@@ -6,30 +6,26 @@
     color: white;
     background-color: lightblue;
 }
+.links{
+    display: inline;
+    margin-right: 75px;
+}
+.links > a{
+    padding: 50px 25px 25px 25px;
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+}
+.links > a:hover{
+    color: white;
+}
 nav{
     height: 100px;
     margin: auto;
 }
 h2{
     font-family: 'LemonMilk';
-    margin: auto;
-}
-.sidebar {
-    width: 200px;
-    min-height: 100vh;
-    background-color:aliceblue;
-}
-a{
-    text-decoration:none;
-    color: black;
-    padding-left: 25px;
-}
-a:hover{
-    color: gray;
-}
-#menu{
-    padding: 15px;
-    font-weight: bold;
+    margin-left: 75px;
 }
 .sidebar-header{
     width: 200px;

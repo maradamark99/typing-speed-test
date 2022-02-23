@@ -6,8 +6,4 @@ import { Component } from '@angular/core';
     styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent{
-    public isClicked = false;
-    public onToggle(){
-        this.isClicked = !this.isClicked;
-    }
 }

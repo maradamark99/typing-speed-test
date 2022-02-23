@@ -3,6 +3,6 @@
         <span *ngFor="let word of words">{{ word + " " }}</span>
     </div>
     <div>
-        <input type="text" style="width: 100%;" placeholder="type here...">
+        <input type="text" style="width: 100%;" placeholder="type here..." (keyup.space)="doThis()" [(ngModel)]="input">
     </div>
 </div>

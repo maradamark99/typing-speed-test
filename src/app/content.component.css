@@ -7,7 +7,14 @@
 span{
     padding-top: 15px;
     padding-left: 15px;
+    font-size: 1.2rem;
+    font-weight: 500;
 }
 .container{
     margin-top: 2rem;
+}
+input{
+    border: 3px solid black;
+    border-top: none;
+    border-radius: 5px;
 }
