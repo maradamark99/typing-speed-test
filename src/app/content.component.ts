@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class ContentComponent implements OnInit, OnDestroy {
 
+    numOfCorrect: number = 0;
     index: number = 0;
     input: string = "";
     words: string[] = ["hurl", "snub", "circle", "banish", "squash", "preparation", "shop",
@@ -17,7 +18,8 @@ export class ContentComponent implements OnInit, OnDestroy {
         "describe", "ask", "adoption", "cigarette", "affair", "transform", "cord", "shame", "studio", "twist",
         "reluctance", "bet", "manner", "trouble", "shine", "bolt", "racism", "engagement", "lake", "public", "joystick", "flash"];
     
-    //TODO: create a service class for it, and fix the errors
+    //TODO: create a service class for it
+
     url = 'https://random-word-api.herokuapp.com/word?number=200';
     subscription?: Subscription;
 
@@ -32,16 +34,13 @@ export class ContentComponent implements OnInit, OnDestroy {
         //this.subscription?.unsubscribe();
     }
 
-    doThis(){
-        console.log(this.input) 
-        console.log(this.words[this.index]) 
+    checkInput(){
+        this.input = this.input.trim()
         if(this.input === this.words[this.index]){
-            console.log("yep")
+            this.numOfCorrect++
         }  
-        else{
-            console.log("nope")
-        }
         this.index++
+        this.input = ""
     }
 
 }   

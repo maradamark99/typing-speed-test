@@ -1,8 +1,13 @@
 <div class="container">
-    <div id="theWords">
-        <span *ngFor="let word of words">{{ word + " " }}</span>
+    <div>
+        <h3>Correct words: {{numOfCorrect}}/{{words.length}}</h3>
+    </div>
+    <div id="theWords" >
+        <span id="nostyle" *ngFor="let word of words; index as i">
+            <span [ngClass]="{'nextword' : i == index}">{{ word + " " }}</span>
+        </span>
     </div>
     <div>
-        <input type="text" style="width: 100%;" placeholder="type here..." (keyup.space)="doThis()" [(ngModel)]="input">
+        <input type="text" style="width: 100%;" placeholder="type here..." (keyup.space)="checkInput()" [(ngModel)]="input">
     </div>
 </div>

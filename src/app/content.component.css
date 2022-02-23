@@ -5,8 +5,8 @@
     border-radius: 5px;
 }
 span{
-    padding-top: 15px;
-    padding-left: 15px;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
     font-size: 1.2rem;
     font-weight: 500;
 }
@@ -17,4 +17,11 @@ input{
     border: 3px solid black;
     border-top: none;
     border-radius: 5px;
+}
+.nextword{
+    background-color: lightblue;
+    color: white;
+}
+#nostyle{
+    padding: 0 0 0 0;
 }
