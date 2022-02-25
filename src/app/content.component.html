@@ -3,12 +3,12 @@
         <h3 class="same-line">Correct words: {{numOfCorrect}}/{{words.length}}</h3>
         <h3 class="same-line">Timer: {{ timer }} sec</h3>
     </div>
-    <div id="theWords" >
+    <div id="theWords">
         <span id="nostyle" *ngFor="let word of words; index as i">
             <span [ngClass]="{'nextword' : i == index}">{{ word + " " }}</span>
         </span>
     </div>
     <div>
-        <input type="text" style="width: 100%;" placeholder="type here..." (keyup.space)="checkInput()" [(ngModel)]="input">
+        <input type="text" style="width: 100%;" placeholder="type here..." (keyup.space)="checkInput()" (keyup.backspace)="goBack()" [(ngModel)]="input">
     </div>
 </div>

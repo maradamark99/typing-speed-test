@@ -43,13 +43,27 @@ export class ContentComponent implements OnInit, OnDestroy {
             this.timer--;
     }
 
+    goBack(){
+        if(this.index > 0 && this.input === ""){
+            this.index--;
+
+            this.input = this.words[this.index];
+            if(this.input === this.words[this.index]){ //TEST NEEDED
+                this.numOfCorrect--;
+            }
+        }
+    }
+
     checkInput(){
-        this.input = this.input.trim()
-        if(this.input === this.words[this.index]){
-            this.numOfCorrect++
-        }  
-        this.index++
-        this.input = ""
+        if(this.input.trim() !== ""){
+            this.input = this.input.trim()
+            if(this.input === this.words[this.index]){ 
+                this.numOfCorrect++;
+            }
+            if(this.index < this.words.length)  
+                this.index++;
+            this.input = "";
+        }
     }
 
 }   
