@@ -1,14 +1,19 @@
 #theWords{
-    height: 450px;
+    height: 400px;
     width: 100%;
     border: 3px solid black;
     border-radius: 5px;
+    overflow-y: scroll;
 }
 span{
     padding-left: 7.5px;
     padding-right: 7.5px;
     font-size: 1.2rem;
     font-weight: 500;
+}
+.same-line{
+    padding-right: 25px;
+    display: inline;
 }
 .container{
     margin-top: 2rem;
@@ -23,5 +28,5 @@ input{
     color: white;
 }
 #nostyle{
-    padding: 0 0 0 0;
+    padding: 0px;
 }

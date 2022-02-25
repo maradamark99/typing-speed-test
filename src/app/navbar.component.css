@@ -2,6 +2,10 @@
     font-family: 'LemonMilk';
     src: url("/assets/fonts/LEMONMILK-Regular.otf") format("opentype");
 }
+@font-face {
+    font-family: 'Lato', 'sans-serif';
+    src: url("/assets/fonts/Lato-Light.ttf") format("truetype");
+}
 .navbar{
     color: white;
     background-color: lightblue;
@@ -11,14 +15,16 @@
     margin-right: 75px;
 }
 .links > a{
-    padding: 50px 25px 25px 25px;
+    padding: 39px 25px 39px 25px;
     text-decoration: none;
-    color: black;
-    font-size: 1.1rem;
-    font-weight: bolder;
+    color: white;
+    font-weight: bold;
+    font-size: 1.125rem;
+    font-family: 'Lato', 'sans-serif';
 }
 .links > a:hover{
-    color: white;
+    color: black;
+    background-color: aliceblue;
 }
 nav{
     height: 100px;
