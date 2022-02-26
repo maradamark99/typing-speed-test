@@ -9,6 +9,7 @@
         </span>
     </div>
     <div>
-        <input type="text" style="width: 100%;" placeholder="type here..." (keyup.space)="checkInput()" (keyup.backspace)="goBack()" [(ngModel)]="input">
+        <input type="text" style="width: 100%;" placeholder="type here..." (keyup.space)="checkInput()" (keyup.backspace)="goBack()" [(ngModel)]="input" 
+        (focus)="decreaseTime()">
     </div>
 </div>

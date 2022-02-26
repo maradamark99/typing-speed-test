@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class ContentComponent implements OnInit, OnDestroy {
 
+    timerStarted = false;
     numOfCorrect: number = 0;
     index: number = 0;
     input: string = "";
@@ -31,7 +32,6 @@ export class ContentComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.subscription = this.getWords().subscribe(data => (this.words = data));
-        setInterval(() => this.decreaseTime(), 1000);
     }
 
     ngOnDestroy(){
@@ -39,10 +39,18 @@ export class ContentComponent implements OnInit, OnDestroy {
     }
 
     decreaseTime(){
-        if(this.timer > 0)
-            this.timer--;
-    }
+        if(!this.timerStarted){
+            this.timerStarted = true;
+            setInterval(() => {
+                if(this.timer > 0)
+                    this.timer--
+                return
+            }, 1000);
+        }
+        else
+            return
 
+    }
     goBack(){
         if(this.index > 0 && this.input === ""){
             this.index--;
