@@ -8,9 +8,9 @@ import { Subscription } from 'rxjs';
     styleUrls: ['./content.component.css'],
 })
 export class ContentComponent implements OnInit, OnDestroy {
-
     timerStarted = false;
     numOfCorrect: number = 0;
+    numOfTypedChar: number = 0;
     index: number = 0;
     input: string = "";
     /*words: string[] = ["hurl", "snub", "circle", "banish", "squash", "preparation", "shop",
@@ -64,7 +64,8 @@ export class ContentComponent implements OnInit, OnDestroy {
 
     checkInput(){
         if(this.input.trim() !== ""){
-            this.input = this.input.trim()
+            this.input = this.input.trim();
+            this.numOfTypedChar += this.input.length;
             if(this.input === this.words[this.index]){ 
                 this.numOfCorrect++;
             }

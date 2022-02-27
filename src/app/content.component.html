@@ -1,7 +1,8 @@
 <div class="container">
     <div>
-        <h3 class="same-line">Correct words: {{numOfCorrect}}/{{words.length}}</h3>
+        <h3 class="same-line">Correct words: {{numOfCorrect}}/{{index}}</h3>
         <h3 class="same-line">Timer: {{ timer }} sec</h3>
+        <h3 class="same-line">WPM: {{ (numOfTypedChar / 5) / ((60-timer)/60) }}</h3>
     </div>
     <div id="theWords">
         <span id="nostyle" *ngFor="let word of words; index as i">
