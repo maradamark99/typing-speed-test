@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { isNgContainer } from '@angular/compiler';
 
 @Component({
     selector: 'pageContent',
@@ -36,6 +37,11 @@ export class ContentComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(){
         this.subscription?.unsubscribe();
+    }
+
+    calculateCurrentWpm(): Number | string{
+        const wpm = ((this.numOfTypedChar / 5) / ((60-this.timer)/60))
+        return isNaN(wpm) ? 0 : wpm.toFixed(2);
     }
 
     decreaseTime(){
