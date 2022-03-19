@@ -1,7 +1,5 @@
-import { Component, OnDestroy, OnInit} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Subscription } from 'rxjs';
-import { isNgContainer } from '@angular/compiler';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { DataService } from './data.service'
 
 @Component({
     selector: 'pageContent',
@@ -14,74 +12,61 @@ export class ContentComponent implements OnInit, OnDestroy {
     numOfTypedChar: number = 0;
     index: number = 0;
     input: string = "";
-    /*words: string[] = ["hurl", "snub", "circle", "banish", "squash", "preparation", "shop",
-        "rack", "understand", "cultural", "achieve", "speed", "play", "regular", "nose", "dedicate", "spontaneous",
-        "depart", "favor", "chew", "cream", "need", "illness", "exit", "volunteer", "pupil", "killer", "motorist",
-        "describe", "ask", "adoption", "cigarette", "affair", "transform", "cord", "shame", "studio", "twist",
-        "reluctance", "bet", "manner", "trouble", "shine", "bolt", "racism", "engagement", "lake", "public", "joystick", "flash"];
-    */
-    //TODO: create a service class for this
-    words: string[] = [];
-    url = 'https://random-word-api.herokuapp.com/word?number=200';
-    subscription?: Subscription;
     timer: number = 60;
 
-    constructor(private http: HttpClient) { }
-    getWords() {
-        return this.http.get<string[]>(this.url);
-    }
+    constructor(public readonly service: DataService) { }
+
 
     ngOnInit() {
-        this.subscription = this.getWords().subscribe(data => (this.words = data));
+        this.service.subscription = this.service.getWords().subscribe(data => (this.service.words = data));
     }
 
-    ngOnDestroy(){
-        this.subscription?.unsubscribe();
+    ngOnDestroy() {
+        this.service.subscription?.unsubscribe();
     }
 
-    calculateCurrentWpm(): Number | string{
-        const wpm = ((this.numOfTypedChar / 5) / ((60-this.timer)/60))
+
+
+    calculateCurrentWpm(): Number | string {
+        const wpm = ((this.numOfTypedChar / 5) / ((60 - this.timer) / 60))
         return isNaN(wpm) ? 0 : wpm.toFixed(2);
     }
 
-    decreaseTime(){
-        if(!this.timerStarted){
-            this.timerStarted = true;
-            setInterval(() => {
-                if(this.timer > 0)
-                    this.timer--
-                return
-            }, 1000);
-        }
-        else
+    decreaseTime() {
+        if (this.timerStarted)
             return
-
+        this.timerStarted = true;
+        setInterval(() => {
+            if (this.timer > 0)
+                this.timer--
+            return
+        }, 1000);
     }
-    goBack(){
-        if(this.index > 0 && this.input === ""){
+    goBack() {
+        if (this.index > 0 && this.input === "") {
             this.index--;
 
-            this.input = this.words[this.index];
-            if(this.input === this.words[this.index]){ //TEST NEEDED
+            this.input = this.service.words[this.index];
+            if (this.input === this.service.words[this.index]) { //TEST NEEDED
                 this.numOfCorrect--;
             }
         }
     }
 
-    checkInput(){
-        if(this.input.trim() !== ""){
-            this.input = this.input.trim();
-            this.numOfTypedChar += this.input.length;
-            if(this.input === this.words[this.index]){ 
-                this.numOfCorrect++;
-            }
-            if(this.index < this.words.length)  
-                this.index++;
-            this.input = "";
+    checkInput() {
+        if (this.input.trim() === "")
+            return
+        this.input = this.input.trim();
+        this.numOfTypedChar += this.input.length;
+        if (this.input === this.service.words[this.index]) {
+            this.numOfCorrect++;
         }
+        if (this.index < this.service.words.length)
+            this.index++;
+        this.input = "";
     }
 
-}   
+}
 
 
 

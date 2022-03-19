@@ -5,7 +5,7 @@
         <h3 class="same-line">WPM: {{ calculateCurrentWpm() }}</h3>
     </div>
     <div id="theWords">
-        <span id="nostyle" *ngFor="let word of words; index as i">
+        <span id="nostyle" *ngFor="let word of service.words; index as i">
             <span [ngClass]="{'nextword' : i == index}">{{ word + " " }}</span>
         </span>
     </div>
