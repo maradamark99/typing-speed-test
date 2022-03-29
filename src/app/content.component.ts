@@ -13,6 +13,7 @@ export class ContentComponent implements OnInit, OnDestroy {
     index: number = 0;
     input: string = "";
     timer: number = 60;
+    isTimeOver = false;
 
     constructor(public readonly service: DataService) { }
 
@@ -37,9 +38,11 @@ export class ContentComponent implements OnInit, OnDestroy {
             return
         this.timerStarted = true;
         setInterval(() => {
-            if (this.timer > 0)
-                this.timer--
-            return
+            if (this.timer === 0){
+              this.isTimeOver = true
+              return
+            }
+            this.timer--
         }, 1000);
     }
     goBack() {
@@ -57,7 +60,7 @@ export class ContentComponent implements OnInit, OnDestroy {
         if (this.input.trim() === "")
             return
         this.input = this.input.trim();
-        this.numOfTypedChar += this.input.length;
+        this.numOfTypedChar += this.input.trim().length;
         if (this.input === this.service.words[this.index]) {
             this.numOfCorrect++;
         }
