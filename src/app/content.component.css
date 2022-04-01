@@ -22,6 +22,12 @@ input{
     border-top: none;
     border-radius: 5px;
 }
+.modal-button{
+  background-color: lightblue;
+  color: white;
+  border-radius: 5px;
+  width: 3rem;
+}
 .nextword{
     background-color: lightblue;
     color: white;

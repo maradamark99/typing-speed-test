@@ -13,13 +13,17 @@
            (focus)="decreaseTime()">
   </div>
   <p-dialog
-    [style]="{'border': '1px solid black', 'border-radius': '5px', 'width': '60%', 'height':'50%', 'padding': '5%', 'background-color': 'white'}"
-    [visible]="isTimeOver" [closable]=false>
-    <h3>The time is up!</h3>
+    header="The time is up!"
+    [style]="{'border': '1px solid black', 'border-radius': '5px', 'width': '60%'
+    , 'height':'50%', 'padding': '5%', 'background-color': 'white'}"
+    [visible]="isTimeOver" [closable]=false [modal]="true" [blockScroll]="true">
     <div>
-      <h4>Out of {{index}}, you managed to type in {{numOfCorrect}} correctly.</h4>
-      <h4>WPM: {{ calculateCurrentWpm() }}</h4>
-      <h4>CPM: {{ numOfTypedChar }}</h4>
+      <h5>Out of {{index}}, you managed to type in {{numOfCorrect}} correctly.</h5>
+      <h5>WPM: {{ calculateCurrentWpm() }}</h5>
+      <h5>CPM: {{ numOfTypedChar }}</h5>
+      <h5><b>Would you like to start a new game?</b></h5>
+      <button class="modal-button" (click)="newGame()">Yes</button>
+      <button class="modal-button" (click)="redirect()">No</button>
     </div>
   </p-dialog>
 </div>
