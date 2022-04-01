@@ -1,8 +1,20 @@
 <body>
     <div class="wrapper">
-        <navbar style="width: 100%;"></navbar>
+      <nav class="navbar" style="width: 100%">
+        <div class="container-fluid">
+          <h2>Typing speed test</h2>
+          <div class="links">
+            <a routerLink="/home" routerLinkActive="active">Home</a>
+            <a routerLink="/content" routerLinkActive="active">Play</a>
+            <a href="#">My profile</a>
+            <a href="#">Leaderboard</a>
+            <a href="#">Change Type</a>
+            <a href="#">Change Difficulty</a>
+          </div>
+        </div>
+      </nav>
     </div>
     <div>
-        <pageContent></pageContent>
+      <router-outlet></router-outlet>
     </div>
 </body>
