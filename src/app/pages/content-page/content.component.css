@@ -1,9 +1,8 @@
-#theWords{
-    height: 400px;
+.theWords{
+    height: 50%;
     width: 100%;
     border: 2px solid black;
     border-radius: 5px;
-    overflow-y: scroll;
 }
 span{
     margin: 5px;

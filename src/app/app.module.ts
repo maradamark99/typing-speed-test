@@ -11,13 +11,18 @@ import { ContentComponent } from './pages/content-page/content.component';
 import {DialogModule} from "primeng/dialog";
 import {ButtonModule} from "primeng/button";
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
+import {InputTextModule} from "primeng/inputtext";
 @NgModule({
   declarations: [
     AppComponent,
     ContentComponent,
     HomePageComponent,
     PageNotFoundComponent,
+    LeaderboardComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,6 +32,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     FormsModule,
     DialogModule,
     ButtonModule,
+    InputTextModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
