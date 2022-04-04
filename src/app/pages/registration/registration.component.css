@@ -1,0 +1,18 @@
+.container{
+  height: 100%;
+  text-align: center;
+  margin-top: 15%;
+}
+input{
+  width: 20rem;
+  margin: 2%;
+}
+.form{
+  width: 40vw;
+  height: 40vh;
+  margin: 5% auto;
+  border: 1px solid aqua;
+  border-radius: 10px;
+  background-color: lightblue;
+  color: white;
+}

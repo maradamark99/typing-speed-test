@@ -13,6 +13,7 @@
 .navbar{
   color: white;
   background-color: lightblue;
+  border: 1px solid aqua;
 }
 .links{
   display: inline;

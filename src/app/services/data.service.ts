@@ -17,5 +17,4 @@ export class DataService{
     getWords() {
         return this.http.get<string[]>(this.url);
     }
-
 }
