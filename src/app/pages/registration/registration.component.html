@@ -13,6 +13,6 @@
       <input type="password" pInputText required [(ngModel)]="service.userInput.passwordConfirm"/>
       <p class="p-error" *ngIf="service.errors.passwordConfirm">{{service.errors.passwordConfirm}}</p>
     </div>
-    <p-button label="Register" (onClick)="service.save()"></p-button>
+    <p-button label="Create account" (onClick)="service.save()"></p-button>
   </div>
 </div>
