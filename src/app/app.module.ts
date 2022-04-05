@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
 import { RegistrationComponent } from './pages/registration/registration.component';
 import {InputTextModule} from "primeng/inputtext";
+import { LoginComponent } from './pages/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +24,7 @@ import {InputTextModule} from "primeng/inputtext";
     PageNotFoundComponent,
     LeaderboardComponent,
     RegistrationComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

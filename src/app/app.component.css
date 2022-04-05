@@ -16,10 +16,9 @@
 }
 .links{
   display: inline;
-  margin-right: 75px;
 }
 .links > a{
-  padding: 39px 25px 39px 25px;
+  margin: 2rem;
   text-decoration: none;
   color: white;
   font-weight: bold;
@@ -31,14 +30,10 @@
   background-color: aliceblue;
 }
 nav{
-  height: 100px;
+  height: 10vh;
   margin: auto;
 }
 h2{
   font-family: 'LemonMilk';
   margin-left: 75px;
-}
-.sidebar-header{
-  width: 200px;
-  background-color:lightblue;
 }

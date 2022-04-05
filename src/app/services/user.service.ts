@@ -18,7 +18,6 @@ export class UserService {
   }
 
   validate() {
-    //TODO: Better validation logic
     this.errors.username = ''
     this.errors.password = ''
     this.errors.passwordConfirm = ''
@@ -28,11 +27,13 @@ export class UserService {
       this.errors.username = 'Invalid username'
       counter++
     }
-    if (this.userInput.password.length < 8){
+    if (!this.userInput.password.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")){
       this.errors.password = 'Invalid password'
+      counter++
     }
     if (this.userInput.passwordConfirm !== this.userInput.password){
       this.errors.passwordConfirm = 'Passwords do not match'
+      counter++
     }
     return counter
   }

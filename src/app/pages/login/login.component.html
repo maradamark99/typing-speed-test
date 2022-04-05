@@ -1,6 +1,6 @@
 <div class="container">
   <div class="form">
-    <h3>Sign up</h3>
+    <h3>Sign in</h3>
     <div class="form-group">
       <i class="pi pi-user" style="color: white;"></i>
       <input type="text" placeholder="Username" pInputText required [(ngModel)]="service.userInput.username"/>
@@ -16,7 +16,7 @@
       <input type="password" placeholder="Password confirmation" pInputText required [(ngModel)]="service.userInput.passwordConfirm"/>
       <p class="p-error" *ngIf="service.errors.passwordConfirm">{{service.errors.passwordConfirm}}</p>
     </div>
-    <p-button label="Create account" [style]="{'margin-bottom': '2%'}" (onClick)="service.save()"></p-button>
-    <h5>Already have an account?</h5><a routerLink="/login" routerLinkActive="active">Sign in</a>
+    <p-button label="Login" [style]="{'margin-bottom': '2%'}"></p-button>
+    <h5>Not registered yet? </h5><a routerLink="/register" routerLinkActive="active">Sign up here</a>
   </div>
 </div>

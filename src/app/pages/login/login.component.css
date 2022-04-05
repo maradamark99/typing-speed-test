@@ -1,0 +1,22 @@
+.container{
+  height: 100%;
+  text-align: center;
+  margin-top: 7%;
+}
+input{
+  width: 55%;
+  margin: 4%;
+  border-radius: 30px;
+}
+.form{
+  width: 40vw;
+  height: 60vh;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: lightblue;
+  color: white;
+}
+h3{
+  padding-top: 10%;
+  font-weight: bolder;
+}
