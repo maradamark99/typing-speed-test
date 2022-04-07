@@ -14,24 +14,21 @@
   color: white;
   background-color: lightblue;
 }
-.links{
-  display: inline;
-}
-.links > a{
-  margin: 2rem;
+a{
+  margin: 1.125rem;
   text-decoration: none;
   color: white;
   font-weight: bold;
   font-size: 1.125rem;
   font-family: 'Lato', 'sans-serif';
 }
-.links > a:hover{
+a:hover{
   color: black;
   background-color: aliceblue;
 }
 nav{
-  height: 10vh;
-  margin: auto;
+  width: 100%;
+  min-height: 12vh;
 }
 h2{
   font-family: 'LemonMilk';
