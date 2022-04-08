@@ -1,7 +1,8 @@
 .theWords{
     height: 50%;
     width: 100%;
-    background-color: lightblue;
+    background-color: aliceblue;
+    border: 2px solid lightblue;
     border-radius: 10px;
 }
 span{
@@ -28,6 +29,6 @@ input{
   width: 3rem;
 }
 .nextword{
-    background-color: aliceblue;
-    color: black;
+    background-color: lightblue;
+    color: white;
 }
