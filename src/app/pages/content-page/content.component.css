@@ -1,10 +1,11 @@
 .theWords{
     height: 50%;
     width: 100%;
-    border: 2px solid black;
-    border-radius: 5px;
+    background-color: lightblue;
+    border-radius: 10px;
 }
 span{
+    color: black;
     margin: 5px;
     font-size: 1.2rem;
     font-weight: 500;
@@ -17,9 +18,8 @@ span{
     margin-top: 2rem;
 }
 input{
-    border: 2px solid black;
-    border-top: none;
-    border-radius: 5px;
+    border: 2px solid lightblue;
+    border-radius: 10px;
 }
 .modal-button{
   background-color: lightblue;
@@ -28,6 +28,6 @@ input{
   width: 3rem;
 }
 .nextword{
-    background-color: lightblue;
-    color: white;
+    background-color: aliceblue;
+    color: black;
 }
