@@ -5,7 +5,7 @@
 }
 input{
   width: 55%;
-  margin: 4%;
+  margin: 2%;
   border-radius: 30px;
 }
 .form{
@@ -17,6 +17,6 @@ input{
   color: white;
 }
 h3{
-  padding-top: 10%;
+  padding-top: 7.5%;
   font-weight: bolder;
 }

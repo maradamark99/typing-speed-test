@@ -1,7 +1,3 @@
-.wrapper{
-    display: flex;
-}
-
 @font-face {
   font-family: 'LemonMilk';
   src: url("../assets/fonts/LEMONMILK-Regular.otf") format("opentype");
@@ -14,26 +10,23 @@
   color: white;
   background-color: lightblue;
 }
-.links{
-  display: inline;
-}
-.links > a{
-  margin: 2rem;
+a{
+  margin: 0 1rem;
   text-decoration: none;
   color: white;
   font-weight: bold;
   font-size: 1.125rem;
   font-family: 'Lato', 'sans-serif';
 }
-.links > a:hover{
+a:hover{
   color: black;
-  background-color: aliceblue;
+  border-bottom: 2px solid black;
 }
 nav{
-  height: 10vh;
-  margin: auto;
+  width: 100%;
+  min-height: 12vh;
 }
 h2{
   font-family: 'LemonMilk';
-  margin-left: 75px;
+  margin-left: 2rem;
 }

@@ -1,21 +1,32 @@
-<body>
-    <div class="wrapper">
-      <nav class="navbar" style="width: 100%">
-        <div class="container-fluid">
-          <h2>Typing speed test</h2>
-          <div class="links">
-
-            <a routerLink="/home" routerLinkActive="active">Home</a>
-            <a routerLink="/login" routerLinkActive="active">Login</a>
-            <a routerLink="/register" routerLinkActive="active">Register</a>
-            <a routerLink="/content" routerLinkActive="active">Play</a>
-            <a routerLink="/leaderboard" routerLinkActive="active">Leaderboard</a>
-            <a href="#">Options</a>
-          </div>
-        </div>
-      </nav>
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <h2>Typing speed test</h2>
+    <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/content" routerLinkActive="active">Play</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/leaderboard" routerLinkActive="active">Leaderboard</a>
+          </li>
+        </ul>
     </div>
-    <div>
-      <router-outlet></router-outlet>
-    </div>
-</body>
+  </div>
+</nav>
+<div>
+  <router-outlet></router-outlet>
+</div>
