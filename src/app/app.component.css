@@ -11,7 +11,7 @@
   background-color: lightblue;
 }
 a{
-  margin: 1.125rem;
+  margin: 0 1rem;
   text-decoration: none;
   color: white;
   font-weight: bold;
@@ -20,6 +20,7 @@ a{
 }
 a:hover{
   color: black;
+  border-bottom: 2px solid black;
 }
 nav{
   width: 100%;
