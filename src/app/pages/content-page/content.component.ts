@@ -1,5 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service'
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'pageContent',
@@ -15,7 +16,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   timer = 60;
   isTimeOver = false;
 
-  constructor(public readonly service: DataService) {
+  constructor(public readonly service: DataService, private readonly router: Router) {
   }
 
 
@@ -79,8 +80,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   redirect() {
-    //TODO
-    console.log('redirected')
+    this.router.navigate(['/home']).then()
   }
 }
 

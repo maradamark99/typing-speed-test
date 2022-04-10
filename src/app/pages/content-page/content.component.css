@@ -19,6 +19,7 @@ span{
     margin-top: 2rem;
 }
 input{
+    margin-top: 0.25%;
     border: 2px solid lightblue;
     border-radius: 10px;
 }

@@ -1,1 +1,22 @@
-<h1>leaderboard works!</h1>
+<div class="card">
+  <p-table [value]="data">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
+        <th pSortableColumn="wpm">WPM <p-sortIcon field="wpm"></p-sortIcon></th>
+        <th pSortableColumn="cpm">CPM <p-sortIcon field="cpm"></p-sortIcon></th>
+        <th pSortableColumn="accuracy">Accuracy <p-sortIcon field="accuracy"></p-sortIcon></th>
+        <th pSortableColumn="date">Date <p-sortIcon field="date"></p-sortIcon></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+      <tr>
+        <td>{{data.name}}</td>
+        <td>{{data.wpm}}</td>
+        <td>{{data.wpm * 5}}</td>
+        <td>{{data.accuracy}}</td>
+        <td>{{data.date}}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

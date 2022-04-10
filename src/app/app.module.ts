@@ -16,6 +16,7 @@ import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component'
 import { RegistrationComponent } from './pages/registration/registration.component';
 import {InputTextModule} from "primeng/inputtext";
 import { LoginComponent } from './pages/login/login.component';
+import {TableModule} from "primeng/table";
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,16 +27,17 @@ import { LoginComponent } from './pages/login/login.component';
     RegistrationComponent,
     LoginComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    DialogModule,
-    ButtonModule,
-    InputTextModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        DialogModule,
+        ButtonModule,
+        InputTextModule,
+        TableModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
