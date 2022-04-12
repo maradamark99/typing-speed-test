@@ -19,8 +19,8 @@ a{
   font-family: 'Lato', 'sans-serif';
 }
 a:hover{
-  color: black;
-  border-bottom: 2px solid black;
+  color: aliceblue;
+  border-bottom: 2px solid aliceblue;
 }
 nav{
   width: 100%;
