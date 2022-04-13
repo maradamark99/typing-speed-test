@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  wordApiUrl: 'https://random-word-api.herokuapp.com/word',
+  apiUrl: "http://localhost:8080/api/v1/"
 };
 
 /*
