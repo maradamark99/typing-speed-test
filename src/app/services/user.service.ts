@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {IUser} from "../interfaces/IUser";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {catchError} from "rxjs";
+import {catchError, Observable, throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root',
@@ -45,26 +45,27 @@ export class UserService {
     if (this.validate() > 0)
       return
 
-    this.sendUser().subscribe()
+    const {passwordConfirm, ...user} = this.userInput
+    this.sendUser(user).subscribe()
     this.userInput.username = ''
     this.userInput.email = ''
     this.userInput.password = ''
     this.userInput.passwordConfirm = ''
   }
 
-  sendUser() {
-    const url = `${environment.apiUrl}register`
-    const {passwordConfirm, ...user} = this.userInput
-    return this.http.post<IUser>(url, user).pipe(
-      catchError(err => {
-        if (err.status === 400) {
-          this.errors.email = 'Email is already in use'
-          this.errors.username = 'Username is already in use'
-        }
-        console.log(err)
-        return err
-      })
-    )
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 0) {
+      console.error('An error occurred:', error.error);
+    } else {
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+    }
+    return throwError(() => new Error('Something bad happened; please try again later.'));
+  }
+
+  sendUser(user: IUser): Observable<IUser> {
+    return this.http.post<IUser>(`${environment.apiUrl}register`, user)
+      .pipe(catchError(this.handleError));
   }
 
 }
