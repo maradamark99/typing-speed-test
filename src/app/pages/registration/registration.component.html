@@ -2,6 +2,11 @@
   <div class="form">
     <h3>Sign up</h3>
     <div class="form-group">
+      <i class="pi pi-envelope" style="color: white;"></i>
+      <input type="email" placeholder="E-mail" pInputText required [(ngModel)]="service.userInput.email"/>
+      <p class="p-error" *ngIf="service.errors.email">{{service.errors.email}}</p>
+    </div>
+    <div class="form-group">
       <i class="pi pi-user" style="color: white;"></i>
       <input type="text" placeholder="Username" pInputText required [(ngModel)]="service.userInput.username"/>
       <p class="p-error" *ngIf="service.errors.username">{{service.errors.username}}</p>

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   wordApiUrl: 'https://random-word-api.herokuapp.com/word',
-  apiUrl: "http://localhost:8080/api/v1/"
+  apiUrl: "http://localhost:8080/api/v1"
 };
 
 /*

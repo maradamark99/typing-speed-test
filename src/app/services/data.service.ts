@@ -19,6 +19,6 @@ export class DataService{
     }
 
     getLeaderboard(){
-      return this.http.get<IResult[]>(environment.apiUrl + "results");
+      return this.http.get<IResult[]>(environment.apiUrl + "/results");
     }
 }
