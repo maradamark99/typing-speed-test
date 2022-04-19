@@ -1,4 +1,3 @@
-import {Optional} from "@angular/core";
 
 export interface IUser {
   email: string,

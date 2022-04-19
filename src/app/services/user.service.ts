@@ -13,6 +13,7 @@ export class UserService {
   public userInput: IUser = {email: '', username: '', password: '', passwordConfirm: ''}
   private readonly pwRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
   private readonly emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+
   constructor(private readonly http: HttpClient) { }
 
   validate() {
@@ -64,7 +65,7 @@ export class UserService {
   }
 
   sendUser(user: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${environment.apiUrl}register`, user)
+    return this.http.post<IUser>(`${environment.apiUrl}/auth/register`, user)
       .pipe(catchError(this.handleError));
   }
 
