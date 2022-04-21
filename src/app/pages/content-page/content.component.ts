@@ -15,6 +15,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   input = "";
   timer = 60;
   isTimeOver = false;
+  previousWords: string[] = [];
 
   constructor(public readonly service: DataService, private readonly router: Router) {
   }
@@ -50,19 +51,21 @@ export class ContentComponent implements OnInit, OnDestroy {
   goBack() {
     if (this.index > 0 && this.input === "") {
       this.index--;
-
-      this.input = this.service.words[this.index];
-      if (this.input === this.service.words[this.index]) { //TEST NEEDED
+      this.input = this.previousWords[this.index];
+      this.previousWords.pop();
+      if (this.input === this.service.words[this.index]) {
         this.numOfCorrect--;
       }
     }
   }
 
   checkInput() {
+    console.log(this.previousWords)
     if (this.input.trim() === "")
       return
     this.input = this.input.trim();
     this.numOfTypedChar += this.input.trim().length;
+    this.previousWords.push(this.input);
     if (this.input === this.service.words[this.index]) {
       this.numOfCorrect++;
     }
