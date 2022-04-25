@@ -21,7 +21,7 @@
       <input type="password" placeholder="Password confirmation" pInputText required [(ngModel)]="service.userInput.passwordConfirm"/>
       <p class="p-error" *ngIf="service.errors.passwordConfirm">{{service.errors.passwordConfirm}}</p>
     </div>
-    <p-button label="Create account" [style]="{'margin-bottom': '2%'}" (onClick)="service.save()"></p-button>
+    <p-button label="Create account" [style]="{'margin-bottom': '2%'}" (onClick)="service.saveRegisterInput()"></p-button>
     <h5>Already have an account?</h5><a routerLink="/login" routerLinkActive="active">Sign in</a>
   </div>
 </div>

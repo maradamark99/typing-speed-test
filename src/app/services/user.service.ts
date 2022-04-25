@@ -23,7 +23,7 @@ export class UserService {
     this.errors.email = ''
     let counter = 0
 
-    if(!this.userInput.email.match(this.emailRegex)) {
+    if(!this.userInput.email!.match(this.emailRegex)) {
       this.errors.email = 'Email is invalid'
       counter++
     }
@@ -42,16 +42,23 @@ export class UserService {
     return counter
   }
 
-  save() {
+  saveRegisterInput() {
     if (this.validate() > 0)
       return
 
     const {passwordConfirm, ...user} = this.userInput
-    this.sendUser(user).subscribe()
+    this.registerUser(user).subscribe()
     this.userInput.username = ''
     this.userInput.email = ''
     this.userInput.password = ''
     this.userInput.passwordConfirm = ''
+  }
+
+  saveLoginInput() {
+    const {passwordConfirm,email, ...user} = this.userInput
+    this.loginUser(user).subscribe()
+    this.userInput.username = ''
+    this.userInput.password = ''
   }
 
   private handleError(error: HttpErrorResponse) {
@@ -64,8 +71,13 @@ export class UserService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
-  sendUser(user: IUser): Observable<IUser> {
+  registerUser(user: IUser): Observable<IUser> {
     return this.http.post<IUser>(`${environment.apiUrl}/auth/register`, user)
+      .pipe(catchError(this.handleError));
+  }
+
+  loginUser(user: IUser): Observable<IUser> {
+    return this.http.post<IUser>(`${environment.apiUrl}/auth/login`, user)
       .pipe(catchError(this.handleError));
   }
 
