@@ -9,14 +9,18 @@
 .navbar{
   color: white;
   background-color: lightblue;
+  box-shadow: 0 0 10px 3px lightblue;
 }
 a{
+  text-align: center;
   margin: 0 1rem;
   text-decoration: none;
   color: white;
   font-weight: bold;
   font-size: 1.125rem;
   font-family: 'Lato', 'sans-serif';
+  border-bottom: 2px solid lightblue;
+  min-width: 100px;
 }
 a:hover{
   color: aliceblue;

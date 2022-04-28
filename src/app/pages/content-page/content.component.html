@@ -16,7 +16,7 @@
     header="The time is up!"
     [style]="{'border': '1px solid black', 'border-radius': '5px', 'width': '60%'
     , 'height':'50%', 'padding': '5%', 'background-color': 'white'}"
-    [visible]="isTimeOver" [closable]=false [modal]="true" [blockScroll]="true">
+    [visible]="isTimeOver" [closable]=false [modal]="true" [blockScroll]="true" [draggable]="false">
     <div>
       <h5>Out of {{index}} words, you managed to type in {{numOfCorrect}} correctly.</h5>
       <h5>WPM: {{ calculateCurrentWpm() }}</h5>

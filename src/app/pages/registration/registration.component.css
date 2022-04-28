@@ -1,7 +1,7 @@
 .container{
   height: 100%;
   text-align: center;
-  margin-top: 7%;
+  margin-top: 10vh;
 }
 input{
   width: 55%;
@@ -9,8 +9,8 @@ input{
   border-radius: 30px;
 }
 .form{
-  width: 40vw;
-  height: 60vh;
+  width: 75%;
+  height: 65%;
   margin: 0 auto;
   border-radius: 10px;
   background-color: lightblue;

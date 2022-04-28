@@ -3,6 +3,7 @@ import {IUser} from "../interfaces/IUser";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {catchError, Observable, throwError} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class UserService {
   private readonly pwRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
   private readonly emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
 
-  constructor(private readonly http: HttpClient) { }
+  constructor(private readonly http: HttpClient, private readonly router: Router) { }
 
   validate() {
     this.errors.username = ''
@@ -52,11 +53,18 @@ export class UserService {
     this.userInput.email = ''
     this.userInput.password = ''
     this.userInput.passwordConfirm = ''
+    this.router.navigate(['/login'])
   }
 
   saveLoginInput() {
     const {passwordConfirm,email, ...user} = this.userInput
-    this.loginUser(user).subscribe()
+    this.loginUser(user).subscribe(res => {
+      console.log(res)
+      if(res.status === 'success'){
+        localStorage.setItem('token', res.access_token)
+        this.router.navigate(['/'])
+      }
+    })
     this.userInput.username = ''
     this.userInput.password = ''
   }
@@ -71,14 +79,14 @@ export class UserService {
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
 
-  registerUser(user: IUser): Observable<IUser> {
+  registerUser(user: IUser): Observable<any> {
     return this.http.post<IUser>(`${environment.apiUrl}/auth/register`, user)
       .pipe(catchError(this.handleError));
   }
 
-  loginUser(user: IUser): Observable<IUser> {
+  loginUser(user: IUser): Observable<any> {
     return this.http.post<IUser>(`${environment.apiUrl}/auth/login`, user)
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError))
   }
 
 }
