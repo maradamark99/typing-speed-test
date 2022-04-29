@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service'
 import {Router} from "@angular/router";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Component({
   selector: 'pageContent',
@@ -17,7 +18,8 @@ export class ContentComponent implements OnInit, OnDestroy {
   isTimeOver = false;
   previousWords: string[] = [];
 
-  constructor(public readonly service: DataService, private readonly router: Router) {
+  constructor(public readonly service: DataService, private readonly router: Router,
+              private readonly jwtHelper: JwtHelperService) {
   }
 
 
@@ -30,9 +32,9 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
 
-  calculateCurrentWpm(): Number | string {
-    const wpm = ((this.numOfTypedChar / 5) / ((60 - this.timer) / 60))
-    return isNaN(wpm) ? 0 : wpm.toFixed(2);
+  calculateCurrentWpm() {
+    const wpm = ((this.numOfTypedChar / 5) / ((60 - this.timer) / 60));
+    return isNaN(wpm) ? 0 : wpm;
   }
 
   decreaseTime() {
@@ -75,6 +77,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   newGame() {
+    this.input = ""
     this.index = 0
     this.numOfTypedChar = 0
     this.numOfCorrect = 0
@@ -84,6 +87,32 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   redirect() {
     this.router.navigate(['/home']).then()
+  }
+
+  saveResult()
+  {
+    const token = this.jwtHelper.decodeToken(localStorage.getItem('token')!);
+    let date = Date.now().toString();
+    if(!token || this.jwtHelper.isTokenExpired(localStorage.getItem('token')!))
+    {
+      this.router.navigate(['/login']).then()
+      return
+    }
+    const username: string = token.sub;
+    return {
+      username: username,
+      wpm: this.calculateCurrentWpm(),
+      accuracy: this.numOfCorrect / this.index,
+      date: Date.parse(date).toString()
+    };
+  }
+  send(){
+    this.service.sendResult(this.saveResult()!).subscribe()
+    this.newGame()
+  }
+
+  cancel() {
+    this.newGame()
   }
 }
 

@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 import { Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IResult } from "../interfaces/IResult";
 import {environment} from "../../environments/environment";
 
@@ -20,5 +20,13 @@ export class DataService{
 
     getLeaderboard(){
       return this.http.get<IResult[]>(environment.apiUrl + "/results");
+    }
+
+    sendResult(result: IResult){
+      return this.http.post<IResult>(environment.apiUrl + "/results", result, {headers: new HttpHeaders(
+          {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            'Content-Type': 'application/json'
+          })});
     }
 }

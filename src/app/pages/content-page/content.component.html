@@ -2,7 +2,7 @@
   <div>
     <h3 class="same-line">Correct words: {{numOfCorrect}}/{{index}}</h3>
     <h3 class="same-line">Timer: {{ timer }} sec</h3>
-    <h3 class="same-line">WPM: {{ calculateCurrentWpm() }}</h3>
+    <h3 class="same-line">WPM: {{ calculateCurrentWpm().toFixed(2) }}</h3>
   </div>
   <div class="theWords">
     <span *ngFor="let word of service.words; index as i" [ngClass]="{'nextword' : i == index}">{{ word + " " }}</span>
@@ -19,11 +19,15 @@
     [visible]="isTimeOver" [closable]=false [modal]="true" [blockScroll]="true" [draggable]="false">
     <div>
       <h5>Out of {{index}} words, you managed to type in {{numOfCorrect}} correctly.</h5>
-      <h5>WPM: {{ calculateCurrentWpm() }}</h5>
-      <h5>CPM: {{ numOfTypedChar }}</h5>
-      <h5><b>Would you like to start a new game?</b></h5>
+      <h5>That is an accuracy of: {{numOfCorrect/index * 100}}%</h5>
+      <h5><b>WPM:</b> {{ calculateCurrentWpm() }}</h5>
+      <h5><b>CPM:</b> {{ numOfTypedChar }}</h5>
+      <h5>Would you like to save your result?</h5>
+      <button pButton type="button" (click)="send()" label="Save" class="pi pi-save"></button>
+      <button pButton type="button" (click)="cancel()" label="No" class="pi pi-times"></button>
+      <!--<h5><b>Would you like to start a new game?</b></h5>
       <button class="modal-button" (click)="newGame()">Yes</button>
-      <button class="modal-button" (click)="redirect()">No</button>
+      <button class="modal-button" (click)="redirect()">No</button>-->
     </div>
   </p-dialog>
 </div>
