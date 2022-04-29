@@ -11,6 +11,25 @@
   background-color: lightblue;
   box-shadow: 0 0 10px 3px lightblue;
 }
+.dropdown-menu{
+  background-color: lightblue;
+}
+.dropdown-item{
+  color: aliceblue;
+  margin: 0;
+  border: none;
+}
+.dropdown-item:hover{
+  background-color: aliceblue;
+  color: lightblue;
+  border: none;
+}
+#navbarDropdown{
+  border: none;
+}
+#navbarDropdown:hover{
+ border:none;
+}
 a{
   text-align: center;
   margin: 0 1rem;
