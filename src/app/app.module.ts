@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtModule } from "@auth0/angular-jwt";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -37,6 +38,13 @@ import {TableModule} from "primeng/table";
         ButtonModule,
         InputTextModule,
         TableModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: () => {
+                    return localStorage.getItem('access_token');
+                },
+            }
+        })
     ],
   providers: [],
   bootstrap: [AppComponent]
