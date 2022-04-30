@@ -2,6 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service'
 import {Router} from "@angular/router";
 import {JwtHelperService} from "@auth0/angular-jwt";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'pageContent',
@@ -19,7 +20,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   previousWords: string[] = [];
 
   constructor(public readonly service: DataService, private readonly router: Router,
-              private readonly jwtHelper: JwtHelperService) {
+              private readonly jwtHelper: JwtHelperService, private readonly datePipe: DatePipe) {
   }
 
 
@@ -91,19 +92,19 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   saveResult()
   {
-    const token = this.jwtHelper.decodeToken(localStorage.getItem('token')!);
-    let date = Date.now().toString();
+    const token = this.jwtHelper.decodeToken(localStorage.getItem('token')!)
     if(!token || this.jwtHelper.isTokenExpired(localStorage.getItem('token')!))
     {
       this.router.navigate(['/login']).then()
       return
     }
-    const username: string = token.sub;
+    const username: string = token.sub
+    const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd, h:mm:ss a')
     return {
       username: username,
       wpm: this.calculateCurrentWpm(),
       accuracy: this.numOfCorrect / this.index,
-      date: Date.parse(date).toString()
+      date: date!
     };
   }
   send(){

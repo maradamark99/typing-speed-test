@@ -18,6 +18,7 @@ import { RegistrationComponent } from './pages/registration/registration.compone
 import {InputTextModule} from "primeng/inputtext";
 import { LoginComponent } from './pages/login/login.component';
 import {TableModule} from "primeng/table";
+import {DatePipe} from "@angular/common";
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,7 @@ import {TableModule} from "primeng/table";
             }
         })
     ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
