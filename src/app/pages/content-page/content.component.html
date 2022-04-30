@@ -18,10 +18,10 @@
     , 'height':'50%', 'padding': '5%', 'background-color': 'white'}"
     [visible]="isTimeOver" [closable]=false [modal]="true" [blockScroll]="true" [draggable]="false">
     <div>
-      <h5>Out of {{index}} words, you managed to type in {{numOfCorrect}} correctly.</h5>
-      <h5>That is an accuracy of: {{numOfCorrect/index * 100}}%</h5>
-      <h5><b>WPM:</b> {{ calculateCurrentWpm() }}</h5>
-      <h5><b>CPM:</b> {{ numOfTypedChar }}</h5>
+      <p>Out of {{index}} words, you managed to type in {{numOfCorrect}} correctly.</p>
+      <p>That is an accuracy of: {{numOfCorrect/index * 100}}%</p>
+      <p><b>WPM:</b> {{ calculateCurrentWpm() }}</p>
+      <p><b>CPM:</b> {{ numOfTypedChar }}</p>
       <h5>Would you like to save your result?</h5>
       <button pButton type="button" (click)="send()" label="Save" class="pi pi-save"></button>
       <button pButton type="button" (click)="cancel()" label="No" class="pi pi-times"></button>

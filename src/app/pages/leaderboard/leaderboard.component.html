@@ -1,5 +1,5 @@
 <div class="card">
-  <p-table [value]="data">
+  <p-table id="customTable" [value]="data">
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="username">Username <p-sortIcon field="username"></p-sortIcon></th>
@@ -14,7 +14,7 @@
         <td>{{data.username}}</td>
         <td>{{data.wpm}}</td>
         <td>{{data.wpm * 5}}</td>
-        <td>{{data.accuracy}}</td>
+        <td>{{data.accuracy * 100}}%</td>
         <td>{{data.date}}</td>
       </tr>
     </ng-template>
