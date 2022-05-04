@@ -1,5 +1,5 @@
 <div class="card">
-  <p-table id="customTable" [value]="data">
+  <p-table id="customTable" [value]="dataService.results">
     <ng-template pTemplate="header">
       <tr>
         <th pSortableColumn="username">Username <p-sortIcon field="username"></p-sortIcon></th>

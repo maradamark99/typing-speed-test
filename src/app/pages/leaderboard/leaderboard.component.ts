@@ -8,13 +8,8 @@ import {IResult} from "../../interfaces/IResult";
   styleUrls: ['./leaderboard.component.css'],
 })
 export class LeaderboardComponent implements OnInit {
-  data: IResult[] = []
-
-  constructor(private readonly dataService: DataService) { }
+  constructor(public readonly dataService: DataService) { }
 
   ngOnInit(): void {
-    this.dataService.getLeaderboard().subscribe(data => {
-      this.data = data;
-    });
   }
 }
