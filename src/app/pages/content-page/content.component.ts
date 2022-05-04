@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service'
 import {Router} from "@angular/router";
-import { DatePipe } from '@angular/common';
+import {DatePipe} from '@angular/common';
 import {TokenService} from "../../services/token.service";
 import {Subscription} from "rxjs";
 
@@ -21,10 +21,11 @@ export class ContentComponent implements OnInit, OnDestroy {
   previousWords: string[] = [];
   subscription1?: Subscription;
   subscription2?: Subscription;
+  private inputField?: HTMLElement | null;
 
 
   constructor(public readonly service: DataService, private readonly router: Router,
-              private readonly datePipe: DatePipe, private readonly tokenService: TokenService) { }
+              private readonly datePipe: DatePipe, private readonly tokenService: TokenService) {}
 
 
   ngOnInit() {
@@ -94,9 +95,8 @@ export class ContentComponent implements OnInit, OnDestroy {
     this.router.navigate(['/home']).then()
   }
 
-  saveResult()
-  {
-    if(!this.tokenService.checkToken()){
+  saveResult() {
+    if (!this.tokenService.checkToken()) {
       return null
     }
     const token = this.tokenService.getDecodedToken()
@@ -109,8 +109,9 @@ export class ContentComponent implements OnInit, OnDestroy {
       date: date!
     };
   }
-  send(){
-    if(!this.saveResult()){
+
+  send() {
+    if (!this.saveResult()) {
       return
     }
     this.subscription2 = this.service.sendResult(this.saveResult()!).subscribe()
