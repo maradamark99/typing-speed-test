@@ -35,6 +35,9 @@ export class AppComponent implements OnInit, OnDestroy {
     });
   }
   getMyResults(){
+    if(!this.tokenService.checkToken()){
+      return
+    }
     this.subscription2 = this.dataService.getMyLeaderboard().subscribe(data => {
       this.dataService.results = data;
     });

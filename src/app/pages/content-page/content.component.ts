@@ -96,18 +96,18 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   saveResult()
   {
-    const token = this.tokenService.getDecodedToken()
-    if(this.tokenService.checkToken()){
-      const username = token.sub
-      const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd, h:mm:ss a')
-      return {
-        username: username,
-        wpm: this.calculateCurrentWpm(),
-        accuracy: this.numOfCorrect / this.index,
-        date: date!
-      };
+    if(!this.tokenService.checkToken()){
+      return null
     }
-    return null
+    const token = this.tokenService.getDecodedToken()
+    const username = token.sub
+    const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd, h:mm:ss a')
+    return {
+      username: username,
+      wpm: this.calculateCurrentWpm(),
+      accuracy: this.numOfCorrect / this.index,
+      date: date!
+    };
   }
   send(){
     if(!this.saveResult()){
