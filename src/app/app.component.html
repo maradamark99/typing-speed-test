@@ -11,10 +11,10 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
         </li>
-        <li class="nav-item" *ngIf="!getToken()">
+        <li class="nav-item" *ngIf="!tokenService.getToken()">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">Login</a>
         </li>
-        <li class="nav-item" *ngIf="!getToken()">
+        <li class="nav-item" *ngIf="!tokenService.getToken()">
           <a class="nav-link" routerLink="/register" routerLinkActive="active">Register</a>
         </li>
         <li class="nav-item">
@@ -25,12 +25,12 @@
             Leaderboard
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" routerLink="/leaderboard" routerLinkActive="active">all results</a></li>
-            <li><a class="dropdown-item" href="#">my results</a></li>
+            <li><a class="dropdown-item" routerLink="/leaderboard" (click)="getAllResults()">all results</a></li>
+            <li><a class="dropdown-item" routerLink="/leaderboard" (click)="getMyResults()">my results</a></li>
           </ul>
         </li>
-        <li class="nav-item" *ngIf="getToken()">
-          <a class="nav-link" href="#" (click)="removeToken()">Logout</a>
+        <li class="nav-item" *ngIf="tokenService.getToken()">
+          <a class="nav-link" href="#" (click)="tokenService.removeToken()">Logout</a>
         </li>
       </ul>
     </div>

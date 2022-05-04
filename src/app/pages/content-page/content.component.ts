@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from '../../services/data.service'
 import {Router} from "@angular/router";
-import {JwtHelperService} from "@auth0/angular-jwt";
 import { DatePipe } from '@angular/common';
+import {TokenService} from "../../services/token.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'pageContent',
@@ -18,18 +19,21 @@ export class ContentComponent implements OnInit, OnDestroy {
   timer = 60;
   isTimeOver = false;
   previousWords: string[] = [];
+  subscription1?: Subscription;
+  subscription2?: Subscription;
+
 
   constructor(public readonly service: DataService, private readonly router: Router,
-              private readonly jwtHelper: JwtHelperService, private readonly datePipe: DatePipe) {
-  }
+              private readonly datePipe: DatePipe, private readonly tokenService: TokenService) { }
 
 
   ngOnInit() {
-    this.service.subscription = this.service.getWords().subscribe(data => (this.service.words = data));
+    this.subscription1 = this.service.getWords().subscribe(data => (this.service.words = data));
   }
 
   ngOnDestroy() {
-    this.service.subscription?.unsubscribe();
+    this.subscription1?.unsubscribe();
+    this.subscription2?.unsubscribe()
   }
 
 
@@ -92,23 +96,24 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   saveResult()
   {
-    const token = this.jwtHelper.decodeToken(localStorage.getItem('token')!)
-    if(!token || this.jwtHelper.isTokenExpired(localStorage.getItem('token')!))
-    {
-      this.router.navigate(['/login']).then()
-      return
+    const token = this.tokenService.getDecodedToken()
+    if(this.tokenService.checkToken()){
+      const username = token.sub
+      const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd, h:mm:ss a')
+      return {
+        username: username,
+        wpm: this.calculateCurrentWpm(),
+        accuracy: this.numOfCorrect / this.index,
+        date: date!
+      };
     }
-    const username: string = token.sub
-    const date = this.datePipe.transform(Date.now(), 'yyyy-MM-dd, h:mm:ss a')
-    return {
-      username: username,
-      wpm: this.calculateCurrentWpm(),
-      accuracy: this.numOfCorrect / this.index,
-      date: date!
-    };
+    return null
   }
   send(){
-    this.service.sendResult(this.saveResult()!).subscribe()
+    if(!this.saveResult()){
+      return
+    }
+    this.subscription2 = this.service.sendResult(this.saveResult()!).subscribe()
     this.newGame()
   }
 
