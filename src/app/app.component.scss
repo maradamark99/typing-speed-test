@@ -3,27 +3,27 @@
 .sidenav {
 	background-color: $sidebar;
 	width: 15vw;
-	min-width: 10rem;
+	min-width: 9rem;
+	font-family: "Lato", "sans-serif";
 	display: flex;
-	align-items: center;
-
+	justify-content: center;
 	.nav-list {
-		height: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		width: 100%;
-		.nav-link {
-			text-decoration: none;
-			padding-left: 2rem;
-			padding-top: 1.5rem;
-			color: $dark-text;
-			font-size: 1.4rem;
-			:hover {
-				border-right: 5px solid;
-				border-color: $dark-text;
-			}
-		}
+		height: 100%;
+	}
+
+	.nav-link {
+		text-decoration: none;
+		color: $dark-text;
+		font-size: 1.3rem;
+		font-weight: bold;
+		padding: 1rem 1rem 1rem 2rem;
+	}
+	.nav-link:hover {
+		background-color: $dark-sidenav-hover;
+		color: $dark-bg;
 	}
 }
 

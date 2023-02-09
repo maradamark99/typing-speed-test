@@ -3,28 +3,26 @@
 		<mat-sidenav class="sidenav" mode="side" #sidenav>
 			<div class="nav-list">
 				<a class="nav-link" routerLink="/" routerLinkActive="active">
-					<p>Home</p>
+					Home
 				</a>
 				<a class="nav-link" routerLink="/" routerLinkActive="active">
-					<p>Login</p>
+					Login
 				</a>
 				<a class="nav-link" routerLink="/" routerLinkActive="active">
-					<p>Register</p>
+					Register
 				</a>
 				<a class="nav-link" routerLink="/" routerLinkActive="active">
-					<p>Play</p>
+					Play
 				</a>
 				<a class="nav-link" routerLink="/" routerLinkActive="active">
-					<p>Results</p>
+					Results
 				</a>
-				<a class="nav-link">
-					<p>Logout</p>
-				</a>
+				<a class="nav-link">Logout </a>
 			</div>
 		</mat-sidenav>
 		<mat-sidenav-content>
 			<div class="main-content">
-				<p (click)="sidenav.toggle()">toggle</p>
+				<button (click)="sidenav.toggle()">toggle</button>
 				<router-outlet></router-outlet>
 			</div>
 		</mat-sidenav-content>
