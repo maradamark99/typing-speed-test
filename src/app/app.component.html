@@ -1,3 +1,30 @@
 <div class="page">
-	<router-outlet></router-outlet>
+	<mat-sidenav-container class="container" hasBackdrop="false">
+		<mat-sidenav class="sidenav" mode="side" #sidenav>
+			<div class="nav-list">
+				<a class="nav-link" routerLink="/" routerLinkActive="active">
+					Home
+				</a>
+				<a class="nav-link" routerLink="/" routerLinkActive="active">
+					Login
+				</a>
+				<a class="nav-link" routerLink="/" routerLinkActive="active">
+					Register
+				</a>
+				<a class="nav-link" routerLink="/" routerLinkActive="active">
+					Play
+				</a>
+				<a class="nav-link" routerLink="/" routerLinkActive="active">
+					Results
+				</a>
+				<a class="nav-link">Logout </a>
+			</div>
+		</mat-sidenav>
+		<mat-sidenav-content>
+			<div class="main-content">
+				<button (click)="sidenav.toggle()">toggle</button>
+				<router-outlet></router-outlet>
+			</div>
+		</mat-sidenav-content>
+	</mat-sidenav-container>
 </div>

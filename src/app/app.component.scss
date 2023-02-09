@@ -1,0 +1,38 @@
+@import "../styles.scss";
+
+.sidenav {
+	background-color: $sidebar;
+	width: 15vw;
+	min-width: 9rem;
+	font-family: "Lato", "sans-serif";
+	display: flex;
+	justify-content: center;
+	.nav-list {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100%;
+	}
+
+	.nav-link {
+		text-decoration: none;
+		color: $dark-text;
+		font-size: 1.3rem;
+		font-weight: bold;
+		padding: 1rem 1rem 1rem 2rem;
+	}
+	.nav-link:hover {
+		background-color: $dark-sidenav-hover;
+		color: $dark-bg;
+	}
+}
+
+.container {
+	min-height: 100vh;
+}
+
+.main-content {
+	background-color: $dark-bg;
+	min-height: 100vh;
+	color: $dark-text;
+}
