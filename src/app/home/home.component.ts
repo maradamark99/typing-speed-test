@@ -11,7 +11,9 @@ export class HomeComponent implements OnInit {
 
 	constructor() { 
 		// for testing purposes
-    this.words = ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur",]
+    this.words = ["Lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "Lorem",
+      "ipsum", "dolor", "sit", "amet", "consectetur", "Lorem", "ipsum", "dolor",
+      "sit", "amet", "consectetur", "Lorem", "ipsum", "dolor", "sit", "amet", "consectetur",]
 	}
 
   ngOnInit(): void {

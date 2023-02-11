@@ -1,10 +1,20 @@
 <div class="container">
-	<div class="words">
-		<!-- TODO: Extract this to a component-->
-		<div class="word" *ngFor="let word of words">
-			<ng-container *ngFor="let char of word.split('')">
-				<span>{{ char }}</span>
-			</ng-container>
+	<!--TODO: create a seperate component for this-->
+	<div class="word-box">
+		<div class="prev-words"></div>
+		<span class="blinking-cursor">|</span>
+		<div class="curr-words">
+			<div
+				class="curr-word"
+				*ngFor="let word of words; index as i"
+				id="word{{ i }}"
+			>
+				<span
+					*ngFor="let char of word.split(''); index as c"
+					id="char{{ i }}{{ c }}"
+					>{{ char }}</span
+				>
+			</div>
 		</div>
 	</div>
 </div>
