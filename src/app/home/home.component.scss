@@ -41,12 +41,18 @@
 }
 
 .blinking-cursor {
-	color: var(--text-color);
+	color: $dark-text;
 	-webkit-animation: 1.5s blink step-end infinite;
 	-moz-animation: 1.5s blink step-end infinite;
 	-ms-animation: 1.5s blink step-end infinite;
 	-o-animation: 1.5s blink step-end infinite;
 	animation: 1.5s blink step-end infinite;
+}
+
+.user-input {
+	position: absolute;
+	left: -9999px;
+	opacity: 0;
 }
 
 @keyframes blink {
@@ -56,7 +62,7 @@
 	}
 
 	50% {
-		color: var(--text-color);
+		color: $dark-text;
 	}
 }
 
@@ -67,7 +73,7 @@
 	}
 
 	50% {
-		color: var(--text-color);
+		color: $dark-text;
 	}
 }
 
@@ -78,7 +84,7 @@
 	}
 
 	50% {
-		color: var(--text-color);
+		color: $dark-text;
 	}
 }
 
@@ -89,7 +95,7 @@
 	}
 
 	50% {
-		color: var(--text-color);
+		color: $dark-text;
 	}
 }
 
@@ -100,6 +106,6 @@
 	}
 
 	50% {
-		color: var(--text-color);
+		color: $dark-text;
 	}
 }
