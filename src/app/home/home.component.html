@@ -1,10 +1,22 @@
 <div class="container">
 	<!--TODO: create a seperate component for this-->
 	<div class="word-box" (click)="userInput.focus()">
-		<div class="prev-words"></div>
+		<div class="prev-words">
+			<div
+				class="prev-word"
+				*ngFor="let prevWord of prevWords; index as i"
+			>
+				<span *ngFor="let char of prevWord.split(''); index as c">{{
+					char
+				}}</span>
+			</div>
+		</div>
 		<span class="blinking-cursor">|</span>
 		<div class="curr-words">
-			<div class="curr-word" *ngFor="let word of words; index as i">
+			<div
+				class="curr-word"
+				*ngFor="let word of currentWords; index as i"
+			>
 				<span *ngFor="let char of word.split(''); index as c">{{
 					char
 				}}</span>
@@ -15,7 +27,8 @@
 		type="text"
 		class="user-input"
 		#userInput
-		(keyup)="checkInput(userInput.value); userInput.value = ''"
+		(keypress)="checkInput($event)"
+		(keydown.space)="nextWord(userInput.value); userInput.value = ''"
 	/>
 	<h1 *ngIf="test == true">YEP</h1>
 </div>

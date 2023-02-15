@@ -25,10 +25,25 @@
 	display: inline;
 }
 
+.prev-word {
+	padding-right: 0.5rem;
+	display: inline;
+}
+
+.hide {
+	display: none;
+	visibility: hidden;
+}
+
 .prev-words {
+	height: 100%;
 	width: 50%;
-	padding-left: 0.5rem;
-	float: right;
+	white-space: nowrap;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	color: $dark-text-secondary;
 }
 
 .curr-words {
