@@ -1,4 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { LinkedList } from 'linked-list-typescript';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +8,10 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   private originalWords?: Array<String>;
-  public currentWords?: Array<String>;
-  public prevWords?: Array<String>;
+  public currentWords?: LinkedList<String>;
+  public previousWords?: LinkedList<String>;
   charIndex?: number;
   wordIndex?: number;
-  test?: boolean;
 
 	constructor() { 
 	}
@@ -19,34 +19,39 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 		// for testing purposes
     this.originalWords = ["lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "lorem",
-      "ipsum", "dolor", "sit", "amet", "consectetur", "Lorem", "ipsum", "dolor",
-      "sit", "amet", "consectetur", "lorem", "ipsum", "dolor", "sit", "amet", "consectetur",];
-    this.currentWords = [...this.originalWords];
+      "ipsum", "dolor", "sit", "amet", "consectetur", "lorem", "ipsum", "dolor",
+      "sit", "amet", "consectetur", "lorem", "ipsum", "dolor", "sit", "amet", "consectetur"];
+    this.currentWords = new LinkedList<String>(...this.originalWords);
+    this.previousWords = new LinkedList<String>();
+    this.previousWords.append("")
     this.charIndex = 0;
     this.wordIndex = 0;
-    this.prevWords = []
-    this.prevWords![this.wordIndex] = "";
-
   }
 
-  checkInput(value: KeyboardEvent): void {
-    if (value.key.trim().length < 1)
+  checkInput(event: KeyboardEvent, value: string): void {
+    if (event.key.trim().length < 1)
       return
-    this.test = value.key == this.originalWords![this.wordIndex!][this.charIndex!];
-    this.prevWords![this.wordIndex!] += value.key
-    this.currentWords![this.wordIndex!] = this.currentWords![this.wordIndex!].substring(1);
-    if(this.charIndex! < this.originalWords![this.wordIndex!].length-1)
-      this.charIndex!++;
-    this.test = undefined;
+        
+    let prevWord = this.previousWords!.removeTail() + event.key;
+    this.previousWords?.append(prevWord);
+    let newWord = this.currentWords!.removeHead().substring(1);
+    this.currentWords!.prepend(newWord);
+    
+    if(this.isCharIndexSmallerThanCurrentWordLength())
+      this.charIndex!++;  
   }
 
   nextWord(value: string): void {
     if (value.trim().length < 1)
       return;
-    this.currentWords![this.wordIndex!] = "";
+    this.currentWords!.removeHead();
     this.charIndex = 0;
-    this.wordIndex!++;
-    this.prevWords![this.wordIndex!] = "";
+    this.wordIndex!++
+    this.previousWords?.append("")
+  } 
+
+  private isCharIndexSmallerThanCurrentWordLength() {
+    return this.charIndex! < this.originalWords![this.wordIndex!].length - 1;
   }
 
 }

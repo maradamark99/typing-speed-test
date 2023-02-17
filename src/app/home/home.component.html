@@ -4,7 +4,7 @@
 		<div class="prev-words">
 			<div
 				class="prev-word"
-				*ngFor="let prevWord of prevWords; index as i"
+				*ngFor="let prevWord of previousWords; index as i"
 			>
 				<span *ngFor="let char of prevWord.split(''); index as c">{{
 					char
@@ -27,8 +27,7 @@
 		type="text"
 		class="user-input"
 		#userInput
-		(keypress)="checkInput($event)"
+		(keypress)="checkInput($event, userInput.value)"
 		(keydown.space)="nextWord(userInput.value); userInput.value = ''"
 	/>
-	<h1 *ngIf="test == true">YEP</h1>
 </div>
