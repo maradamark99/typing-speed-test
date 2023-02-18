@@ -16,9 +16,6 @@
 					Register
 				</a>
 				<a class="nav-link" routerLink="/" routerLinkActive="active">
-					Play
-				</a>
-				<a class="nav-link" routerLink="/" routerLinkActive="active">
 					Results
 				</a>
 				<a class="nav-link">Logout </a>
@@ -26,7 +23,40 @@
 		</mat-sidenav>
 		<mat-sidenav-content>
 			<div class="main-content">
-				<button (click)="sidenav.toggle()">toggle</button>
+				<a class="sidenav-toggle" (click)="sidenav.toggle()">
+					<ng-container *ngIf="sidenav.opened">
+						<svg
+							class="sidenav-toggle-icon"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M6 18L18 6M6 6l12 12"
+							/>
+						</svg>
+					</ng-container>
+					<ng-container *ngIf="!sidenav.opened">
+						<svg
+							class="sidenav-toggle-icon"
+							xmlns="http://www.w3.org/2000/svg"
+							fill="none"
+							viewBox="0 0 24 24"
+							stroke-width="1.5"
+							stroke="currentColor"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+							/>
+						</svg>
+					</ng-container>
+				</a>
 				<router-outlet></router-outlet>
 			</div>
 		</mat-sidenav-content>
