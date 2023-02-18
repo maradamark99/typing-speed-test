@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   public previousWords?: LinkedList<String>;
   charIndex?: number;
   wordIndex?: number;
+  currentWord: string = "";
 
 	constructor() { 
 	}
@@ -28,29 +29,52 @@ export class HomeComponent implements OnInit {
     this.wordIndex = 0;
   }
 
-  checkInput(event: KeyboardEvent, value: string): void {
-    if (event.key.trim().length < 1)
-      return
-        
-    let prevWord = this.previousWords!.removeTail() + event.key;
-    this.previousWords?.append(prevWord);
-    let newWord = this.currentWords!.removeHead().substring(1);
-    this.currentWords!.prepend(newWord);
-    
-    if(this.isCharIndexSmallerThanCurrentWordLength())
-      this.charIndex!++;  
+  public checkInput(event: KeyboardEvent): void {
+    this.currentWord += event.key;
+    console.log(this.currentWord)
+    if (this.validateInputKey(event.key)) {
+      if (!this.isInputEqualToCurrent()) {
+        this.createNewPreviousWord(event.key);
+      }
+      else {
+        this.createNewCurrentWord(event.key);
+        this.createNewPreviousWord(event.key); 
+        if(this.isCharIndexSmallerThanCurrentWordLength())
+          this.charIndex!++; 
+      }
+    }
   }
 
-  nextWord(value: string): void {
-    if (value.trim().length < 1)
+  public nextWord(): void {
+    if (this.currentWord.trim().length < 1)
       return;
     this.currentWords!.removeHead();
     this.charIndex = 0;
-    this.wordIndex!++
-    this.previousWords?.append("")
+    this.wordIndex!++;
+    this.previousWords?.append("");
+    this.currentWord = "";
   } 
 
-  private isCharIndexSmallerThanCurrentWordLength() {
+  private isInputEqualToCurrent(): boolean {
+    return this.currentWord.substring(0, this.charIndex!)
+      == this.originalWords![this.wordIndex!].substring(0, this.charIndex!) 
+  }
+
+  private createNewPreviousWord(key: string): void {
+    let newPrevious = this.previousWords!.removeTail() + key;
+    this.previousWords!.append(newPrevious);
+  }
+
+  private createNewCurrentWord(key: string): void {
+    let newCurrent = this.currentWords!.removeHead().substring(1);
+    this.currentWords!.prepend(newCurrent);
+  }
+
+  private validateInputKey(inputKey: string): boolean{
+    return !(inputKey.trim().length < 1 || inputKey < 'a' || inputKey > 'z');
+  }
+
+  private isCharIndexSmallerThanCurrentWordLength(): boolean {   
     return this.charIndex! < this.originalWords![this.wordIndex!].length - 1;
   }
 
