@@ -27,7 +27,8 @@
 		type="text"
 		class="user-input"
 		#userInput
-		(keypress)="checkInput($event)"
-		(keydown.space)="nextWord(); userInput.value = ''"
+		(keypress)="onKeyPress($event)"
+		(keydown.space)="onSpaceKeyPress(); userInput.value = ''"
+		(keydown.backspace)="onBackspaceKeyPress()"
 	/>
 </div>
