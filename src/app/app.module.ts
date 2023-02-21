@@ -10,12 +10,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { WordTypingComponent } from './home/word/word-typing.component';
+import { StatComponent } from './home/stat/stat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     WordTypingComponent,
+    StatComponent,
   ],
   imports: [
     BrowserModule,

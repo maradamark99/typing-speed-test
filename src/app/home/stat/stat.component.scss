@@ -1,0 +1,20 @@
+@import "../../../styles.scss";
+
+.stat-box {
+	height: 7rem;
+	width: 7rem;
+	background-color: $dark-secondary;
+	border-radius: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.stat-value {
+		font-size: 1.75rem;
+		font-weight: 400;
+	}
+}
+
+label {
+	font-size: 1.1rem;
+	font-weight: 250;
+}
