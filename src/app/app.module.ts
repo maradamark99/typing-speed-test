@@ -9,11 +9,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
+import { WordTypingComponent } from './home/word/word-typing.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    WordTypingComponent,
   ],
   imports: [
     BrowserModule,
