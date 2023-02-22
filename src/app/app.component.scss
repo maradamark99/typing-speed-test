@@ -10,14 +10,13 @@
 	.nav-list {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		height: 100%;
+		margin-top: 20vh;
 	}
 
 	.nav-link {
 		text-decoration: none;
 		color: $dark-text;
-		font-size: 1.3rem;
+		font-size: 1.4rem;
 		font-weight: bold;
 		padding: 1rem 1rem 1rem 2rem;
 	}
@@ -35,4 +34,15 @@
 	background-color: $dark-bg;
 	min-height: 100vh;
 	color: $dark-text;
+	.sidenav-toggle {
+		height: 2rem;
+		width: 2rem;
+		:hover {
+			cursor: pointer;
+		}
+		.sidenav-toggle-icon {
+			width: 2rem;
+			height: 2rem;
+		}
+	}
 }

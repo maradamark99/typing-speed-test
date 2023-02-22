@@ -1,0 +1,118 @@
+@import "../../../styles.scss";
+
+.word-box {
+	height: 12.5rem;
+	width: 65%;
+	font-size: 2rem;
+	font-weight: 200;
+	display: flex;
+	align-items: center;
+	background-color: $dark-secondary;
+	color: $dark-text;
+	border-radius: 20px;
+}
+
+.curr-word {
+	padding-right: 0.5rem;
+	display: inline;
+}
+
+.prev-word {
+	padding-left: 0.5rem;
+	display: inline;
+}
+
+.hide {
+	display: none;
+	visibility: hidden;
+}
+
+.prev-words {
+	height: 100%;
+	width: 50%;
+	white-space: nowrap;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	color: $dark-text-secondary;
+}
+
+.curr-words {
+	width: 50%;
+	height: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	display: flex;
+	align-items: center;
+}
+
+.blinking-cursor {
+	color: $dark-text;
+	-webkit-animation: 1.5s blink step-end infinite;
+	-moz-animation: 1.5s blink step-end infinite;
+	-ms-animation: 1.5s blink step-end infinite;
+	-o-animation: 1.5s blink step-end infinite;
+	animation: 1.5s blink step-end infinite;
+}
+
+.user-input {
+	position: absolute;
+	left: -9999px;
+	opacity: 0;
+}
+
+@keyframes blink {
+	from,
+	to {
+		color: transparent;
+	}
+
+	50% {
+		color: $dark-text;
+	}
+}
+
+@-moz-keyframes blink {
+	from,
+	to {
+		color: transparent;
+	}
+
+	50% {
+		color: $dark-text;
+	}
+}
+
+@-webkit-keyframes blink {
+	from,
+	to {
+		color: transparent;
+	}
+
+	50% {
+		color: $dark-text;
+	}
+}
+
+@-ms-keyframes blink {
+	from,
+	to {
+		color: transparent;
+	}
+
+	50% {
+		color: $dark-text;
+	}
+}
+
+@-o-keyframes blink {
+	from,
+	to {
+		color: transparent;
+	}
+
+	50% {
+		color: $dark-text;
+	}
+}

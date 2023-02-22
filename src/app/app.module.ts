@@ -7,10 +7,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
+import { FormsModule } from '@angular/forms';
+import { WordTypingComponent } from './home/word/word-typing.component';
+import { StatComponent } from './home/stat/stat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    WordTypingComponent,
+    StatComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,6 +26,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatInputModule,
     MatSelectModule,
     BrowserAnimationsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,8 @@
+<div class="container">
+	<app-word-typing (focusChange)="onFocusChange($event)" class="words"></app-word-typing>
+	<div class="stats">
+		<app-stat class="stat" [valueToDisplay]="wordService.calculateWordsPerMinute(currentTime ?? countFrom)" [label]="'wpm'"></app-stat>
+		<app-stat class="stat" [valueToDisplay]="wordService.calculateAccuracy()" [label]="'accuracy'"></app-stat>
+		<app-stat class="stat" [valueToDisplay]="currentTime ?? countFrom" [label]="'time left'"></app-stat>
+	</div>	
+</div>

@@ -1,0 +1,21 @@
+.words {
+	margin-top: 15vh;
+	display: flex;
+	justify-content: center;
+}
+
+.stats {
+	margin-top: 7vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.stat {
+	margin-right: 7%;
+	text-align: center;
+}
+
+.stat:last-of-type {
+	margin-right: 0%;
+}
