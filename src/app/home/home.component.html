@@ -1,8 +1,8 @@
 <div class="container">
-	<app-word-typing class="words"></app-word-typing>
+	<app-word-typing (focusChange)="onFocusChange($event)" class="words"></app-word-typing>
 	<div class="stats">
-		<app-stat class="stat" [valueToDisplay]="87" [label]="'wpm'"></app-stat>
-		<app-stat class="stat" [valueToDisplay]="97.25" [label]="'accuracy'"></app-stat>
-		<app-stat class="stat" [valueToDisplay]="52" [label]="'time left '"></app-stat>
+		<app-stat class="stat" [valueToDisplay]="wordService.calculateWordsPerMinute(currentTime ?? countFrom)" [label]="'wpm'"></app-stat>
+		<app-stat class="stat" [valueToDisplay]="wordService.calculateAccuracy()" [label]="'accuracy'"></app-stat>
+		<app-stat class="stat" [valueToDisplay]="currentTime ?? countFrom" [label]="'time left'"></app-stat>
 	</div>	
 </div>
