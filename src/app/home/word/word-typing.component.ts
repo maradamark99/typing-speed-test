@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { LinkedList } from 'linked-list-typescript';
 import { WordService } from 'src/app/services/word.service';
 
@@ -9,11 +9,11 @@ import { WordService } from 'src/app/services/word.service';
   styleUrls: ['./word-typing.component.scss']
 })
 export class WordTypingComponent implements OnInit {
+  @Output('focusChange') focusChange = new EventEmitter<boolean>();
   public originalWords?: string[];
   public currentWords?: LinkedList<string>;
   public previousWords?: LinkedList<string>;
-  charIndex: number = 0;
-  wordIndex: number = 0;
+  private isFocused = false;
   input: string = "";
 
   constructor(private wordService: WordService) { }
@@ -31,19 +31,20 @@ export class WordTypingComponent implements OnInit {
     
     this.input += event.key;
     if (this.isInputEqualToCurrentWord()) {
+      this.wordService.numberOfTypedChar++;
       this.updateCurrentWords(this.currentWords!.head.substring(1));
-      if(this.charIndex < this.originalWords![this.wordIndex].length)
-        this.charIndex++; 
+      if(this.wordService.charIndex < this.originalWords![this.wordService.wordIndex].length)
+        this.wordService.charIndex++; 
     }
     this.updatePreviousWords(this.previousWords?.tail + event.key);
   }
 
   public onBackspaceKeyPress() {
-    if (this.charIndex == 0 && this.input.length < 1) return;
+    if (this.wordService.charIndex == 0 && this.input.length < 1) return;
 
     if (this.isInputEqualToCurrentWord()) {
-      this.charIndex--;
-      this.updateCurrentWords(this.input[this.charIndex] + this.currentWords!.head);
+      this.wordService.charIndex--;
+      this.updateCurrentWords(this.input[this.wordService.charIndex] + this.currentWords!.head);
     } 
     let tail = this.previousWords!.tail;
     this.updatePreviousWords(tail.substring(0, tail.length - 1));
@@ -53,16 +54,18 @@ export class WordTypingComponent implements OnInit {
   public onSpaceKeyPress(): void {
     if (this.input.trim().length < 1)
       return;
+    if (this.input == this.originalWords![this.wordService.wordIndex])
+      this.wordService.numberOfCorrect++;
     this.currentWords!.removeHead();
-    this.charIndex = 0;
-    this.wordIndex++;
+    this.wordService.charIndex = 0;
+    this.wordService.wordIndex++;
     this.previousWords?.append("");
     this.input = "";
   } 
 
   private isInputEqualToCurrentWord(): boolean {
     return this.input
-      == this.originalWords![this.wordIndex].substring(0, this.input.length) 
+      == this.originalWords![this.wordService.wordIndex].substring(0, this.input.length) 
   }
 
   private updatePreviousWords(newValue: string): void {
@@ -81,6 +84,11 @@ export class WordTypingComponent implements OnInit {
 
   private getWords() {
     this.originalWords = this.wordService.getWords();
+  }
+
+  public inputInFocus() {
+    this.isFocused = true;
+    this.focusChange?.emit(this.isFocused);
   }
 
 }
