@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatDrawer, MatDrawerMode } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
