@@ -26,6 +26,8 @@ export class WordTypingComponent implements OnInit {
   }
 
   public onKeyPress(event: KeyboardEvent): void {
+    if (this.wordService.wordIndex == this.originalWords?.length)
+      return;
     if (!this.isAValidKey(event.key))
       return;
     
