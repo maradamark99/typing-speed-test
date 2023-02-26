@@ -1,5 +1,8 @@
 .words {
-	margin-top: 15vh;
+	@media (max-height: 600px) and (orientation: landscape) {
+		margin-top: 5vw;
+	}
+	margin-top: 17.5vh;
 	display: flex;
 	justify-content: center;
 }

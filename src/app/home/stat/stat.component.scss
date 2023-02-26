@@ -1,6 +1,14 @@
 @import "../../../styles.scss";
 
 .stat-box {
+	@media (orientation: portrait) {
+		height: 5.5rem;
+		width: 5.5rem;
+	}
+	@media (orientation: landscape) and (max-height: 500px) {
+		height: 5.5rem;
+		width: 5.5rem;
+	}
 	height: 7rem;
 	width: 7rem;
 	background-color: $dark-secondary;
