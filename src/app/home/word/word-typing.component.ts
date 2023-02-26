@@ -26,6 +26,8 @@ export class WordTypingComponent implements OnInit {
   }
 
   public onKeyPress(event: KeyboardEvent): void {
+    if (this.wordService.wordIndex == this.originalWords?.length)
+      return;
     if (!this.isAValidKey(event.key))
       return;
     
@@ -79,7 +81,7 @@ export class WordTypingComponent implements OnInit {
   }
 
   private isAValidKey(key: string): boolean{
-    return !(key.trim().length < 1 || key < 'a' || key > 'z');
+    return !(key < 'a' || key > 'z');
   }
 
   private getWords() {
