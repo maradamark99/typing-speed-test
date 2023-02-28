@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { WordTypingComponent } from './home/word/word-typing.component';
 import { StatComponent } from './home/stat/stat.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { StatComponent } from './home/stat/stat.component';
     HomeComponent,
     WordTypingComponent,
     StatComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,7 @@ import { StatComponent } from './home/stat/stat.component';
     MatInputModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
