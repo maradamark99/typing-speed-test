@@ -1,0 +1,98 @@
+@import "/src/styles.scss";
+
+.container {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 15vh;
+	@media (orientation: landscape) and (max-height: 500px) {
+		margin-top: 0;
+	}
+	@media (orientation: portrait) {
+		margin-top: 10vh;
+	}
+}
+
+.title {
+	text-align: center;
+	font-family: "Lato", "sans-serif";
+	font-weight: 600;
+}
+
+.line-container {
+	display: flex;
+	align-items: center;
+}
+
+.line {
+	flex: 1;
+	border: none;
+	height: 1px;
+	background-color: $dark-text;
+}
+
+.line-text {
+	margin: 0 10px;
+}
+
+.link-container {
+	display: flex;
+	justify-content: center;
+}
+
+.link {
+	font-size: 1.125rem;
+	color: $dark-text;
+	text-align: center;
+}
+
+.button-container {
+	display: flex;
+	justify-content: center;
+}
+
+button {
+	width: 8rem;
+	background-color: $dark-text;
+	border-radius: 20px;
+	margin: 1rem 0rem 1rem 0rem;
+}
+
+form {
+	@media (min-width: 600px) {
+		width: 25rem;
+	}
+	width: 70%;
+	padding: 5rem;
+	border-radius: 2rem;
+	background-color: $dark-secondary;
+}
+
+.form-group {
+	display: flex;
+	justify-content: center;
+	padding: 1rem 0rem 1rem 0rem;
+	@media (orientation: landscape) and (max-height: 500px) {
+		padding: 0.5rem;
+	}
+}
+
+input {
+	@media (min-width: 600px) {
+		width: 80%;
+	}
+	@media (max-width: 450px) {
+		width: 100%;
+	}
+	padding-left: 1rem;
+	color: $dark-bg;
+	border: 2px solid $dark-text;
+	background-color: $dark-text;
+	width: 90%;
+	height: 2rem;
+	border-radius: 20px;
+}
+
+input:focus {
+	outline: 4px solid $dark-bg;
+}
