@@ -1,20 +1,11 @@
 <div class="container">
-  <form>
-    <h1 class="title">Sign up</h1>
-    <div class="form-group">
-      <input type="email" placeholder="E-mail" required />
-    </div>
-    <div class="form-group">
-      <input type="text" placeholder="Username" required/>
-    </div>
-    <div class="form-group">
-      <input type="password" placeholder="Password" />
-    </div>
-    <div class="form-group">
-      <input type="password" placeholder="Password confirmation"  required />
+  <form [formGroup]="form!">
+    <h1 class="title">{{ 'Sign up' }}</h1>
+    <div class="form-control" *ngFor="let formControl of formControls">
+      <input name="{{formControl.name}}" type="{{formControl.type}}" placeholder="{{formControl.placeholder}} " />
     </div>
     <div class="button-container">
-      <button>Create an account</button>
+      <button class="button" (click)="onSubmit()">Submit</button>
     </div>
     <div class="line-container">
       <hr class="line" />
@@ -22,7 +13,7 @@
       <hr class="line" />
     </div>
     <div class="link-container">
-      <a class="link" routerLink="/register">Sign in</a>
+      <a class="link" routerLink="/register">{{ 'Sign in' }}</a>
     </div>
   </form>
 </div>

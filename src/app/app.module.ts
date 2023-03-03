@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { WordTypingComponent } from './home/word/word-typing.component';
 import { StatComponent } from './home/stat/stat.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { RegistrationComponent } from './registration/registration.component';
     MatSelectModule,
     BrowserAnimationsModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
