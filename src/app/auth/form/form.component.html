@@ -1,0 +1,22 @@
+<form [formGroup]="form!" (ngSubmit)="onSubmit()">
+    <h1 class="title">{{ title }}</h1>
+    <div class="form-control" *ngFor="let formControlDetail of formControlDetails">
+        <input [class.is-invalid]="form!.controls[formControlDetail.name].invalid 
+        && form!.controls[formControlDetail.name].touched" 
+        [formControlName]="formControlDetail.name"
+         type="{{formControlDetail.type}}" placeholder="{{formControlDetail.placeholder}}" />
+    </div>
+    <div class="button-container">
+        <button class="submit-btn" type="submit">Submit</button>
+    </div>
+    <ng-container *ngIf="addSeparator">
+        <div class="line-container">
+            <hr class="line" />
+            <h2 class="line-text">OR</h2>
+            <hr class="line" />
+        </div>
+    </ng-container>
+    <div class="link-container">
+        <a class="link" routerLink="/{{redirectRoute}}">{{ redirectLink }}</a>
+    </div>
+</form>
