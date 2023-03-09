@@ -20,13 +20,31 @@ export class CustomValidator {
 		}
 	}
 
-	public static matchingControlsValidator(controlName: string, matchingControlName: string): ValidatorFn {
-		return (form: AbstractControl): ValidationErrors | null => {
-			const control = form.get(controlName)?.value;
-			const matchingControl = form.get(matchingControlName)?.value;
-			if (!(control && matchingControl))
+	public static usernameValidator(): ValidatorFn {
+		return (control: AbstractControl): ValidationErrors | null => {
+			const controlValue = control.value;
+
+			if (control.value == null)
 				return null;
-			return control == matchingControl ? null : { notEquivavent: true };
+			
+			const startsWithLetter = /[A-Za-z]/.test(controlValue.charAt(0));
+			
+			// TODO: implement the rest of the validations
+			
+			return startsWithLetter ? null : { shouldStartWithLetter: true };
 		}
 	}
+
+	public static matchingControlValuesValidator(controlName: string, matchingControlName: string): ValidatorFn {
+		return (form: AbstractControl): ValidationErrors | null => {
+			const control = form.get(controlName);
+			const matchingControl = form.get(matchingControlName);
+			if (!control || !matchingControl)
+				return null;
+			if (control.value != matchingControl.value)
+				matchingControl.setErrors({ notEquivalent: true });
+			return control.value == matchingControl.value ? null : { notEquivalent: true };
+		}
+	}
+	
 }
