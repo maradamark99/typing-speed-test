@@ -1,0 +1,7 @@
+<div class="container">
+  <app-form [title]="'Sign up'" [formControlDetails]="formControlDetails"
+   [redirectLink]="'Sign in'" [redirectRoute]="'login'" [addSeparator]="true"
+   [formValidators]="formValidators"
+    (formSubmitted)="onUserSubmitted($event)">
+  </app-form>
+</div>
