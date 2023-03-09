@@ -11,8 +11,10 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { WordTypingComponent } from './home/word/word-typing.component';
 import { StatComponent } from './home/stat/stat.component';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './auth/registration/registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormComponent } from './auth/form/form.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     WordTypingComponent,
     StatComponent,
     RegistrationComponent,
+    FormComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSelectModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
