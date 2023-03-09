@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { IFormControlDetails } from 'src/app/interfaces/form-control-details';
 import { CustomValidator } from 'src/app/utils/custom-validator';
 
@@ -14,6 +14,7 @@ export class FormComponent implements OnInit {
   @Input() redirectLink?: string;
   @Input() redirectRoute?: string;
   @Input() addSeparator?: boolean;
+  @Input() formValidators?: CustomValidator[];
   @Output() formSubmitted = new EventEmitter<any>();
   public form?: FormGroup 
 
@@ -24,7 +25,7 @@ export class FormComponent implements OnInit {
     this.createFormGroup();
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.form?.invalid)
       return;
     let result: any = {};
@@ -42,7 +43,12 @@ export class FormComponent implements OnInit {
       formControlDetail => group[formControlDetail.name] = new FormControl('', formControlDetail.validators)
     )
 
-    this.form = this.formBuilder.group(group,{ validators: CustomValidator.matchingControlsValidator('password', 'passwordConfirmation') });
+    this.form = this.formBuilder.group(group,
+      { validators: [...this.formValidators ?? []]} as AbstractControlOptions);
+  }
+
+  get fc() {
+    return this.form?.controls
   }
 
 }
