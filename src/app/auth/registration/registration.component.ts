@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomValidator } from 'src/app/utils/custom-validator';
@@ -13,7 +14,7 @@ import { IFormControlDetail } from '../../interfaces/form-control-detail';
 })
 export class RegistrationComponent implements OnInit {
 
-  public readonly formControlDetails?: IFormControlDetails[] = [
+  private subscription?: Subscription;
 
   public readonly formControlDetails: IFormControlDetail[] = [
     {
@@ -53,11 +54,15 @@ export class RegistrationComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
+  }
+
   constructor(private authService: AuthService, private router: Router) {
   }
 
   onUserSubmitted(user: IUser) {
-    this.authService.registerUser(user).subscribe((result) => console.log(result));
+    this.subscription = this.authService.registerUser(user).subscribe();
     this.redirect();
   }
 
