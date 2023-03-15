@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
 import { CustomValidator } from 'src/app/utils/custom-validator';
-import { IFormControlDetails } from '../../interfaces/form-control-details';
+import { IFormControlDetail } from '../../interfaces/form-control-detail';
 
 @Component({
   selector: 'app-registration',
@@ -14,6 +14,8 @@ import { IFormControlDetails } from '../../interfaces/form-control-details';
 export class RegistrationComponent implements OnInit {
 
   public readonly formControlDetails?: IFormControlDetails[] = [
+
+  public readonly formControlDetails: IFormControlDetail[] = [
     {
       name: 'email',
       placeholder: 'Email',

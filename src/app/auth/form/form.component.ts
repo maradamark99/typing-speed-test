@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { IFormControlDetails } from 'src/app/interfaces/form-control-details';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { IFormControlDetail } from 'src/app/interfaces/form-control-detail';
 import { CustomValidator } from 'src/app/utils/custom-validator';
 
 @Component({
@@ -10,7 +10,7 @@ import { CustomValidator } from 'src/app/utils/custom-validator';
 })
 export class FormComponent implements OnInit {
   @Input() title?: string
-  @Input() formControlDetails?: IFormControlDetails[];
+  @Input() formControlDetails?: IFormControlDetail[];
   @Input() redirectLink?: string;
   @Input() redirectRoute?: string;
   @Input() addSeparator?: boolean;
