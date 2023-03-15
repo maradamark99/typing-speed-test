@@ -16,22 +16,21 @@ export class CustomValidator {
 			
 			const passwordValid = hasUpperCase && hasLowerCase && hasNumeric;
 
-			return !passwordValid ? { passwordStrength: true } : null;
+			return !passwordValid ? { message: "The password is not strong enough."} : null;
 		}
 	}
 
 	public static usernameValidator(): ValidatorFn {
 		return (control: AbstractControl): ValidationErrors | null => {
+
 			const controlValue = control.value;
 
 			if (control.value == null)
 				return null;
 			
 			const startsWithLetter = /[A-Za-z]/.test(controlValue.charAt(0));
-			
-			// TODO: implement the rest of the validations
-			
-			return startsWithLetter ? null : { shouldStartWithLetter: true };
+						
+			return startsWithLetter ? null : { message: "The username must start with a letter."};
 		}
 	}
 
@@ -39,11 +38,14 @@ export class CustomValidator {
 		return (form: AbstractControl): ValidationErrors | null => {
 			const control = form.get(controlName);
 			const matchingControl = form.get(matchingControlName);
+
 			if (!control || !matchingControl)
 				return null;
-			if (control.value != matchingControl.value)
-				matchingControl.setErrors({ notEquivalent: true });
-			return control.value == matchingControl.value ? null : { notEquivalent: true };
+			
+			const isMatching = control.value === matchingControl.value;
+			if (!isMatching)
+				matchingControl.setErrors({ message: `The fields ${controlName} and ${matchingControlName} do not match.` });
+			return null;
 		}
 	}
 	
