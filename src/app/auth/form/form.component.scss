@@ -31,9 +31,13 @@
 	height: 2rem;
 	width: 8rem;
 	background-color: $dark-text;
-	margin: 1rem 0rem 1rem 0rem;
+	margin: 0.5rem 0rem 0.5rem 0rem;
 	cursor: pointer;
 	border-style: none;
+}
+
+.submit-btn:hover {
+	border: 2px solid $dark-secondary;
 }
 
 .link-container {
@@ -59,17 +63,13 @@ form {
 }
 
 .form-control {
-	padding: 0.75rem 0rem 0.75rem 0rem;
-	@media (orientation: landscape) and (max-height: 500px) {
-		padding: 0.5rem;
-	}
-}
-
-.wrapper {
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	height: 4.25rem;
+	@media (orientation: landscape) and (max-height: 500px) {
+		padding: 0.5rem;
+	}
 }
 
 input {
@@ -98,8 +98,11 @@ input:focus {
 }
 
 .input-error-msg {
-	margin-top: 0.5rem;
-	font-size: 0.8rem;
+	margin-left: 2rem;
+	align-self: flex-start;
+	margin-top: 0.25rem;
+	font-size: 0.75rem;
+	height: 0;
 	font-weight: lighter;
 	color: red;
 }

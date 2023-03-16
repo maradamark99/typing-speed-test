@@ -2,29 +2,27 @@
     <h1 class="title">{{ title }}</h1>
     <div class="form-controls">
         <div class="form-control" *ngFor="let formControlDetail of formControlDetails">
-            <div class="wrapper">
-                <input [class.is-invalid]="
-                fc![formControlDetail.name].invalid 
-                && fc![formControlDetail.name].touched" 
-                [formControlName]="formControlDetail.name"
-                type="{{formControlDetail.type}}" placeholder="{{formControlDetail.placeholder}}" />
+            <input [class.is-invalid]="
+            fc![formControlDetail.name].invalid 
+            && fc![formControlDetail.name].touched" 
+            [formControlName]="formControlDetail.name"
+            type="{{formControlDetail.type}}" placeholder="{{formControlDetail.placeholder}}" />
 
-                <ng-container *ngIf="fc![formControlDetail.name].dirty 
-                && fc![formControlDetail.name].invalid">
-                    <ng-container *ngIf="fc![formControlDetail.name].hasError('message')">
-                        <p class="input-error-msg">{{fc![formControlDetail.name].errors!['message']}}</p>
-                    </ng-container>
-                    <ng-container *ngIf="fc![formControlDetail.name].errors!['required']">
-                        <p class="input-error-msg">This value is required</p>
-                    </ng-container>
-                    <ng-container *ngIf="fc![formControlDetail.name].errors!['email']">
-                        <p class="input-error-msg">Please enter a valid email.</p>
-                    </ng-container>
-                    <ng-container *ngIf="fc![formControlDetail.name].errors!['minLength'] || fc![formControlDetail.name].errors!['maxLength']">
-                        <p class="input-error-msg">Invalid length.</p>
-                    </ng-container>
+            <ng-container *ngIf="fc![formControlDetail.name].dirty 
+            && fc![formControlDetail.name].invalid">
+                <ng-container *ngIf="fc![formControlDetail.name].hasError('message')">
+                    <p class="input-error-msg">{{fc![formControlDetail.name].errors!['message']}}</p>
                 </ng-container>
-            </div>
+                <ng-container *ngIf="fc![formControlDetail.name].errors!['required']">
+                    <p class="input-error-msg">This value is required</p>
+                </ng-container>
+                <ng-container *ngIf="fc![formControlDetail.name].errors!['email']">
+                    <p class="input-error-msg">Please enter a valid email.</p>
+                </ng-container>
+                <ng-container *ngIf="fc![formControlDetail.name].errors!['minlength'] || fc![formControlDetail.name].errors!['maxlength']">
+                    <p class="input-error-msg">Invalid length.</p>
+                </ng-container>
+            </ng-container>
         </div>
     </div>
     <div class="button-container">
