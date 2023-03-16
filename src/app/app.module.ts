@@ -15,7 +15,8 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './auth/form/form.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatSnackBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

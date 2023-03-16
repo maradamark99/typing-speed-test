@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidationErrors } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { IFormControlDetail } from 'src/app/interfaces/form-control-detail';
 import { CustomValidator } from 'src/app/utils/custom-validator';
 
@@ -18,7 +19,7 @@ export class FormComponent implements OnInit {
   @Output() formSubmitted = new EventEmitter<any>();
   public form?: FormGroup 
 
-  constructor( private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -26,8 +27,10 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form?.invalid)
+    if (this.form?.invalid) {
+      this.snackBar.open("Errors in input", "dismiss", {duration: 3000});
       return;
+    }
     let result: any = {};
     this.formControlDetails?.forEach(formControl => {
       if(formControl.saveValue !== false)
