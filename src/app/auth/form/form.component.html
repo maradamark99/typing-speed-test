@@ -1,4 +1,4 @@
-<form [formGroup]="form!" (ngSubmit)="onSubmit()">
+<form [formGroup]="form!" (ngSubmit)="handleSubmit()">
     <h1 class="title">{{ title }}</h1>
     <div class="form-controls">
         <div class="form-control" *ngFor="let formControlDetail of formControlDetails">
@@ -11,7 +11,7 @@
             <ng-container *ngIf="fc![formControlDetail.name].dirty 
             && fc![formControlDetail.name].invalid">
                 <ng-container *ngIf="fc![formControlDetail.name].hasError('message')">
-                    <p class="input-error-msg">{{fc![formControlDetail.name].errors!['message']}}</p>
+                       <p class="input-error-msg">{{fc![formControlDetail.name].errors!['message']}}</p>
                 </ng-container>
                 <ng-container *ngIf="fc![formControlDetail.name].errors!['required']">
                     <p class="input-error-msg">This value is required</p>

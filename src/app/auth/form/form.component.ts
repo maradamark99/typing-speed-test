@@ -26,7 +26,7 @@ export class FormComponent implements OnInit {
     this.createFormGroup();
   }
 
-  onSubmit(): void {
+  handleSubmit(): void {
     if (this.form?.invalid) {
       this.snackBar.open("Errors in input", "dismiss", {duration: 3000});
       return;
