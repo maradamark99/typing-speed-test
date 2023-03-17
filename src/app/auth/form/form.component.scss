@@ -67,9 +67,6 @@ form {
 	flex-direction: column;
 	align-items: center;
 	height: 4.25rem;
-	@media (orientation: landscape) and (max-height: 500px) {
-		padding: 0.5rem;
-	}
 }
 
 input {
