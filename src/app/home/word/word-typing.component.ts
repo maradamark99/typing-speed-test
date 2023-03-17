@@ -25,7 +25,7 @@ export class WordTypingComponent implements OnInit {
     this.previousWords.append("")
   }
 
-  public onKeyPress(event: KeyboardEvent): void {
+  public handleKeyPress(event: KeyboardEvent): void {
     if (this.wordService.wordIndex == this.originalWords?.length)
       return;
     if (!this.isAValidKey(event.key))
@@ -41,7 +41,7 @@ export class WordTypingComponent implements OnInit {
     this.updatePreviousWords(this.previousWords?.tail + event.key);
   }
 
-  public onBackspaceKeyPress() {
+  public handleBackspaceKeyPress() {
     if (this.wordService.charIndex == 0 && this.input.length < 1) return;
 
     if (this.isInputEqualToCurrentWord()) {
@@ -53,7 +53,7 @@ export class WordTypingComponent implements OnInit {
     this.input = this.input.substring(0, this.input.length - 1);
   }
 
-  public onSpaceKeyPress(): void {
+  public handleSpaceKeyPress(): void {
     if (this.input.trim().length < 1)
       return;
     if (this.input == this.originalWords![this.wordService.wordIndex])

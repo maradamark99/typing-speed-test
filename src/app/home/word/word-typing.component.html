@@ -25,7 +25,7 @@
 		type="text"
 		class="user-input"
 		#userInput
-		(keypress)="onKeyPress($event)"
-		(keydown.space)="onSpaceKeyPress(); userInput.value = ''"
-		(keydown.backspace)="onBackspaceKeyPress()"
+		(keypress)="handleKeyPress($event)"
+		(keydown.space)="handleSpaceKeyPress(); userInput.value = ''"
+		(keydown.backspace)="handleBackspaceKeyPress()"
 />
