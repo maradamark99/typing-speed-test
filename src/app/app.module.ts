@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './auth/form/form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { LoginComponent } from './auth/login/login.component';
  
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     StatComponent,
     RegistrationComponent,
     FormComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
