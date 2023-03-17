@@ -10,8 +10,14 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
+  private readonly AUTH_URL: string = "/api/v1/auth";
+
   registerUser(user: IUser) {
-    // TODO: handle error
-    return this.http.post<IUser>(environment.apiUrl + '/api/v1/auth/register', user);
+    return this.http.post<IUser>(`${environment.apiUrl}${this.AUTH_URL}/login`, user);
   }
+
+  loginUser(user: IUser) {
+    return this.http.post<IUser>(`${environment.apiUrl}${this.AUTH_URL}/login`, user);
+  }
+  
 }
