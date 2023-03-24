@@ -1,9 +1,14 @@
 .container {
 	height: 100%;
+	width: 100%;
 	display: flex;
 	justify-content: center;
-	margin-top: 10vh;
-	@media (orientation: landscape) and (max-height: 500px) {
-		margin-top: 0;
+	align-items: center;
+}
+
+.login-form {
+	margin-top: 15vh;
+	@media (max-height: 550px) {
+		margin-top: 2vh;
 	}
 }

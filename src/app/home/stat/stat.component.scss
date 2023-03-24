@@ -1,13 +1,13 @@
 @import "../../../styles.scss";
 
 .stat-box {
-	@media (orientation: portrait) {
-		height: 5.5rem;
-		width: 5.5rem;
+	@media (max-width: 350px) {
+		height: 4.5rem;
+		width: 4.5rem;
 	}
-	@media (orientation: landscape) and (max-height: 500px) {
-		height: 5.5rem;
-		width: 5.5rem;
+	@media (max-width: 750px) {
+		max-height: 5.5rem;
+		max-width: 5.5rem;
 	}
 	height: 7rem;
 	width: 7rem;

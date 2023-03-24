@@ -4,8 +4,11 @@
 	height: 100%;
 	display: flex;
 	justify-content: center;
+}
+
+.register-form {
 	margin-top: 10vh;
-	@media (orientation: landscape) and (max-height: 500px) {
+	@media (max-height: 680px) {
 		margin-top: 0;
 	}
 }

@@ -2,14 +2,7 @@
 
 .sidenav {
 	background-color: $sidebar;
-	width: 12.5rem;
-	@media (orientation: portrait) and (max-width: 650px) {
-		width: 9rem;
-	}
-	@media (orientation: landscape) and (max-height: 500px) {
-		width: 9rem;
-	}
-	min-width: 9rem;
+	width: $sidebar-width;
 	font-family: "Lato", "sans-serif";
 	display: flex;
 	justify-content: center;
@@ -17,14 +10,10 @@
 
 .nav-link {
 	text-decoration: none;
+	border: none;
+	outline: none;
 	color: $dark-text;
-	@media (orientation: portrait) {
-		font-size: 1.1rem;
-	}
-	@media (orientation: landscape) and (max-height: 500px) {
-		font-size: 1.1rem;
-	}
-	font-size: 1.4rem;
+	font-size: 1.3rem;
 	font-weight: bold;
 	padding: 1rem 1rem 1rem 2rem;
 }
@@ -50,6 +39,8 @@
 }
 
 .sidenav-toggle {
+	color: $dark-text;
+	position: absolute;
 	height: 2rem;
 	width: 2rem;
 	:hover {
@@ -59,4 +50,10 @@
 		width: 2rem;
 		height: 2rem;
 	}
+}
+
+.opened-sidenav-toggle {
+	position: fixed;
+	top: 1rem;
+	left: calc($sidebar-width + 1rem);
 }
