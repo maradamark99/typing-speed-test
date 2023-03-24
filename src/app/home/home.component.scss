@@ -1,10 +1,7 @@
-.words {
-	@media (max-height: 600px) and (orientation: landscape) {
-		margin-top: 5vw;
-	}
-	margin-top: 17.5vh;
+.word-component {
 	display: flex;
 	justify-content: center;
+	margin-top: 20vh;
 }
 
 .stats {
@@ -15,7 +12,7 @@
 }
 
 .stat {
-	margin-right: 7%;
+	margin-right: 5%;
 	text-align: center;
 }
 

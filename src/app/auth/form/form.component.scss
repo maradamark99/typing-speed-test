@@ -53,10 +53,16 @@
 }
 
 form {
-	@media (min-width: 600px) {
-		width: 25rem;
+	@media (max-device-width: 399px) {
+		width: 7.5rem;
 	}
-	width: 70%;
+	@media (min-device-width: 400px) and (max-device-width: 499px) {
+		width: 14rem;
+	}
+	@media (min-device-width: 500px) and (max-device-width: 768px) {
+		width: 18rem;
+	}
+	width: 25rem;
 	padding: 5rem;
 	border-radius: 2rem;
 	background-color: $dark-secondary;
@@ -70,12 +76,6 @@ form {
 }
 
 input {
-	@media (min-width: 600px) {
-		width: 80%;
-	}
-	@media (max-width: 450px) {
-		width: 100%;
-	}
 	padding-left: 1rem;
 	padding-right: 1rem;
 	color: $dark-bg;
