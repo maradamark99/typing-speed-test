@@ -1,6 +1,24 @@
 <div class="page">
-	<mat-sidenav-container class="container" hasBackdrop="false">
-		<mat-sidenav class="sidenav" mode="side" #sidenav>
+	<mat-sidenav-container class="container" hasBackdrop="true">
+		<mat-sidenav class="sidenav" mode="over" #sidenav>
+			<ng-container *ngIf="sidenav.opened">
+				<a class="sidenav-toggle opened-sidenav-toggle" (click)="sidenav.toggle()">
+					<svg
+						class="sidenav-toggle-icon"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M6 18L18 6M6 6l12 12"
+						/>
+					</svg>
+				</a>
+			</ng-container>
 			<div class="nav-list">
 				<a class="nav-link" routerLink="/home" routerLinkActive="active">
 					Home
@@ -17,44 +35,26 @@
 				<a class="nav-link">Logout </a>
 			</div>
 		</mat-sidenav>
-		<mat-sidenav-content>
-			<div class="main-content">
+		<mat-sidenav-content class="main-content">
+			<ng-container *ngIf="!sidenav.opened">
 				<a class="sidenav-toggle" (click)="sidenav.toggle()">
-					<ng-container *ngIf="sidenav.opened">
-						<svg
-							class="sidenav-toggle-icon"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M6 18L18 6M6 6l12 12"
-							/>
-						</svg>
-					</ng-container>
-					<ng-container *ngIf="!sidenav.opened">
-						<svg
-							class="sidenav-toggle-icon"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-							/>
-						</svg>
-					</ng-container>
+					<svg
+						class="sidenav-toggle-icon"
+						xmlns="http://www.w3.org/2000/svg"
+						fill="none"
+						viewBox="0 0 24 24"
+						stroke-width="1.5"
+						stroke="currentColor"
+					>
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+						/>
+					</svg>				
 				</a>
-				<router-outlet></router-outlet>
-			</div>
+			</ng-container>
+			<router-outlet></router-outlet>
 		</mat-sidenav-content>
 	</mat-sidenav-container>
 </div>
