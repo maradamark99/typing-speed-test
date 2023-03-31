@@ -2,7 +2,7 @@
 	<mat-sidenav-container class="container" hasBackdrop="true">
 		<mat-sidenav class="sidenav" mode="over" #sidenav>
 			<ng-container *ngIf="sidenav.opened">
-				<a class="sidenav-toggle opened-sidenav-toggle" (click)="sidenav.toggle()">
+				<a class="sidenav-toggle sidenav-toggle-opened" (click)="sidenav.toggle()">
 					<svg
 						class="sidenav-toggle-icon"
 						xmlns="http://www.w3.org/2000/svg"
@@ -37,7 +37,7 @@
 		</mat-sidenav>
 		<mat-sidenav-content class="main-content">
 			<ng-container *ngIf="!sidenav.opened">
-				<a class="sidenav-toggle" (click)="sidenav.toggle()">
+				<a class="sidenav-toggle sidenav-toggle-closed" (click)="sidenav.toggle()">
 					<svg
 						class="sidenav-toggle-icon"
 						xmlns="http://www.w3.org/2000/svg"
