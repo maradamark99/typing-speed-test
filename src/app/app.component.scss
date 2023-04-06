@@ -28,13 +28,9 @@
 	margin-top: 20vh;
 }
 
-.container {
-	min-height: 100vh;
-}
-
 .main-content {
 	background-color: $dark-bg;
-	min-height: 100vh;
+	height: 100vh;
 	color: $dark-text;
 }
 

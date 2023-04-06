@@ -10,16 +10,17 @@
 
             <ng-container *ngIf="fc![formControlDetail.name].dirty 
             && fc![formControlDetail.name].invalid">
-                <ng-container *ngIf="fc![formControlDetail.name].hasError('message')">
-                       <p class="input-error-msg">{{fc![formControlDetail.name].errors!['message']}}</p>
+                <ng-container *ngIf="fc![formControlDetail.name].hasError('customError')">
+                       <p class="input-error-msg">{{fc![formControlDetail.name].errors!['customError']}}</p>
                 </ng-container>
-                <ng-container *ngIf="fc![formControlDetail.name].errors!['required']">
+                <ng-container *ngIf="fc![formControlDetail.name].hasError('required')">
                     <p class="input-error-msg">This value is required</p>
                 </ng-container>
-                <ng-container *ngIf="fc![formControlDetail.name].errors!['email']">
+                <ng-container *ngIf="fc![formControlDetail.name].hasError('email')">
                     <p class="input-error-msg">Please enter a valid email.</p>
                 </ng-container>
-                <ng-container *ngIf="fc![formControlDetail.name].errors!['minlength'] || fc![formControlDetail.name].errors!['maxlength']">
+                <ng-container *ngIf="fc![formControlDetail.name].hasError('minlength') ||
+                 fc![formControlDetail.name].hasError('maxlength')">
                     <p class="input-error-msg">Invalid length.</p>
                 </ng-container>
             </ng-container>
