@@ -10,14 +10,14 @@ import { CustomValidator } from 'src/app/utils/custom-validator';
   styleUrls: ['./form.component.scss']
 })
 export class FormComponent implements OnInit {
-  @Input() title?: string
+  @Input() title?: string;
   @Input() formControlDetails?: IFormControlDetail[];
   @Input() redirectLink?: string;
   @Input() redirectRoute?: string;
   @Input() addSeparator?: boolean;
   @Input() formValidators?: CustomValidator[];
   @Output() formSubmitted = new EventEmitter<any>();
-  public form?: FormGroup 
+  public form?: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
   }
@@ -26,6 +26,7 @@ export class FormComponent implements OnInit {
     this.createFormGroup();
   }
 
+
   handleSubmit(): void {
     if (this.form?.invalid) {
       this.snackBar.open("Errors in input", "dismiss", {duration: 3000});
@@ -33,9 +34,9 @@ export class FormComponent implements OnInit {
     }
     let result: any = {};
     this.formControlDetails?.forEach(formControl => {
-      if(formControl.saveValue !== false)
+      if (formControl.saveValue !== false)
         result[formControl.name] = this.form!.controls[formControl.name].value;
-    })
+    });
     this.formSubmitted.emit(result);
     this.form?.reset();
   }
@@ -44,14 +45,14 @@ export class FormComponent implements OnInit {
     const group: any = {};
     this.formControlDetails?.forEach(
       formControlDetail => group[formControlDetail.name] = new FormControl('', formControlDetail.validators)
-    )
+    );
 
     this.form = this.formBuilder.group(group,
       { validators: [...this.formValidators ?? []]} as AbstractControlOptions);
   }
 
   get fc() {
-    return this.form?.controls
+    return this.form?.controls;
   }
 
 }
