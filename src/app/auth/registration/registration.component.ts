@@ -21,21 +21,19 @@ export class RegistrationComponent implements OnInit {
       name: 'email',
       placeholder: 'Email',
       type: 'email',
-      validators: [Validators.required, Validators.email, Validators.maxLength(255)],
+      validators: [Validators.email],
     },
     {
       name: 'username',
       placeholder: 'Username',
       type: 'text',
-      validators: [Validators.minLength(4), Validators.maxLength(255), CustomValidator.usernameValidator()],
+      validators: [CustomValidator.usernameValidator()],
     },
     {
       name: 'password',
       placeholder: 'Password',
       type: 'password',
       validators: [
-        Validators.minLength(8),
-        Validators.maxLength(255),
         CustomValidator.passwordStrengthValidator()
       ],
     },

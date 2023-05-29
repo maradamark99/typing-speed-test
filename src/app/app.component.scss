@@ -3,7 +3,6 @@
 .sidenav {
 	background-color: $sidebar;
 	width: $sidebar-width;
-	font-family: "Lato", "sans-serif";
 	display: flex;
 	justify-content: center;
 }
@@ -13,8 +12,8 @@
 	border: none;
 	outline: none;
 	color: $dark-text;
+	font-weight: 900;
 	font-size: 1.3rem;
-	font-weight: bold;
 	padding: 1rem 1rem 1rem 2rem;
 }
 .nav-link:hover {
@@ -28,13 +27,9 @@
 	margin-top: 20vh;
 }
 
-.container {
-	min-height: 100vh;
-}
-
 .main-content {
 	background-color: $dark-bg;
-	min-height: 100vh;
+	height: 100vh;
 	color: $dark-text;
 }
 
@@ -52,7 +47,12 @@
 	}
 }
 
-.opened-sidenav-toggle {
+.sidenav-toggle-closed {
+	margin-left: 1rem;
+	margin-top: 1rem;
+}
+
+.sidenav-toggle-opened {
 	position: fixed;
 	top: 1rem;
 	left: calc($sidebar-width + 1rem);
