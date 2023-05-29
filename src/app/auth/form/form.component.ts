@@ -28,10 +28,6 @@ export class FormComponent implements OnInit {
 
 
   handleSubmit(): void {
-    if (this.form?.invalid) {
-      this.snackBar.open("Errors in input", "dismiss", {duration: 3000});
-      return;
-    }
     let result: any = {};
     this.formControlDetails?.forEach(formControl => {
       if (formControl.saveValue !== false)
