@@ -57,3 +57,7 @@
 	top: 1rem;
 	left: calc($sidebar-width + 1rem);
 }
+
+.router-link-active {
+	color: rgba($dark-text, 0.33);
+}

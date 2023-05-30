@@ -12,7 +12,7 @@ import { CustomValidator } from 'src/app/utils/custom-validator';
 export class FormComponent implements OnInit {
   @Input() title?: string;
   @Input() formControlDetails?: IFormControlDetail[];
-  @Input() redirectLink?: string;
+  @Input() redirectMessage?: string;
   @Input() redirectRoute?: string;
   @Input() addSeparator?: boolean;
   @Input() formValidators?: CustomValidator[];

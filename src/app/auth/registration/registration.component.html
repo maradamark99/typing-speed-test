@@ -1,6 +1,6 @@
 <div class="container">
   <app-form class="register-form" [title]="'Sign up'" [formControlDetails]="formControlDetails"
-    [formValidators]="formValidators"
+    [formValidators]="formValidators" [redirectMessage]="'Already have an account?'" [redirectRoute]="'/login'"
     (formSubmitted)="handleRegistrationFormSubmitted($event)">
   </app-form>
 </div>

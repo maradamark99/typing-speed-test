@@ -26,7 +26,7 @@
 }
 
 .button-container {
-	margin: 1rem 0 1rem 0;
+	margin: 0.5rem 0 0.5rem 0;
 	display: flex;
 	justify-content: center;
 }
@@ -34,7 +34,8 @@
 .submit-btn {
 	height: 2rem;
 	width: 8rem;
-	background-color: $dark-text;
+	color: $dark-text;
+	background-color: $dark-primary-btn;
 	cursor: pointer;
 	border-radius: 0.5rem;
 	border-style: none;
@@ -47,7 +48,7 @@
 }
 
 .link {
-	font-size: 1.125rem;
+	font-size: 0.85rem;
 	color: $dark-text;
 	text-align: center;
 }
@@ -77,7 +78,7 @@ form {
 }
 
 .form-controls {
-	margin-top: 2rem;
+	margin-top: 1rem;
 	display: flex;
 	flex-direction: column;
 	justify-items: center;
