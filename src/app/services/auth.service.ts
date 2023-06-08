@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../interfaces/user.interface';
+import { ApiPath } from '../utils/api-path';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +11,13 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  private readonly AUTH_URL: string = "/api/v1/auth";
 
   registerUser(user: IUser) {
-    return this.http.post<IUser>(`${environment.apiUrl}${this.AUTH_URL}/login`, user);
+    return this.http.post<IUser>(environment.apiUrl + ApiPath.REGISTER, user);
   }
 
   loginUser(user: IUser) {
-    return this.http.post<IUser>(`${environment.apiUrl}${this.AUTH_URL}/login`, user);
+    return this.http.post<IUser>(environment.apiUrl + ApiPath.LOGIN, user);
   }
   
 }
