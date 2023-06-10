@@ -1,34 +1,43 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { LinkedList } from 'linked-list-typescript';
 import { WordService } from 'src/app/services/word.service';
-
+import { EndResultDialogComponent } from '../end-result-dialog/end-result-dialog.component';
+import { ResultService } from 'src/app/services/result.service';
 
 @Component({
   selector: 'app-word-typing',
   templateUrl: './word-typing.component.html',
   styleUrls: ['./word-typing.component.scss']
 })
-export class WordTypingComponent implements OnInit {
-  @Output('focusChange') focusChange = new EventEmitter<boolean>();
-  public originalWords?: string[];
-  public currentWords?: LinkedList<string>;
-  public previousWords?: LinkedList<string>;
+export class WordTypingComponent {
+  @Input('timeLeft') timeLeft?: number;
+  @Output('isFocusChanged') isFocusChanged = new EventEmitter<boolean>();
+  @Output('isFinished') isFinished = new EventEmitter<boolean>();
+  public originalWords: string[];
+  public currentWords: LinkedList<string>;
+  public previousWords: LinkedList<string>;
   private isFocused = false;
   input: string = "";
 
-  constructor(private wordService: WordService) { }
+  constructor(
+    private wordService: WordService,
+    private resultService: ResultService,
+    private dialog: MatDialog) {
+      this.originalWords = this.wordService.getWords();
+      this.currentWords = new LinkedList<string>(...this.originalWords!);
+      this.previousWords = new LinkedList<string>();
+      this.previousWords.append("");
+    }
 
-  ngOnInit(): void {
-    this.getWords();
-    this.currentWords = new LinkedList<string>(...this.originalWords!);
-    this.previousWords = new LinkedList<string>();
-    this.previousWords.append("")
+  ngOnChanges(): void {
+    if (this.timeLeft! < 1)
+      this.openDialog();
   }
 
   public handleKeyPress(event: KeyboardEvent): void {
-    if (this.wordService.wordIndex == this.originalWords?.length)
-      return;
-    if (!this.isAValidKey(event.key))
+    if (this.wordService.wordIndex == this.originalWords?.length
+        || !this.isAValidKey(event.key))
       return;
     
     this.input += event.key;
@@ -56,6 +65,9 @@ export class WordTypingComponent implements OnInit {
   public handleSpaceKeyPress(): void {
     if (this.input.trim().length < 1)
       return;
+    if (this.wordService.wordIndex === this.originalWords!.length - 1) {
+      this.openDialog();
+    }
     if (this.input == this.originalWords![this.wordService.wordIndex])
       this.wordService.numberOfCorrect++;
     this.currentWords!.removeHead();
@@ -84,13 +96,39 @@ export class WordTypingComponent implements OnInit {
     return !(key < 'a' || key > 'z');
   }
 
-  private getWords() {
-    this.originalWords = this.wordService.getWords();
+  public isInputInFocus() {
+    this.isFocused = true;
+    this.isFocusChanged?.emit(this.isFocused);
   }
 
-  public inputInFocus() {
-    this.isFocused = true;
-    this.focusChange?.emit(this.isFocused);
+  private openDialog() {
+    const wpm = this.wordService.calculateWordsPerMinute(this.timeLeft!);
+    const accuracy = this.wordService.calculateAccuracy();
+
+    const dialogRef = this.dialog.open(EndResultDialogComponent, {
+      data: {
+        wpm: wpm,
+        accuracy: accuracy, 
+        numOfCorrect: this.wordService.numberOfCorrect,
+        wordAmount: this.originalWords!.length - 1 
+      }
+    })
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'save') {
+        this.resultService.save({ wpm: wpm, accuracy: accuracy })
+      }
+      this.resetProperties();
+    })
+  }
+
+  private resetProperties(): void {
+    this.originalWords = this.wordService.getWords().reverse();
+    this.currentWords = new LinkedList<string>(...this.originalWords!);
+    this.previousWords = new LinkedList<string>();
+    this.previousWords.append("");
+    this.wordService.resetProperties();
+    this.input = "";
+    this.isFinished.emit(true);
   }
 
 }

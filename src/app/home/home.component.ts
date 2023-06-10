@@ -18,12 +18,19 @@ export class HomeComponent {
   
   constructor(public readonly wordService: WordService, public readonly timerService: TimerService) { 
   }
+
+  onIsFinished(value: boolean) {
+    if (value) {
+      this.currentTime = this.countFrom;
+    }
+  }
+
   
-  onFocusChange(isFocused: boolean) {
-    this.isFocused = isFocused;
-    if (isFocused && !this.timerSubscription) {
+  onFocusChange(value: boolean) {
+    this.isFocused = value;
+    if (value && !this.timerSubscription) {
       this.timerSubscription = this.timerService.startCountDownTimer(this.countFrom).subscribe((time) => this.currentTime = time);
-    } else if (!isFocused && this.timerSubscription) {
+    } else if (!value && this.timerSubscription) {
       this.timerSubscription.unsubscribe();
     }
   }

@@ -15,8 +15,8 @@ export class WordService {
     return this.wordIndex == 0 ? 0 : +((this.numberOfCorrect / this.wordIndex * 100).toFixed(2));
   }
 
-  calculateWordsPerMinute(currentTime: number): number {
-    const wpm = ((this.numberOfTypedChar / 5) / ((60 - currentTime) / 60));
+  calculateWordsPerMinute(timeLeftInSeconds: number): number {
+    const wpm = ((this.numberOfTypedChar / 5) / ((60 - timeLeftInSeconds) / 60));
     return +((isNaN(wpm) || !isFinite(wpm) ? 0 : wpm).toFixed(2));
   }
 
@@ -24,6 +24,13 @@ export class WordService {
     return ["lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "lorem",
       "ipsum", "dolor", "sit", "amet", "consectetur", "lorem", "ipsum", "dolor",
       "sit", "amet", "consectetur", "lorem", "ipsum", "dolor", "sit", "amet", "consectetur"];
+  }
+
+  resetProperties() {
+    this.charIndex = 0;
+    this.wordIndex = 0;
+    this.numberOfTypedChar = 0;
+    this.numberOfCorrect = 0;
   }
 
 }
