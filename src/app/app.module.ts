@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog'; 
 import { WordTypingComponent } from './home/word/word-typing.component';
 import { StatComponent } from './home/stat/stat.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
@@ -17,6 +18,7 @@ import { FormComponent } from './auth/form/form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginComponent } from './auth/login/login.component';
+import { EndResultDialogComponent } from './home/end-result-dialog/end-result-dialog.component';
  
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { LoginComponent } from './auth/login/login.component';
     RegistrationComponent,
     FormComponent,
     LoginComponent,
+    EndResultDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,8 +42,9 @@ import { LoginComponent } from './auth/login/login.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
+    MatDialogModule,
   ],
-  providers: [],
+  providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }, ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
