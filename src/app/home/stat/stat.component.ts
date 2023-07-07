@@ -7,8 +7,8 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class StatComponent implements OnInit {
 
-  @Input('valueToDisplay') valueToDisplay?: number; 
-  @Input('label') label?: string;
+  @Input() valueToDisplay?: number; 
+  @Input() label?: string;
 
   constructor() { }
 
