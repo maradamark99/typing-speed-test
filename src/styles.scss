@@ -21,3 +21,11 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
+.mat-dialog-container,
+.mat-dialog-content,
+.mat-dialog-title,
+.mat-dialog-actions {
+	background-color: $dark-secondary;
+	color: $dark-text;
+}
