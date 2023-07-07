@@ -9,29 +9,31 @@ import { WordService } from '../services/word.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-
-  isFocused: boolean = false;
-  countFrom: number = 60;
+  readonly countFrom: number = 60;
   currentTime?: number; 
-  timerSubscription?: Subscription;
+  timerSubscription: Subscription = Subscription.EMPTY;
 
-  
   constructor(public readonly wordService: WordService, public readonly timerService: TimerService) { 
   }
 
-  onIsFinished(value: boolean) {
+  handleIsFinished(value: boolean) {
     if (value) {
+      this.unSubscribeFromTimer();
       this.currentTime = this.countFrom;
     }
   }
 
-  
-  onFocusChange(value: boolean) {
-    this.isFocused = value;
-    if (value && !this.timerSubscription) {
+  handleFocusChange(value: boolean) {
+    if (value && this.timerSubscription === Subscription.EMPTY) {
       this.timerSubscription = this.timerService.startCountDownTimer(this.countFrom).subscribe((time) => this.currentTime = time);
     } else if (!value && this.timerSubscription) {
-      this.timerSubscription.unsubscribe();
+      this.unSubscribeFromTimer();
     }
   }
+
+  private unSubscribeFromTimer() {
+    this.timerSubscription!.unsubscribe();
+    this.timerSubscription = Subscription.EMPTY
+  }
+
 }

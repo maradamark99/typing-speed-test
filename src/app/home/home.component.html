@@ -1,7 +1,7 @@
 <div class="container">
 	<app-word-typing
-		(isFocusChanged)="onFocusChange($event)"
-		(isFinished)="onIsFinished($event)"
+		(isFocusChanged)="handleFocusChange($event)"
+		(isFinished)="handleIsFinished($event)"
 		[timeLeft]="currentTime" 
 		class="word-component">
 	</app-word-typing>

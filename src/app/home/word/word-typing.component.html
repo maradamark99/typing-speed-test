@@ -1,31 +1,31 @@
-<div class="word-box" (click)="userInput.focus(); isInputInFocus()">
-		<div class="prev-words">
-			<div
-				class="prev-word"
-				*ngFor="let prevWord of previousWords; index as i"
-			>
-				<span *ngFor="let char of prevWord.split(''); index as c">{{
-					char
-				}}</span>
-			</div>
-		</div>
-		<span class="blinking-cursor">|</span>
-		<div class="curr-words">
-			<div
-				class="curr-word"
-				*ngFor="let word of currentWords; index as i"
-			>
-				<span *ngFor="let char of word.split(''); index as c">{{
-					char
-				}}</span>
-			</div>
+<div class="word-box" (click)="isInputInFocus()">
+	<div class="prev-words">
+		<div
+			class="prev-word"
+			*ngFor="let prevWord of previousWords; index as i"
+		>
+			<span *ngFor="let char of prevWord.split(''); index as c">{{
+				char
+			}}</span>
 		</div>
 	</div>
-	<input
-		type="text"
-		class="user-input"
-		#userInput
-		(keypress)="handleKeyPress($event)"
-		(keydown.space)="handleSpaceKeyPress(); userInput.value = ''"
-		(keydown.backspace)="handleBackspaceKeyPress()"
+	<span class="blinking-cursor">|</span>
+	<div class="curr-words">
+		<div
+			class="curr-word"
+			*ngFor="let word of currentWords; index as i"
+		>
+			<span *ngFor="let char of word.split(''); index as c">{{
+				char
+			}}</span>
+		</div>
+	</div>
+</div>
+<input
+	type="text"
+	class="word-input"
+	#wordInput
+	(keypress)="handleKeyPress($event)"
+	(keydown.space)="handleSpaceKeyPress(); wordInput.value = ''"
+	(keydown.backspace)="handleBackspaceKeyPress()"
 />

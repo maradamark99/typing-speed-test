@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LinkedList } from 'linked-list-typescript';
 import { WordService } from 'src/app/services/word.service';
@@ -11,28 +11,38 @@ import { ResultService } from 'src/app/services/result.service';
   styleUrls: ['./word-typing.component.scss']
 })
 export class WordTypingComponent {
-  @Input('timeLeft') timeLeft?: number;
-  @Output('isFocusChanged') isFocusChanged = new EventEmitter<boolean>();
-  @Output('isFinished') isFinished = new EventEmitter<boolean>();
-  public originalWords: string[];
-  public currentWords: LinkedList<string>;
-  public previousWords: LinkedList<string>;
-  private isFocused = false;
+  @Input() timeLeft?: number;
+  @Output() isFocusChanged = new EventEmitter<boolean>();
+  @Output() isFinished = new EventEmitter<boolean>();
+  @ViewChild('wordInput') wordInputRef?: ElementRef<HTMLInputElement>;
+  public originalWords: string[] = [];
+  public currentWords?: LinkedList<string>;
+  public previousWords?: LinkedList<string>;
   input: string = "";
 
   constructor(
     private wordService: WordService,
     private resultService: ResultService,
     private dialog: MatDialog) {
-      this.originalWords = this.wordService.getWords();
-      this.currentWords = new LinkedList<string>(...this.originalWords!);
-      this.previousWords = new LinkedList<string>();
-      this.previousWords.append("");
-    }
+  }
+
+  ngOnInit() {
+    this.resetState();
+  }
+  
+  resetState() {
+    this.originalWords = this.wordService.getWords();
+    this.currentWords = new LinkedList<string>(...this.originalWords!);
+    this.previousWords = new LinkedList<string>();
+    this.previousWords.append("");
+    this.wordService.resetState();
+    this.isFocusChanged.emit(false);
+    this.isFinished.emit(false);
+  }
 
   ngOnChanges(): void {
     if (this.timeLeft! < 1)
-      this.openDialog();
+      this.openDialog("You have run out of time.");
   }
 
   public handleKeyPress(event: KeyboardEvent): void {
@@ -66,7 +76,7 @@ export class WordTypingComponent {
     if (this.input.trim().length < 1)
       return;
     if (this.wordService.wordIndex === this.originalWords!.length - 1) {
-      this.openDialog();
+      this.openDialog("You have reached the end of the words.");
     }
     if (this.input == this.originalWords![this.wordService.wordIndex])
       this.wordService.numberOfCorrect++;
@@ -97,11 +107,11 @@ export class WordTypingComponent {
   }
 
   public isInputInFocus() {
-    this.isFocused = true;
-    this.isFocusChanged?.emit(this.isFocused);
+    this.isFocusChanged.emit(true);
+    this.wordInputRef!.nativeElement.focus();
   }
 
-  private openDialog() {
+  private openDialog(message: string) {
     const wpm = this.wordService.calculateWordsPerMinute(this.timeLeft!);
     const accuracy = this.wordService.calculateAccuracy();
 
@@ -110,25 +120,18 @@ export class WordTypingComponent {
         wpm: wpm,
         accuracy: accuracy, 
         numOfCorrect: this.wordService.numberOfCorrect,
-        wordAmount: this.originalWords!.length - 1 
+        wordAmount: this.originalWords!.length - 1,
+        message: message
       }
     })
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'save') {
         this.resultService.save({ wpm: wpm, accuracy: accuracy })
       }
-      this.resetProperties();
+      this.wordInputRef!.nativeElement.blur();
+      this.isFinished.emit(true);
+      this.resetState();
     })
-  }
-
-  private resetProperties(): void {
-    this.originalWords = this.wordService.getWords().reverse();
-    this.currentWords = new LinkedList<string>(...this.originalWords!);
-    this.previousWords = new LinkedList<string>();
-    this.previousWords.append("");
-    this.wordService.resetProperties();
-    this.input = "";
-    this.isFinished.emit(true);
   }
 
 }
