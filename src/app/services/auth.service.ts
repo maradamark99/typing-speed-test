@@ -3,21 +3,25 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../interfaces/user.interface';
 import { ApiPath } from '../utils/api-path';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
 
+  constructor(
+    private readonly http: HttpClient,
+  ) { }
 
-  registerUser(user: IUser) {
-    return this.http.post<IUser>(environment.apiUrl + ApiPath.REGISTER, user);
+  register(user: IUser): Observable<void> {
+    return this.http.post<void>(environment.apiUrl + ApiPath.REGISTER, user);
   }
 
-  loginUser(user: IUser) {
-    return this.http.post<IUser>(environment.apiUrl + ApiPath.LOGIN, user);
+  login(user: IUser): Observable<string> {
+    return this.http.post<string>(environment.apiUrl + ApiPath.LOGIN, user);
   }
-  
+
+
 }
