@@ -8,7 +8,8 @@ $dark-secondary: #353347;
 $dark-tertiary: #686679;
 $dark-text: #f0f8ff;
 $dark-text-secondary: #01010f;
-$dark-primary-btn: #252528;
+$dark-primary-btn: #232434;
+$dark-secondary-btn: #353347;
 $light-text: #01010f;
 $dark-sidenav-hover: #eeeeff;
 
@@ -28,4 +29,31 @@ body {
 .mat-dialog-actions {
 	background-color: $dark-secondary;
 	color: $dark-text;
+}
+
+.mat-dialog-actions {
+	display: flex;
+	justify-content: center;
+}
+
+.btn {
+	height: 2rem;
+	width: 6rem;
+	cursor: pointer;
+	border-radius: 0.5rem;
+	border-style: none;
+}
+
+.primary-btn {
+	color: $dark-text;
+	background-color: $dark-primary-btn;
+}
+
+.primary-btn:hover {
+	background-color: $dark-bg;
+}
+
+.secondary-btn {
+	color: $dark-text;
+	background-color: $dark-secondary-btn;
 }
