@@ -59,14 +59,14 @@ export class RegistrationComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {
   }
 
-  handleRegistrationFormSubmitted(user: IUser) {
-    this.subscription = this.authService.registerUser(user).subscribe({
+  handleRegistration(user: IUser): void {
+    this.subscription = this.authService.register(user).subscribe({
       error: (e) => console.error(e),
       complete: () => this.redirectToLogin()
     });
   }
 
-  redirectToLogin() {
+  redirectToLogin(): void {
     this.router.navigate(['/login']);
   }
 

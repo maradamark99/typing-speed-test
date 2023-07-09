@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { IFormControlDetail } from 'src/app/interfaces/form-control-detail';
 import { IUser } from 'src/app/interfaces/user.interface';
 import { AuthService } from 'src/app/services/auth.service';
+import { TokenService } from 'src/app/services/token.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+
+  private subscription?: Subscription;
 
   public readonly formControlDetails: IFormControlDetail[] = [
     {
@@ -23,13 +28,21 @@ export class LoginComponent implements OnInit {
     },
   ];
 
-  constructor(private readonly authService: AuthService) { }
+  constructor(private readonly authService: AuthService, private readonly tokenService: TokenService, private readonly router: Router) { }
 
   ngOnInit(): void {
   }
 
-  public handleLoginFormSubmitted(user: IUser) {
-    this.authService.loginUser(user).subscribe((result) => console.log(result));
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+
+  public handleLogin(user: IUser) {
+    this.subscription = this.authService.login(user).subscribe({
+      next: response => this.tokenService.setToken(response.token),
+      error: e => console.log(e),
+      complete: () => this.router.navigate(['/']).then()
+    });
   }
 
 }
