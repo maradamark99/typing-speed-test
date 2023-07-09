@@ -1,0 +1,12 @@
+<div class="container">
+  <h2 mat-dialog-title>{{data.message}}</h2>
+  <mat-dialog-content>
+      <p>Correct: <span>{{data.numOfCorrect}}/{{data.wordAmount}}</span></p>
+      <p>Accuracy: <span>{{data.accuracy}} %</span></p>
+      <p>WPM: <span>{{data.wpm}}</span></p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="'cancel'" class="btn cancel-btn">Cancel</button>
+    <button mat-button [mat-dialog-close]="'save'" class="btn save-btn">Save</button>
+  </mat-dialog-actions>
+</div>

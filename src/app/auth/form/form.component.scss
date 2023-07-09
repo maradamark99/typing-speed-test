@@ -31,16 +31,6 @@
 	justify-content: center;
 }
 
-.submit-btn {
-	height: 2rem;
-	width: 8rem;
-	color: $dark-text;
-	background-color: $dark-primary-btn;
-	cursor: pointer;
-	border-radius: 0.5rem;
-	border-style: none;
-}
-
 .link-container {
 	margin-top: 1rem;
 	display: flex;
@@ -58,13 +48,13 @@ form {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	@media (max-device-width: 399px) and (max-device-height: 680px) {
+	@media (max-device-width: 399px) and (max-device-height: 1024px) {
 		width: 10rem;
 		height: 18rem;
 	}
-	@media (min-device-width: 400px) and (max-device-width: 499px) and (max-device-height: 799px) {
-		width: 14rem;
-		height: 20rem;
+	@media (min-device-width: 400px) and (max-device-width: 499px) and (max-device-height: 1024px) {
+		width: 11rem;
+		height: 22.5rem;
 	}
 	@media (min-device-width: 500px) and (max-device-width: 768px) and (max-device-height: 1023px) {
 		width: 15rem;

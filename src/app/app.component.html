@@ -20,7 +20,7 @@
 				</a>
 			</ng-container>
 			<div class="nav-list">
-				<a class="nav-link" routerLink="/home" routerLinkActive="router-link-active">
+				<a class="nav-link" routerLink="/" routerLinkActive="router-link-active">
 					Home
 				</a>
 				<a class="nav-link" routerLink="/login" routerLinkActive="router-link-active">
@@ -32,7 +32,7 @@
 				<a class="nav-link" routerLink="/results" routerLinkActive="router-link-active">
 					Results
 				</a>
-				<a class="nav-link">Logout </a>
+				<a class="nav-link" (click)="tokenService.removeToken()">Logout </a>
 			</div>
 		</mat-sidenav>
 		<mat-sidenav-content class="main-content">

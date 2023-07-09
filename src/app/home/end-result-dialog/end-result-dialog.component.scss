@@ -1,0 +1,25 @@
+@import "../../../styles.scss";
+
+p {
+	font-style: italic;
+	padding: 0.125rem;
+}
+
+span {
+	margin-left: 0.25rem;
+	font-style: normal;
+	font-weight: 700;
+}
+
+.cancel-btn {
+	margin-right: 2rem;
+}
+
+.save-btn,
+.cancel-btn {
+	color: $dark-text;
+	background-color: transparent;
+	border: none;
+	border-radius: 0px;
+	font-weight: bold;
+}

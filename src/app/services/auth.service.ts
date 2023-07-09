@@ -2,22 +2,30 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IUser } from '../interfaces/user.interface';
+import { ApiPath } from '../utils/api-path';
+import { Observable } from 'rxjs';
+
+type LoginResponse = {
+  token: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
 
-  private readonly AUTH_URL: string = "/api/v1/auth";
+  constructor(
+    private readonly http: HttpClient,
+  ) { }
 
-  registerUser(user: IUser) {
-    return this.http.post<IUser>(`${environment.apiUrl}${this.AUTH_URL}/login`, user);
+  register(user: IUser): Observable<void> {
+    return this.http.post<void>(environment.apiUrl + ApiPath.REGISTER, user);
   }
 
-  loginUser(user: IUser) {
-    return this.http.post<IUser>(`${environment.apiUrl}${this.AUTH_URL}/login`, user);
+  login(user: IUser): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(environment.apiUrl + ApiPath.LOGIN, user);
   }
-  
+
+
 }
