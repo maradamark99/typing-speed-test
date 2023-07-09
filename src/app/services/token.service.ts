@@ -16,7 +16,7 @@ export class TokenService {
   }
 
   public setToken(token: string) {
-    localStorage.setItem(this.TOKEN_NAME, JSON.stringify(token));
+    localStorage.setItem(this.TOKEN_NAME, token);
   }
 
   public removeToken() {
