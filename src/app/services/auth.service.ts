@@ -5,6 +5,10 @@ import { IUser } from '../interfaces/user.interface';
 import { ApiPath } from '../utils/api-path';
 import { Observable } from 'rxjs';
 
+type LoginResponse = {
+  token: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -19,8 +23,8 @@ export class AuthService {
     return this.http.post<void>(environment.apiUrl + ApiPath.REGISTER, user);
   }
 
-  login(user: IUser): Observable<string> {
-    return this.http.post<string>(environment.apiUrl + ApiPath.LOGIN, user);
+  login(user: IUser): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(environment.apiUrl + ApiPath.LOGIN, user);
   }
 
 
