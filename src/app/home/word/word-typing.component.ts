@@ -1,16 +1,17 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LinkedList } from 'linked-list-typescript';
 import { WordService } from 'src/app/services/word.service';
 import { EndResultDialogComponent } from '../end-result-dialog/end-result-dialog.component';
 import { ResultService } from 'src/app/services/result.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-word-typing',
   templateUrl: './word-typing.component.html',
   styleUrls: ['./word-typing.component.scss']
 })
-export class WordTypingComponent {
+export class WordTypingComponent implements OnInit, OnDestroy {
   @Input() timeLeft?: number;
   @Output() isFocusChanged = new EventEmitter<boolean>();
   @Output() isFinished = new EventEmitter<boolean>();
@@ -18,6 +19,8 @@ export class WordTypingComponent {
   public originalWords: string[] = [];
   public currentWords?: LinkedList<string>;
   public previousWords?: LinkedList<string>;
+  private dialogRef?: MatDialogRef<EndResultDialogComponent, any>;
+  private subscription?: Subscription;
   input: string = "";
 
   constructor(
@@ -26,8 +29,12 @@ export class WordTypingComponent {
     private dialog: MatDialog) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.resetState();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
   }
   
   resetState() {
@@ -114,24 +121,30 @@ export class WordTypingComponent {
   private openDialog(message: string) {
     const wpm = this.wordService.calculateWordsPerMinute(this.timeLeft!);
     const accuracy = this.wordService.calculateAccuracy();
+    if (!this.dialogRef) {
+      this.dialogRef = this.dialog.open(EndResultDialogComponent, {
+        data: {
+          wpm: wpm,
+          accuracy: accuracy, 
+          numOfCorrect: this.wordService.numberOfCorrect,
+          wordAmount: this.originalWords!.length - 1,
+          message: message
+        }
+      })
+      this.closeDialog(wpm, accuracy);
+    }
+  }
 
-    const dialogRef = this.dialog.open(EndResultDialogComponent, {
-      data: {
-        wpm: wpm,
-        accuracy: accuracy, 
-        numOfCorrect: this.wordService.numberOfCorrect,
-        wordAmount: this.originalWords!.length - 1,
-        message: message
-      }
-    })
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'save') {
-        this.resultService.save({ wpm: wpm, accuracy: accuracy })
-      }
-      this.wordInputRef!.nativeElement.blur();
-      this.isFinished.emit(true);
-      this.resetState();
-    })
+  private closeDialog(wpm: number, accuracy: number): void {
+    this.dialogRef!.afterClosed().subscribe((result) => {
+        if (result === 'save') {
+          this.subscription = this.resultService.save({ wpm: wpm, accuracy: accuracy }).subscribe((result) => console.log(result));
+        }
+        this.wordInputRef!.nativeElement.blur();
+        this.isFinished.emit(true);
+        this.resetState();
+        this.dialogRef = undefined;
+      })
   }
 
 }
