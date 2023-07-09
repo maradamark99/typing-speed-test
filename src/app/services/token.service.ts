@@ -42,7 +42,8 @@ export class TokenService {
   }
 
   private isNotExpired(token: JwtPayload): boolean {
-    return token.exp! > Date.now();
+    const currentUnixTime = Math.round(Date.now() / 1000);
+    return token.exp! > currentUnixTime;
   }
   
 }
