@@ -15,10 +15,11 @@ import { StatComponent } from './home/stat/stat.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './auth/form/form.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LoginComponent } from './auth/login/login.component';
 import { EndResultDialogComponent } from './home/end-result-dialog/end-result-dialog.component';
+import { AuthInterceptor } from './interceptors/AuthInterceptor';
  
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { EndResultDialogComponent } from './home/end-result-dialog/end-result-di
     MatSnackBarModule,
     MatDialogModule,
   ],
-  providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }, ],
+  providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
