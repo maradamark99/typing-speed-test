@@ -24,6 +24,15 @@ body {
 	padding: 0;
 }
 
+.mat-table,
+.mat-header-cell,
+.mat-cell,
+.mat-header-row,
+.mat-row {
+	background-color: $dark-secondary;
+	color: $dark-text;
+}
+
 .mat-dialog-container,
 .mat-dialog-content,
 .mat-dialog-title,
