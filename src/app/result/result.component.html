@@ -1,0 +1,35 @@
+<div class="container">
+        <div class="table">
+            <mat-table #table [dataSource]="this.results">
+
+                <ng-container matColumnDef="username">
+                    <mat-header-cell *matHeaderCellDef> username </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="wpm">
+                    <mat-header-cell *matHeaderCellDef> wpm </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.wpm}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="accuracy">
+                    <mat-header-cell *matHeaderCellDef> accuracy </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.accuracy}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="timestamp">
+                    <mat-header-cell *matHeaderCellDef> timestamp </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.timestamp}} </mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;">
+                </mat-row>
+            </mat-table>
+            <mat-paginator #paginator
+                    [pageSize]="10"
+                    [pageSizeOptions]="[5, 10, 20, 25, 50]"
+                    [showFirstLastButtons]="true">
+            </mat-paginator>
+        </div>
+</div>
