@@ -18,6 +18,7 @@ import { FormComponent } from './auth/form/form.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {MatPaginatorModule} from '@angular/material/paginator'; 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { LoginComponent } from './auth/login/login.component';
 import { EndResultDialogComponent } from './home/end-result-dialog/end-result-dialog.component';
@@ -50,6 +51,7 @@ import { ResultComponent } from './result/result.component';
     MatDialogModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]
