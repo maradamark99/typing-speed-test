@@ -1,7 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ResultService } from '../services/result.service';
 import { ResultResponse } from '../interfaces/result-response';
 import { Subscription } from 'rxjs';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-result',
@@ -9,20 +11,21 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit, OnDestroy {
-  private _results?: ResultResponse[];
   private subscription?: Subscription;
   public readonly displayedColumns = ['username', 'wpm', 'accuracy', 'timestamp']
+  public dataSource?: MatTableDataSource<ResultResponse>;
 
   constructor(public readonly resultService: ResultService) { }
 
-  get results(): ResultResponse[] {
-    return this._results ? [...this._results!] : [];
-  }
+  @ViewChild(MatSort) sort?: MatSort;
 
   ngOnInit(): void {
     this.subscription = this.resultService.getAll(0, 10).subscribe({
       error: (e) => console.log(e),
-      next: (results) => this._results = results
+      next: (results) => {
+        this.dataSource = new MatTableDataSource(results)
+        this.dataSource!.sort = this.sort!;
+      }
     });
   }
 

@@ -1,35 +1,31 @@
 <div class="container">
+    <ng-container>
         <div class="table">
-            <mat-table #table [dataSource]="this.results">
-
+            <mat-table #table [dataSource]="dataSource!" matSort>
                 <ng-container matColumnDef="username">
-                    <mat-header-cell *matHeaderCellDef> username </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> username </mat-header-cell>
                     <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
                 </ng-container>
-
                 <ng-container matColumnDef="wpm">
-                    <mat-header-cell *matHeaderCellDef> wpm </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> wpm </mat-header-cell>
                     <mat-cell *matCellDef="let element"> {{element.wpm}} </mat-cell>
                 </ng-container>
-
                 <ng-container matColumnDef="accuracy">
-                    <mat-header-cell *matHeaderCellDef> accuracy </mat-header-cell>
-                    <mat-cell *matCellDef="let element"> {{element.accuracy}} </mat-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> accuracy </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.accuracy}} % </mat-cell>
                 </ng-container>
-
                 <ng-container matColumnDef="timestamp">
-                    <mat-header-cell *matHeaderCellDef> timestamp </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> timestamp </mat-header-cell>
                     <mat-cell *matCellDef="let element"> {{element.timestamp}} </mat-cell>
                 </ng-container>
-
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;">
                 </mat-row>
             </mat-table>
-            <mat-paginator #paginator
-                    [pageSize]="10"
-                    [pageSizeOptions]="[5, 10, 20, 25, 50]"
-                    [showFirstLastButtons]="true">
-            </mat-paginator>
+            <mat-paginator></mat-paginator>
         </div>
+    </ng-container>
+    <!--<ng-template #noResults >
+        <h1 class="no-results">No results available at the moment.</h1>
+    </ng-template>-->
 </div>
