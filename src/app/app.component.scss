@@ -3,8 +3,7 @@
 .sidenav {
 	background-color: $sidebar;
 	width: $sidebar-width;
-	display: flex;
-	justify-content: center;
+	min-height: 100vh;
 }
 
 .nav-link {
@@ -24,13 +23,14 @@
 
 .nav-list {
 	display: flex;
+	height: 65%;
 	flex-direction: column;
-	margin-top: 20vh;
+	justify-content: center;
 }
 
 .main-content {
 	background-color: $dark-bg;
-	height: 100vh;
+	min-height: 100vh;
 	color: $dark-text;
 }
 
