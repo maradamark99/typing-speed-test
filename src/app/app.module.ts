@@ -16,10 +16,15 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from './auth/form/form.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {MatPaginatorModule} from '@angular/material/paginator'; 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
 import { LoginComponent } from './auth/login/login.component';
 import { EndResultDialogComponent } from './home/end-result-dialog/end-result-dialog.component';
 import { AuthInterceptor } from './interceptors/AuthInterceptor';
+import { ResultComponent } from './result/result.component';
+import { LoadingComponent } from './loading/loading.component';
  
 @NgModule({
   declarations: [
@@ -31,6 +36,8 @@ import { AuthInterceptor } from './interceptors/AuthInterceptor';
     FormComponent,
     LoginComponent,
     EndResultDialogComponent,
+    ResultComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,6 +51,9 @@ import { AuthInterceptor } from './interceptors/AuthInterceptor';
     HttpClientModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true} ],
   bootstrap: [AppComponent]
