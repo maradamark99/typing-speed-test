@@ -24,6 +24,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { EndResultDialogComponent } from './home/end-result-dialog/end-result-dialog.component';
 import { AuthInterceptor } from './interceptors/AuthInterceptor';
 import { ResultComponent } from './result/result.component';
+import { LoadingComponent } from './loading/loading.component';
  
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ResultComponent } from './result/result.component';
     LoginComponent,
     EndResultDialogComponent,
     ResultComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
