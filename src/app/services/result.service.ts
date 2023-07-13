@@ -5,6 +5,7 @@ import { ApiPath } from '../utils/api-path';
 import Result from '../interfaces/result';
 import { ResultResponse } from '../interfaces/result-response';
 import { Observable } from 'rxjs';
+import { PageResponse } from '../interfaces/page-response';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class ResultService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(page: number, size: number): Observable<ResultResponse[]> {
-    return this.http.get<ResultResponse[]>(environment.apiUrl + ApiPath.RESULTS, { params: { page: page, size: size } });
+  getAll(page: number, size: number): Observable<PageResponse<ResultResponse>> {
+    return this.http.get<PageResponse<ResultResponse>>(environment.apiUrl + ApiPath.RESULTS, { params: { page: page, size: size } });
   }
 
   save(result: Result) {
