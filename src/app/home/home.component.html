@@ -1,13 +1,40 @@
 <div class="container">
-	<app-word-typing
-		(isFocusChanged)="handleFocusChange($event)"
-		(isFinished)="handleIsFinished($event)"
-		[timeLeft]="currentTime" 
-		class="word-component">
-	</app-word-typing>
-	<div class="stats">
-		<app-stat class="stat" [valueToDisplay]="wordService.calculateWordsPerMinute(currentTime ?? countFrom)" [label]="'wpm'"></app-stat>
-		<app-stat class="stat" [valueToDisplay]="wordService.calculateAccuracy()" [label]="'accuracy'"></app-stat>
-		<app-stat class="stat" [valueToDisplay]="currentTime ?? countFrom" [label]="'time left'"></app-stat>
-	</div>	
+	<div class="settings">
+		<div class="setting">
+			<label for="difficulty">difficulty: </label>
+			<select name="difficulty" [(ngModel)]="selectedDifficulty">
+				<option *ngFor="let difficulty of difficulties" value="{{difficulty}}">
+					{{difficulty}}
+				</option>
+			</select>
+		</div>
+		<div class="setting">
+			<label for="difficulty">type: </label>
+			<select name="difficulty">
+				<option value="DEFAULT">
+					DEFAULT
+				</option>
+				<option value="INFINITE">
+					INFINITE
+				</option>
+				<option value="CLASSIC">
+					CLASSIC
+				</option>
+			</select>
+		</div>
+	</div>
+	<div class="test">
+		<app-word-typing
+			(isFocusChanged)="handleFocusChange($event)"
+			(isFinished)="handleIsFinished($event)"
+			[timeLeft]="currentTime"
+			[selectedDifficulty]="selectedDifficulty!" 
+			class="word-component">
+		</app-word-typing>
+		<div class="stats">
+			<app-stat class="stat" [valueToDisplay]="wordService.calculateWordsPerMinute(currentTime)" [label]="'wpm'"></app-stat>
+			<app-stat class="stat" [valueToDisplay]="wordService.calculateAccuracy()" [label]="'accuracy'"></app-stat>
+			<app-stat class="stat" [valueToDisplay]="currentTime" [label]="'time left'"></app-stat>
+		</div>
+	</div>
 </div>

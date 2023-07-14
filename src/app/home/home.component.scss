@@ -1,8 +1,9 @@
+@import "../../styles.scss";
+
 .container {
-	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	min-height: 100vh;
 }
 
 .word-component {
@@ -24,4 +25,43 @@
 
 .stat:last-of-type {
 	margin-right: 0%;
+}
+
+.difficulty-btns {
+	display: flex;
+	flex-direction: column;
+	button {
+		margin-bottom: 0.5rem;
+		background-color: $dark-bg;
+		color: $dark-text;
+		border: none;
+	}
+}
+
+.settings {
+	margin: 2rem 2rem 0 0;
+	display: flex;
+	align-self: flex-end;
+}
+
+.setting {
+	margin-left: 2rem;
+	label {
+		font-size: 1rem;
+		font-weight: 300;
+	}
+	select {
+		background-color: transparent;
+		border: none;
+		color: $dark-text;
+		font-weight: 500;
+		font-size: 0.9rem;
+	}
+}
+
+.test {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
