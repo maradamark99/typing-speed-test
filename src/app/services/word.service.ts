@@ -1,4 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ApiPath } from '../utils/api-path';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +13,7 @@ export class WordService {
   numberOfTypedChar: number = 0;
   numberOfCorrect: number = 0;
 
-  constructor() { }
+  constructor(private readonly http: HttpClient) { }
 
   public calculateAccuracy(): number {
     return this.wordIndex == 0 ? 0 : +((this.numberOfCorrect / this.wordIndex * 100).toFixed(2));
@@ -22,10 +26,8 @@ export class WordService {
     return +wpm.toFixed(2);
   }
 
-  public getWords(): string[] {
-    return ["lorem", "ipsum", "dolor", "sit", "amet", "consectetur", "lorem",
-      "ipsum", "dolor", "sit", "amet", "consectetur", "lorem", "ipsum", "dolor",
-      "sit", "amet", "consectetur", "lorem", "ipsum", "dolor", "sit", "amet", "consectetur"];
+  public getWords(difficulty: string): Observable<string[]> {
+    return this.http.get<string[]>(environment.apiUrl + ApiPath.WORDS + `/${difficulty}`);
   }
 
   public resetState(): void {
