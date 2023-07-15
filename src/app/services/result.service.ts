@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiPath } from '../utils/api-path';
-import Result from '../interfaces/result';
+import ResultRequest from '../interfaces/result-request';
 import { ResultResponse } from '../interfaces/result-response';
 import { Observable } from 'rxjs';
 import { PageResponse } from '../interfaces/page-response';
@@ -18,7 +18,7 @@ export class ResultService {
     return this.http.get<PageResponse<ResultResponse>>(environment.apiUrl + ApiPath.RESULTS, { params: { page: page, size: size } });
   }
 
-  save(result: Result) {
+  save(result: ResultRequest) {
     return this.http.post(environment.apiUrl + ApiPath.RESULTS, result);
   }
   
