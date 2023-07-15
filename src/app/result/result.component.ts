@@ -55,7 +55,6 @@ export class ResultComponent implements OnInit, OnDestroy {
           isLastPage,
           isFirstPage,
         };
-        console.log(this.paginationInfo);
         this.dataSource = new MatTableDataSource(content)
         this.dataSource!.sort = this.sort!;
       }

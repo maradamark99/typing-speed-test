@@ -6,10 +6,9 @@ $light-text: #111100;
 $dark-bg: #15151f;
 $dark-secondary: #353347;
 $dark-tertiary: #686679;
+$dark-quaternary: #2f2f45;
 $dark-text: #f0f8ff;
 $dark-text-secondary: #01010f;
-$dark-dialog: #23233f;
-$dark-primary-btn: #232434;
 $dark-secondary-btn: #353347;
 $light-text: #01010f;
 $dark-sidenav-hover: #eeeeff;
@@ -24,26 +23,64 @@ body {
 	padding: 0;
 }
 
+.mat-table {
+	min-height: 17.5rem;
+}
+
 .mat-table,
-.mat-header-cell,
 .mat-cell,
-.mat-header-row,
-.mat-row {
+.mat-row,
+.mat-select {
 	background-color: $dark-secondary;
 	color: $dark-text;
+}
+
+.mat-sort-header-content {
+	margin-left: 18px;
+}
+
+.mat-header-row {
+	opacity: 0.9;
+}
+
+.mat-header-row,
+.mat-header-cell {
+	background-color: $dark-quaternary;
+	color: $dark-text;
+	font-size: medium;
+	display: flex;
+	justify-content: center;
+}
+
+.mat-cell,
+.mat-row {
+	display: flex;
+	justify-content: center;
+}
+
+.mat-cell {
+	font-weight: 300;
+	font-size: 0.9rem;
 }
 
 .mat-dialog-container,
 .mat-dialog-content,
 .mat-dialog-title,
 .mat-dialog-actions {
-	background-color: $dark-dialog;
+	background-color: $dark-quaternary;
 	color: $dark-text;
 }
 
 .mat-dialog-actions {
 	display: flex;
 	justify-content: center;
+}
+
+.mat-expansion-panel,
+.mat-expansion-panel-header {
+	background-color: $dark-secondary;
+	color: $dark-text;
+	border: none;
 }
 
 .btn {
@@ -55,12 +92,12 @@ body {
 }
 
 .primary-btn {
-	color: $dark-text;
-	background-color: $dark-primary-btn;
+	color: $dark-bg;
+	background-color: $dark-text;
 }
 
 .primary-btn:hover {
-	background-color: $dark-bg;
+	background-color: $dark-tertiary;
 }
 
 .secondary-btn {

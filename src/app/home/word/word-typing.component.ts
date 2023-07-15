@@ -1,10 +1,11 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LinkedList } from 'linked-list-typescript';
 import { WordService } from 'src/app/services/word.service';
 import { EndResultDialogComponent } from '../end-result-dialog/end-result-dialog.component';
 import { ResultService } from 'src/app/services/result.service';
 import { Subscription } from 'rxjs';
+import { Difficulty } from 'src/app/interfaces/difficulty';
 
 @Component({
   selector: 'app-word-typing',
@@ -13,14 +14,15 @@ import { Subscription } from 'rxjs';
 })
 export class WordTypingComponent implements OnInit, OnDestroy {
   @Input() timeLeft?: number;
+  @Input() selectedDifficulty?: Difficulty;
   @Output() isFocusChanged = new EventEmitter<boolean>();
   @Output() isFinished = new EventEmitter<boolean>();
   @ViewChild('wordInput') wordInputRef?: ElementRef<HTMLInputElement>;
-  public originalWords: string[] = [];
+  public originalWords?: string[];
   public currentWords?: LinkedList<string>;
   public previousWords?: LinkedList<string>;
   private dialogRef?: MatDialogRef<EndResultDialogComponent, any>;
-  private subscription?: Subscription;
+  private subscriptions: Subscription[] = [];
   input: string = "";
 
   constructor(
@@ -34,12 +36,19 @@ export class WordTypingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+    this.subscriptions.forEach((s) => s.unsubscribe());
   }
   
   resetState() {
-    this.originalWords = this.wordService.getWords();
-    this.currentWords = new LinkedList<string>(...this.originalWords!);
+    if (this.selectedDifficulty) {
+      this.subscriptions.push(this.wordService.getWords(this.selectedDifficulty!.value).subscribe({
+        error: (e) => console.log(e),
+        next: (words) => {
+          this.originalWords = words;
+          this.currentWords = new LinkedList<string>(...this.originalWords!);
+        }
+      }));
+    }
     this.previousWords = new LinkedList<string>();
     this.previousWords.append("");
     this.wordService.resetState();
@@ -47,9 +56,13 @@ export class WordTypingComponent implements OnInit, OnDestroy {
     this.isFinished.emit(false);
   }
 
-  ngOnChanges(): void {
-    if (this.timeLeft! < 1)
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['selectedDifficulty'] && !changes['selectedDifficulty'].firstChange) {
+      this.resetState();
+    }
+    if (this.timeLeft! < 1) {
       this.openDialog("You have run out of time.");
+    }
   }
 
   public handleKeyPress(event: KeyboardEvent): void {
@@ -113,7 +126,7 @@ export class WordTypingComponent implements OnInit, OnDestroy {
     return !(key < 'a' || key > 'z');
   }
 
-  public isInputInFocus() {
+  public onInputFocus() {
     this.isFocusChanged.emit(true);
     this.wordInputRef!.nativeElement.focus();
   }
@@ -138,7 +151,9 @@ export class WordTypingComponent implements OnInit, OnDestroy {
   private closeDialog(wpm: number, accuracy: number): void {
     this.dialogRef!.afterClosed().subscribe((result) => {
         if (result === 'save') {
-          this.subscription = this.resultService.save({ wpm: wpm, accuracy: accuracy }).subscribe((result) => console.log(result));
+          this.subscriptions.push(
+            this.resultService.save({ wpm: wpm, accuracy: accuracy, difficulty_id: this.selectedDifficulty!.id })
+              .subscribe((result) => console.log(result)));
         }
         this.wordInputRef!.nativeElement.blur();
         this.isFinished.emit(true);

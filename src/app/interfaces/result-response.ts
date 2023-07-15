@@ -1,7 +1,8 @@
-import Result from "./result";
+import { ResultBase } from "./result-base";
 
-export interface ResultResponse extends Result {
+export interface ResultResponse extends ResultBase {
     id: number;
     username: string;
     timestamp: string;
+    difficulty: string;
 }
