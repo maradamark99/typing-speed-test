@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { TimerService } from '../services/timer.service';
 import { WordService } from '../services/word.service';
 import { DifficultyService } from '../services/difficulty.service';
+import { Difficulty } from '../interfaces/difficulty';
 
 @Component({
   selector: 'app-home',
@@ -12,20 +13,36 @@ import { DifficultyService } from '../services/difficulty.service';
 export class HomeComponent implements OnInit {
   readonly countFrom: number = 60;
   currentTime: number = this.countFrom;
-  difficulties: string[] = [];
+  difficulties: Difficulty[] = [];
   timerSubscription: Subscription = Subscription.EMPTY;
-  selectedDifficulty?: string;
+  isSettingsDisabled: boolean = false;
+  private _selectedDifficulty?: string;
 
-  constructor(private readonly difficultyService: DifficultyService, public readonly wordService: WordService, public readonly timerService: TimerService) { 
+
+  constructor(
+    private readonly difficultyService: DifficultyService,
+    public readonly wordService: WordService,
+    public readonly timerService: TimerService) { 
   }
+
   ngOnInit(): void {
     this.difficultyService.getAll().subscribe({
       error: (e) => console.log(e),
       next: (result) => {
-        this.difficulties = result.map((d) => d.value);
-        this.selectedDifficulty = this.difficulties[0];
+        this.difficulties = result;
+        this._selectedDifficulty = this.difficulties[0].value;
       }
     })
+  }
+
+  get selectedDifficulty(): string {
+    return this._selectedDifficulty ?? "";
+  }
+
+  setSelectedDifficulty(event: Event): void {
+    if (!this.isSettingsDisabled) {
+      this._selectedDifficulty = (event.target as HTMLSelectElement).value
+    }
   }
 
   handleIsFinished(value: boolean) {
@@ -36,11 +53,16 @@ export class HomeComponent implements OnInit {
   }
 
   handleFocusChange(value: boolean) {
+    this.isSettingsDisabled = value;
     if (value && this.timerSubscription === Subscription.EMPTY) {
       this.timerSubscription = this.timerService.startCountDownTimer(this.countFrom).subscribe((time) => this.currentTime = time);
     } else if (!value && this.timerSubscription) {
       this.unSubscribeFromTimer();
     }
+  }
+
+  getDifficultyFromValue(): Difficulty | undefined {
+    return this.difficulties.filter(d => d.value === this.selectedDifficulty).pop();
   }
 
   private unSubscribeFromTimer() {

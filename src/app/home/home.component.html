@@ -1,10 +1,10 @@
 <div class="container">
-	<div class="settings">
+	<div class="settings" [class.disable-settings]="isSettingsDisabled">
 		<div class="setting">
 			<label for="difficulty">difficulty: </label>
-			<select name="difficulty" [(ngModel)]="selectedDifficulty">
-				<option *ngFor="let difficulty of difficulties" value="{{difficulty}}">
-					{{difficulty}}
+			<select name="difficulty" (change)="setSelectedDifficulty($event)" [disabled]="isSettingsDisabled" required>
+				<option *ngFor="let difficulty of difficulties" value="{{difficulty.value}}">
+					{{difficulty.value}}
 				</option>
 			</select>
 		</div>
@@ -23,12 +23,12 @@
 			</select>
 		</div>
 	</div>
-	<div class="test">
+	<div class="word-container">
 		<app-word-typing
 			(isFocusChanged)="handleFocusChange($event)"
 			(isFinished)="handleIsFinished($event)"
 			[timeLeft]="currentTime"
-			[selectedDifficulty]="selectedDifficulty!" 
+			[selectedDifficulty]="getDifficultyFromValue()" 
 			class="word-component">
 		</app-word-typing>
 		<div class="stats">
