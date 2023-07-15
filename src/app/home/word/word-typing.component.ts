@@ -126,7 +126,7 @@ export class WordTypingComponent implements OnInit, OnDestroy {
     return !(key < 'a' || key > 'z');
   }
 
-  public inputIsFocused() {
+  public onInputFocus() {
     this.isFocusChanged.emit(true);
     this.wordInputRef!.nativeElement.focus();
   }
