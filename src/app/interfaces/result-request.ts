@@ -1,5 +1,5 @@
-export default interface ResultRequest {
-    wpm: number,
-    accuracy: number,
+import { ResultBase } from "./result-base";
+
+export default interface ResultRequest extends ResultBase {
     difficulty_id: number
 }
