@@ -5,6 +5,7 @@ import { WordService } from 'src/app/services/word.service';
 import { EndResultDialogComponent } from '../end-result-dialog/end-result-dialog.component';
 import { ResultService } from 'src/app/services/result.service';
 import { Subscription } from 'rxjs';
+import { Difficulty } from 'src/app/interfaces/difficulty';
 
 @Component({
   selector: 'app-word-typing',
@@ -125,7 +126,7 @@ export class WordTypingComponent implements OnInit, OnDestroy {
     return !(key < 'a' || key > 'z');
   }
 
-  public isInputInFocus() {
+  public inputIsFocused() {
     this.isFocusChanged.emit(true);
     this.wordInputRef!.nativeElement.focus();
   }
@@ -150,7 +151,9 @@ export class WordTypingComponent implements OnInit, OnDestroy {
   private closeDialog(wpm: number, accuracy: number): void {
     this.dialogRef!.afterClosed().subscribe((result) => {
         if (result === 'save') {
-          this.subscription = this.resultService.save({ wpm: wpm, accuracy: accuracy }).subscribe((result) => console.log(result));
+          this.subscriptions.push(
+            this.resultService.save({ wpm: wpm, accuracy: accuracy, difficulty_id: this.selectedDifficulty!.id })
+              .subscribe((result) => console.log(result)));
         }
         this.wordInputRef!.nativeElement.blur();
         this.isFinished.emit(true);
