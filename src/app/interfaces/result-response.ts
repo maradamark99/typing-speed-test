@@ -4,5 +4,4 @@ export interface ResultResponse extends ResultBase {
     id: number;
     username: string;
     timestamp: string;
-    difficulty: string;
 }

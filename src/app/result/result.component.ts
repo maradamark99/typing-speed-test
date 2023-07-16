@@ -13,7 +13,7 @@ import { PaginationInfo } from '../interfaces/pagination-info';
 })
 export class ResultComponent implements OnInit, OnDestroy {
   private subscription?: Subscription;
-  public readonly displayedColumns = ['username', 'wpm', 'accuracy', 'timestamp'];
+  public readonly displayedColumns = ['username', 'wpm', 'accuracy', 'difficulty', 'timestamp'];
   public readonly pageSizeOptions = [5, 10, 25, 50];
   public dataSource?: MatTableDataSource<ResultResponse>;
   public paginationInfo?: PaginationInfo;
