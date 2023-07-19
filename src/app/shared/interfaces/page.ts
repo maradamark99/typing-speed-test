@@ -1,5 +1,5 @@
 import { PaginationInfo } from "./pagination-info";
 
-export interface PageResponse<T> extends PaginationInfo {
+export interface Page<T> extends PaginationInfo {
     content: T[];
 }

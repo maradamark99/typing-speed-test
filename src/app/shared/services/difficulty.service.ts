@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiPath } from '../utils/api-path';
-import { Difficulty } from '../interfaces/difficulty';
+import { Difficulty } from '../interfaces/difficulty'
 
 @Injectable({
   providedIn: 'root'

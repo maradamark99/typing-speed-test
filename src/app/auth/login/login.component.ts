@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IFormControlDetail } from 'src/app/interfaces/form-control-detail';
-import { IUser } from 'src/app/interfaces/user.interface';
-import { AuthService } from 'src/app/services/auth.service';
-import { TokenService } from 'src/app/services/token.service';
+import { IFormControlDetail } from 'src/app/shared/interfaces/form-control-detail';
+import { IUser } from 'src/app/shared/interfaces/user.interface';
+import { AuthService } from '../../shared/services/auth.service';
+import { TokenService } from '../../shared/services/token.service';
 
 @Component({
   selector: 'app-login',

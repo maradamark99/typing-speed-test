@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { ResultService } from '../services/result.service';
-import { ResultResponse } from '../interfaces/result-response';
+import { ResultService } from '../shared/services/result.service';
+import { ResultResponse } from '../shared/interfaces/result-response';
 import { Subscription } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { PaginationInfo } from '../interfaces/pagination-info';
+import { PaginationInfo } from '../shared/interfaces/pagination-info';
 
 @Component({
   selector: 'app-result',
@@ -18,7 +18,6 @@ export class ResultComponent implements OnInit, OnDestroy {
   public dataSource?: MatTableDataSource<ResultResponse>;
   public paginationInfo?: PaginationInfo;
   public selectedPageSize = this.pageSizeOptions[0];
-
 
   constructor(public readonly resultService: ResultService) { }
 
@@ -39,25 +38,13 @@ export class ResultComponent implements OnInit, OnDestroy {
     this.resultService.getAll(!page ? 0 : page, this.selectedPageSize).subscribe({
       error: (e) => console.log(e),
       next: (res) => {
-        const {
-          content,
-          totalPages,
-          pageSize,
-          currentPage,
-          isLastPage,
-          isFirstPage,
-        } = res;
-
+        const { content, ...pagination } = res
         this.paginationInfo = {
-          totalPages,
-          pageSize,
-          currentPage,
-          isLastPage,
-          isFirstPage,
+          ...pagination
         };
         this.dataSource = new MatTableDataSource(content)
         this.dataSource!.sort = this.sort!;
-      }
+      },
     });
   }
 

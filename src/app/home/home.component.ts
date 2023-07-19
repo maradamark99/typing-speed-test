@@ -1,9 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
-import { TimerService } from '../services/timer.service';
-import { WordService } from '../services/word.service';
-import { DifficultyService } from '../services/difficulty.service';
-import { Difficulty } from '../interfaces/difficulty';
+import { TimerService } from '../shared/services/timer.service';
+import { WordService } from '../shared/services/word.service';
+import { DifficultyService } from '../shared/services/difficulty.service';
+import { Difficulty } from '../shared/interfaces/difficulty';
 
 @Component({
   selector: 'app-home',

@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { IFormControlDetail } from 'src/app/interfaces/form-control-detail';
-import { CustomValidator } from 'src/app/utils/custom-validator';
+import { IFormControlDetail } from 'src/app/shared/interfaces/form-control-detail';
+import { CustomValidator } from 'src/app/shared/utils/custom-validator';
 
 @Component({
   selector: 'app-form',
