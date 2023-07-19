@@ -62,12 +62,8 @@ export class RegistrationComponent implements OnInit {
   handleRegistration(user: IUser): void {
     this.subscription = this.authService.register(user).subscribe({
       error: (e) => console.error(e),
-      complete: () => this.redirectToLogin()
+      complete: () => this.router.navigate(['/login'])
     });
-  }
-
-  redirectToLogin(): void {
-    this.router.navigate(['/login']);
   }
 
 }
