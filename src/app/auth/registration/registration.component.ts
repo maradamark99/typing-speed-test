@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUser } from 'src/app/interfaces/user.interface';
-import { AuthService } from 'src/app/services/auth.service';
-import { CustomValidator } from 'src/app/utils/custom-validator';
-import { IFormControlDetail } from '../../interfaces/form-control-detail';
+import { IUser } from 'src/app/shared/interfaces/user.interface';
+import { AuthService } from '../../shared/services/auth.service';
+import { CustomValidator } from 'src/app/shared/utils/custom-validator';
+import { IFormControlDetail } from '../../shared/interfaces/form-control-detail';
 
 @Component({
   selector: 'app-registration',

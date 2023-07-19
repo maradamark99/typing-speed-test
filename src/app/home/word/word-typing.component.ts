@@ -1,11 +1,11 @@
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { LinkedList } from 'linked-list-typescript';
-import { WordService } from 'src/app/services/word.service';
+import { WordService } from '../../shared/services/word.service';
 import { EndResultDialogComponent } from '../end-result-dialog/end-result-dialog.component';
-import { ResultService } from 'src/app/services/result.service';
+import { ResultService } from '../../shared/services/result.service';
 import { Subscription } from 'rxjs';
-import { Difficulty } from 'src/app/interfaces/difficulty';
+import { Difficulty } from 'src/app/shared/interfaces/difficulty';
 
 @Component({
   selector: 'app-word-typing',
