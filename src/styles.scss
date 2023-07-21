@@ -23,20 +23,12 @@ body {
 	padding: 0;
 }
 
-.mat-table {
-	min-height: 17.5rem;
-}
-
 .mat-table,
 .mat-cell,
 .mat-row,
 .mat-select {
 	background-color: $dark-secondary;
 	color: $dark-text;
-}
-
-.mat-sort-header-content {
-	margin-left: 18px;
 }
 
 .mat-header-row {
