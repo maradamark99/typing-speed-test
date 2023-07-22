@@ -1,4 +1,10 @@
 export interface Sort {
     field: string;
-    direction: "asc" | "desc";
+    direction: SortDirection;
+}
+
+export enum SortDirection {
+    DEFAULT, 
+    ASC = "asc",
+    DESC = "desc"
 }
