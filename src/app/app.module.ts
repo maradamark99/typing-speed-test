@@ -24,6 +24,7 @@ import { AuthInterceptor } from './shared/interceptors/AuthInterceptor';
 import { ResultComponent } from './result/result.component';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadedDirective } from './shared/directives/loaded-directive';
+import { SortHeaderComponent } from './shared/components/sort-header/sort-header.component';
  
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { LoadedDirective } from './shared/directives/loaded-directive';
     ResultComponent,
     LoadingComponent,
     LoadedDirective,
+    SortHeaderComponent,
   ],
   imports: [
     BrowserModule,
