@@ -13,6 +13,14 @@ export class SortHeaderComponent implements OnInit {
   @Input() sortOrder = [SortDirection.DEFAULT, SortDirection.ASC, SortDirection.DESC]
   private index: number = 0;
 
+  get currentSortOrder(): SortDirection {
+    return this.sortOrder[this.index];
+  }
+
+  get sortDirection(): typeof SortDirection {
+    return SortDirection;
+  }
+
   constructor() {
 
   }
