@@ -1,49 +1,62 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ResultService } from '../shared/services/result.service';
 import { ResultResponse } from '../shared/interfaces/result-response';
 import { Subscription } from 'rxjs';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 import { PaginationInfo } from '../shared/interfaces/pagination-info';
+import { Sort } from '../shared/interfaces/sort';
+import SortHeaderContext from '../shared/components/sort-header/sort-header-context';
 
 @Component({
   selector: 'app-result',
   templateUrl: './result.component.html',
-  styleUrls: ['./result.component.scss']
+  styleUrls: ['./result.component.scss'],
 })
 export class ResultComponent implements OnInit, OnDestroy {
   private subscription?: Subscription;
-  public readonly displayedColumns = ['username', 'wpm', 'accuracy', 'difficulty', 'timestamp'];
   public readonly pageSizeOptions = [5, 10, 25, 50];
-  public dataSource?: MatTableDataSource<ResultResponse>;
+  public readonly columnsToDisplay = ["user", "wpm", "accuracy", "difficulty", "date"];
+  public sortColumns: Map<string, Sort> = new Map();
+  public results: ResultResponse[] = [];
   public paginationInfo?: PaginationInfo;
   public selectedPageSize = this.pageSizeOptions[0];
+  public readonly sortHeaderContext: SortHeaderContext;
 
-  constructor(public readonly resultService: ResultService) { }
-
-  @ViewChild(MatSort) sort?: MatSort;
+  constructor(public readonly resultService: ResultService) {
+    const columnsAndDirections = new Map();
+    this.columnsToDisplay.forEach((column) => columnsAndDirections.set(column, 0));
+    this.sortHeaderContext = new SortHeaderContext(columnsAndDirections);
+  }
 
   ngOnInit(): void {
-    this.fetchResults();
+    this.getResults();
+    
   }
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
+
+  handleSortChange(sortBy: Sort) {
+    this.sortColumns.set(sortBy.field, sortBy);
+    this.getResults(this.paginationInfo?.currentPage, [...this.sortColumns.values()]);
+  }
   
-  fetchResults(page?: number) {
+  getResults(page?: number, sortBy?: Sort[]) {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.resultService.getAll(!page ? 0 : page, this.selectedPageSize).subscribe({
+    this.subscription = this.resultService.getAll({
+      page: page ?? 0,
+      size: this.selectedPageSize,
+      sort: sortBy
+    }).subscribe({
       error: (e) => console.log(e),
       next: (res) => {
         const { content, ...pagination } = res
         this.paginationInfo = {
           ...pagination
         };
-        this.dataSource = new MatTableDataSource(content)
-        this.dataSource!.sort = this.sort!;
+        this.results = content
       },
     });
   }

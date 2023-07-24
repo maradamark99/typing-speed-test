@@ -1,36 +1,34 @@
 <div class="container">
     <table class="results-table" *loaded="this.results">
-        <tr>
-            <th>
-                user
-            </th>
-            <th>
-                wpm
-            </th>
-            <th>
-                accuracy
-            </th>
-            <th>
-                difficulty
-            </th>
-            <th>
-                date
-            </th>
-        </tr>
-        <div class="no-results" *ngIf="this.results.length < 1">
-            <h2>
-                No results found.
-            </h2>
-        </div>
-        <ng-container *ngIf="this.results.length > 0">
-            <tr *ngFor="let result of results" >
-                <td>{{result.username}}</td>
-                <td>{{result.wpm}}</td>
-                <td>{{result.accuracy}} %</td>
-                <td>{{result.difficulty}}</td>
-                <td>{{result.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+        <thead>
+            <tr>
+                <th *ngFor="let column of columnsToDisplay">
+                    <app-sort-header  
+                    class="sort-header" 
+                    [column]="column" 
+                    [context]="sortHeaderContext" 
+                    (sortChanged)="handleSortChange($event)"
+                    >
+                    </app-sort-header>
+                </th>
             </tr>
-        </ng-container>
+        </thead>
+        <tbody>
+            <div class="no-results" *ngIf="this.results.length < 1">
+                <h2>
+                    No results found.
+                </h2>
+            </div>
+            <ng-container *ngIf="this.results.length > 0">
+                <tr *ngFor="let result of results" >
+                    <td>{{result.username}}</td>
+                    <td>{{result.wpm}}</td>
+                    <td>{{result.accuracy}} %</td>
+                    <td>{{result.difficulty}}</td>
+                    <td>{{result.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                </tr>
+            </ng-container>
+        </tbody>
     </table>
     <div class="paginator">
         <div class="page-size pagination-item">
