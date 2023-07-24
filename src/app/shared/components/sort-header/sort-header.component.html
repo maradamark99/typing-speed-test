@@ -1,4 +1,4 @@
-<th (click)="handleClick()">
+<div class="sort-content" (click)="handleClick()">
     {{column}}
     <ng-container [ngSwitch]="currentSortOrder">
         <ng-container *ngSwitchCase="sortDirection.ASC">
@@ -12,4 +12,4 @@
             </svg>
         </ng-container>
     </ng-container>
-</th>
+</div>
