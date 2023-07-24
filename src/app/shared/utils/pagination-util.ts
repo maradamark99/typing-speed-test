@@ -7,12 +7,11 @@ export function processPageOptionParams(pageOptions: PageOptions): HttpParams {
   params = params.append('page', pageOptions.page);
   params = params.append('size', pageOptions.size);
   if (pageOptions.sort) {
-      if (Array.isArray(pageOptions.sort)) {
-      pageOptions.sort.forEach((value) => params.append('sort', `${value.field},${value.direction}`));
+    pageOptions.sort.forEach((value) => {
+      if (value.direction && value.field) {
+        params = params.append('sort', `${value.field},${value.direction}`);
       }
-      else {
-          params.append('sort', `${pageOptions.sort.field},${pageOptions.sort.direction}`)
-      }
+    }); 
   }
   return params;
 }
