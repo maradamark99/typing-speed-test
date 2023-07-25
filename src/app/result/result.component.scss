@@ -9,14 +9,10 @@
 }
 
 .results-table {
-	padding: 2rem;
-	min-width: 22rem;
+	min-width: 24rem;
 	width: 60vw;
-	border-collapse: collapse;
 	table-layout: fixed;
-	tr {
-		border-bottom: 1px solid $dark-bg;
-	}
+	border-collapse: collapse;
 	td {
 		background-color: $dark-secondary;
 		font-weight: 300;
@@ -27,11 +23,20 @@
 }
 
 .sort-header {
+	border: none !important;
+}
+
+.sort {
+	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	background-color: $dark-quaternary;
 	height: 4rem;
+}
+
+.result-row {
+	border-bottom: 1px solid $dark-bg;
 }
 
 .paginator {
@@ -94,8 +99,8 @@ select {
 	align-items: center;
 	justify-content: center;
 	height: 6rem;
+	min-width: 22rem;
 	width: 60vw;
-	min-width: 25rem;
 }
 
 .error {

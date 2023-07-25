@@ -1,10 +1,10 @@
 <div class="container">
     <table class="results-table" *loaded="this.results">
         <thead>
-            <tr>
+            <tr class="sort-header">
                 <th *ngFor="let column of columnsToDisplay">
                     <app-sort-header  
-                    class="sort-header" 
+                    class="sort" 
                     [column]="column" 
                     [context]="sortHeaderContext" 
                     (sortChanged)="handleSortChange($event)"
@@ -14,13 +14,8 @@
             </tr>
         </thead>
         <tbody>
-            <div class="no-results" *ngIf="this.results.length < 1">
-                <h2>
-                    No results found.
-                </h2>
-            </div>
             <ng-container *ngIf="this.results.length > 0">
-                <tr *ngFor="let result of results" >
+                <tr class="result-row" *ngFor="let result of results" >
                     <td>{{result.username}}</td>
                     <td>{{result.wpm}}</td>
                     <td>{{result.accuracy}} %</td>
@@ -30,6 +25,11 @@
             </ng-container>
         </tbody>
     </table>
+    <div class="no-results" *ngIf="this.results.length < 1">
+            <h2>
+                No results found.
+            </h2>
+    </div>
     <div class="paginator">
         <div class="page-size pagination-item">
             <label for="page-size-select">
