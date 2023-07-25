@@ -23,46 +23,6 @@ body {
 	padding: 0;
 }
 
-.mat-table {
-	min-height: 17.5rem;
-}
-
-.mat-table,
-.mat-cell,
-.mat-row,
-.mat-select {
-	background-color: $dark-secondary;
-	color: $dark-text;
-}
-
-.mat-sort-header-content {
-	margin-left: 18px;
-}
-
-.mat-header-row {
-	opacity: 0.9;
-}
-
-.mat-header-row,
-.mat-header-cell {
-	background-color: $dark-quaternary;
-	color: $dark-text;
-	font-size: medium;
-	display: flex;
-	justify-content: center;
-}
-
-.mat-cell,
-.mat-row {
-	display: flex;
-	justify-content: center;
-}
-
-.mat-cell {
-	font-weight: 300;
-	font-size: 0.9rem;
-}
-
 .mat-dialog-container,
 .mat-dialog-content,
 .mat-dialog-title,
@@ -74,13 +34,6 @@ body {
 .mat-dialog-actions {
 	display: flex;
 	justify-content: center;
-}
-
-.mat-expansion-panel,
-.mat-expansion-panel-header {
-	background-color: $dark-secondary;
-	color: $dark-text;
-	border: none;
 }
 
 .btn {

@@ -126,7 +126,7 @@ export class WordTypingComponent implements OnInit, OnDestroy {
     return !(key < 'a' || key > 'z');
   }
 
-  public onInputFocus() {
+  public handleInputFocus() {
     this.isFocusChanged.emit(true);
     this.wordInputRef!.nativeElement.focus();
   }
@@ -152,7 +152,7 @@ export class WordTypingComponent implements OnInit, OnDestroy {
     this.dialogRef!.afterClosed().subscribe((result) => {
         if (result === 'save') {
           this.subscriptions.push(
-            this.resultService.save({ wpm: wpm, accuracy: accuracy, difficulty: this.selectedDifficulty!.value })
+            this.resultService.save({ wpm: wpm, accuracy: accuracy, difficulty: this.selectedDifficulty!.value, date: Date.now() })
               .subscribe((result) => console.log(result)));
         }
         this.wordInputRef!.nativeElement.blur();

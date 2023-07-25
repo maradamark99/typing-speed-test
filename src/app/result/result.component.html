@@ -1,71 +1,82 @@
 <div class="container">
-    <div class="table" *loaded="this.dataSource">
-        <mat-table #table [dataSource]="dataSource!" matSort>
-            <ng-container matColumnDef="username">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> username </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.username}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="wpm">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> wpm </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.wpm}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="accuracy">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> accuracy </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.accuracy}} % </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="difficulty">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> difficulty </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.difficulty}} </mat-cell>
-            </ng-container>
-            <ng-container matColumnDef="timestamp">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> date </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.timestamp}} </mat-cell>
-            </ng-container>
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;">
-            </mat-row>
-            <tr class="no-results mat-row" *matNoDataRow>
-                <h2>
-                    No results found.
-                </h2>
+    <table class="results-table" *loaded="this.results">
+        <thead>
+            <tr class="sort-header">
+                <th *ngFor="let column of columnsToDisplay">
+                    <app-sort-header  
+                    class="sort" 
+                    [column]="column" 
+                    [context]="sortHeaderContext" 
+                    (sortChanged)="handleSortChange($event)"
+                    >
+                    </app-sort-header>
+                </th>
             </tr>
-        </mat-table>
-        <div class="paginator">
-            <div class="page-size">
-                <label for="page-size-select">
-                    Results per page: 
-                </label>
-                <select name="page-size-select" [(ngModel)]="selectedPageSize" (ngModelChange)="fetchResults()">
-                    <option *ngFor="let pageSizeOption of pageSizeOptions">
-                        {{ pageSizeOption }}
-                    </option>
-                </select>
-            </div>
-            <div class="current-page">
-                <span>Page {{paginationInfo!.currentPage != 0 ? paginationInfo!.currentPage + 1 : 0}} of {{paginationInfo?.totalPages}}</span>
-            </div>
-            <div class="pagination-btns">
-                <button class="pagination-btn" (click)="fetchResults()" [disabled]="paginationInfo?.isFirstPage" [ngClass]="{'disabled-btn': paginationInfo?.isFirstPage}">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
-                    </svg>
-                </button>
-                <button class="pagination-btn" (click)="fetchResults(paginationInfo!.currentPage - 1)" [disabled]="paginationInfo?.isFirstPage" [ngClass]="{'disabled-btn': paginationInfo?.isFirstPage}">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                    </svg>
-                </button>
-                <button class="pagination-btn" (click)="fetchResults(paginationInfo!.currentPage + 1)" [disabled]="paginationInfo?.isLastPage" [ngClass]="{'disabled-btn': paginationInfo?.isLastPage}">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                    </svg>
-                </button>
-                <button class="pagination-btn" (click)="fetchResults(paginationInfo!.totalPages - 1)" [disabled]="paginationInfo?.isLastPage" [ngClass]="{'disabled-btn': paginationInfo?.isLastPage}">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-                    </svg>
-                </button>
-            </div>
+        </thead>
+        <tbody>
+            <ng-container *ngIf="this.results.length > 0">
+                <tr class="result-row" *ngFor="let result of results" >
+                    <td>{{result.username}}</td>
+                    <td>{{result.wpm}}</td>
+                    <td>{{result.accuracy}} %</td>
+                    <td>{{result.difficulty}}</td>
+                    <td>{{result.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+    <div class="no-results" *ngIf="this.results.length < 1">
+            <h2>
+                No results found.
+            </h2>
+    </div>
+    <div class="paginator">
+        <div class="page-size pagination-item">
+            <label for="page-size-select">
+                Results per page: 
+            </label>
+            <select name="page-size-select" [(ngModel)]="selectedPageSize" (ngModelChange)="getResults()">
+                <option *ngFor="let pageSizeOption of pageSizeOptions">
+                    {{ pageSizeOption }}
+                </option>
+            </select>
+        </div>
+        <div class="current-page pagination-item">
+            <span>Page {{paginationInfo && paginationInfo.currentPage != 0 ? paginationInfo!.currentPage + 1 : 0}} of {{paginationInfo?.totalPages == 1 ? paginationInfo!.totalPages - 1 : paginationInfo?.totalPages}}</span>
+        </div>
+        <div class="pagination-btns pagination-item">
+            <button class="pagination-btn" 
+                (click)="getResults()" 
+                [disabled]="paginationInfo?.isFirstPage" 
+                [ngClass]="{'disabled-btn': paginationInfo?.isFirstPage}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+                </svg>
+            </button>
+            <button class="pagination-btn" 
+                (click)="getResults(paginationInfo!.currentPage - 1)" 
+                [disabled]="paginationInfo?.isFirstPage" 
+                [ngClass]="{'disabled-btn': paginationInfo?.isFirstPage}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+            </button>
+            <button class="pagination-btn" 
+                (click)="getResults(paginationInfo!.currentPage + 1)" 
+                [disabled]="paginationInfo?.isLastPage" 
+                [ngClass]="{'disabled-btn': paginationInfo?.isLastPage}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
+            <button class="pagination-btn" 
+                (click)="getResults(paginationInfo!.totalPages - 1)" 
+                [disabled]="paginationInfo?.isLastPage" 
+                [ngClass]="{'disabled-btn': paginationInfo?.isLastPage}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+                </svg>
+            </button>
         </div>
     </div>
 </div>

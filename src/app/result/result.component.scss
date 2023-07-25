@@ -8,11 +8,46 @@
 	justify-content: center;
 }
 
+.results-table {
+	min-width: 24rem;
+	width: 60vw;
+	table-layout: fixed;
+	border-collapse: collapse;
+	td {
+		background-color: $dark-secondary;
+		font-weight: 300;
+		font-size: 0.9rem;
+		text-align: center;
+		height: 6rem;
+	}
+}
+
+.sort-header {
+	border: none !important;
+}
+
+.sort {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $dark-quaternary;
+	height: 4rem;
+}
+
+.result-row {
+	border-bottom: 1px solid $dark-bg;
+}
+
 .paginator {
 	padding: 1rem 0 1rem 0;
 	width: 100%;
 	height: 3rem;
 	display: flex;
+	@media screen and (width < 500px) {
+		flex-direction: column;
+		margin-top: 2rem;
+	}
 	align-items: center;
 	justify-content: center;
 	color: $dark-text;
@@ -35,6 +70,12 @@
 	cursor: pointer;
 }
 
+.pagination-item {
+	@media screen and (width < 500px) {
+		padding: 0.33rem;
+	}
+}
+
 .current-page {
 	margin-left: 1.5rem;
 }
@@ -51,12 +92,15 @@ select {
 	margin: 0 0.5rem 0 0.5rem;
 }
 
-.table {
-	width: 60%;
-}
-
 .no-results {
-	margin-top: 5rem;
+	background-color: $dark-secondary;
+	font-weight: 300;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 6rem;
+	min-width: 22rem;
+	width: 60vw;
 }
 
 .error {
