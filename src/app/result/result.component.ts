@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { PaginationInfo } from '../shared/interfaces/pagination-info';
 import { Sort } from '../shared/interfaces/sort';
 import SortHeaderContext from '../shared/components/sort-header/sort-header-context';
+import { PageOptions } from '../shared/interfaces/page-options';
 
 @Component({
   selector: 'app-result',
@@ -13,13 +14,13 @@ import SortHeaderContext from '../shared/components/sort-header/sort-header-cont
 })
 export class ResultComponent implements OnInit, OnDestroy {
   private subscription?: Subscription;
-  public readonly pageSizeOptions = [5, 10, 25, 50];
   public readonly columnsToDisplay = ["user", "wpm", "accuracy", "difficulty", "date"];
+  public readonly pageSizeOptions = [5, 10, 15, 20, 30];
   public sortColumns: Map<string, Sort> = new Map();
   public results: ResultResponse[] = [];
   public paginationInfo?: PaginationInfo;
-  public selectedPageSize = this.pageSizeOptions[0];
   public readonly sortHeaderContext: SortHeaderContext;
+  private pageOptions: Partial<PageOptions> = {};
 
   constructor(public readonly resultService: ResultService) {
     const columnsAndDirections = new Map();
@@ -38,17 +39,29 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   handleSortChange(sortBy: Sort) {
     this.sortColumns.set(sortBy.field, sortBy);
-    this.getResults(this.paginationInfo?.currentPage, [...this.sortColumns.values()]);
+    this.updatePageOptions({ ...this.pageOptions, sort: [...this.sortColumns.values()] });
+  }
+
+  handlePageSizeChange(size: number) {
+    this.updatePageOptions({ size });
+  }
+  handlePageChange(page: number) {
+    this.updatePageOptions({ page });
+  }
+
+  private updatePageOptions(updates: Partial<PageOptions>) {
+    this.pageOptions = { ...this.pageOptions, ...updates };
+    this.getResults();
   }
   
-  getResults(page?: number, sortBy?: Sort[]) {
+  getResults() {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
     this.subscription = this.resultService.getAll({
-      page: page ?? 0,
-      size: this.selectedPageSize,
-      sort: sortBy
+      page: this.pageOptions.page,
+      size: this.pageOptions.size ?? this.pageSizeOptions[0],
+      sort: this.pageOptions.sort
     }).subscribe({
       error: (e) => console.log(e),
       next: (res) => {
