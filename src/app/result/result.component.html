@@ -30,7 +30,7 @@
     <app-paginator 
         [paginationInfo]="paginationInfo" 
         [pageSizeOptions]="pageSizeOptions" 
-        (pageChange)="handlePageChange($event)" 
-        (pageSizeChange)="handlePageSizeChange($event)">
+        (pageChange)="updatePageOptions({page: $event})" 
+        (pageSizeChange)="updatePageOptions({size: $event})">
     </app-paginator>
 </div>

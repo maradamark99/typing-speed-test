@@ -30,7 +30,6 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getResults();
-    
   }
 
   ngOnDestroy(): void {
@@ -39,17 +38,10 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   handleSortChange(sortBy: Sort) {
     this.sortColumns.set(sortBy.field, sortBy);
-    this.updatePageOptions({ ...this.pageOptions, sort: [...this.sortColumns.values()] });
+    this.updatePageOptions({ sort: [...this.sortColumns.values()] });
   }
 
-  handlePageSizeChange(size: number) {
-    this.updatePageOptions({ size });
-  }
-  handlePageChange(page: number) {
-    this.updatePageOptions({ page });
-  }
-
-  private updatePageOptions(updates: Partial<PageOptions>) {
+  updatePageOptions(updates: Partial<PageOptions>) {
     this.pageOptions = { ...this.pageOptions, ...updates };
     this.getResults();
   }
