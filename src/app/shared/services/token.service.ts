@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import jwtDecode, { JwtPayload } from "jwt-decode";
 
- 
+type JwtPayloadWithRole = JwtPayload & { role: string };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,11 +26,11 @@ export class TokenService {
     }
   }
 
-  public decodeToken(token: string): JwtPayload {
-    return jwtDecode<JwtPayload>(token);
+  public decodeToken(token: string): JwtPayloadWithRole {
+    return jwtDecode<JwtPayloadWithRole>(token);
   }
 
-  public isValidToken(token: string): boolean {
+  public isValidToken(token: string | null): boolean {
     if (token) {
       try {
         const decodedToken = this.decodeToken(token);
@@ -41,9 +42,9 @@ export class TokenService {
     return false;
   }
 
-  private isNotExpired(token: JwtPayload): boolean {
+  private isNotExpired(token: JwtPayloadWithRole): boolean {
     const currentUnixTime = Math.round(Date.now() / 1000);
     return token.exp! > currentUnixTime;
   }
-  
+
 }
