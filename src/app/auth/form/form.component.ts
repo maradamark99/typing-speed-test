@@ -1,8 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { IFormControlDetail } from 'src/app/shared/interfaces/form-control-detail';
-import { CustomValidator } from 'src/app/shared/utils/custom-validator';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, ValidatorFn } from '@angular/forms';
+import { FormControlDetail } from 'src/app/shared/interfaces/form-control-detail';
 
 @Component({
   selector: 'app-form',
@@ -11,15 +9,15 @@ import { CustomValidator } from 'src/app/shared/utils/custom-validator';
 })
 export class FormComponent implements OnInit {
   @Input() title?: string;
-  @Input() formControlDetails?: IFormControlDetail[];
+  @Input() formControlDetails?: FormControlDetail[];
   @Input() redirectMessage?: string;
   @Input() redirectRoute?: string;
   @Input() addSeparator?: boolean;
-  @Input() formValidators?: CustomValidator[];
+  @Input() formValidators?: ValidatorFn[];
   @Output() formSubmitted = new EventEmitter<any>();
   public form?: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private snackBar: MatSnackBar) {
+  constructor(private formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {

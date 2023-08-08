@@ -1,6 +1,6 @@
 import { AbstractControl, ValidationErrors } from "@angular/forms";
 
-export interface IFormControlDetail {
+export interface FormControlDetail {
     name: string,
     placeholder?: string,
     type: string,

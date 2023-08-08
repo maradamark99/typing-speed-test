@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { IUser } from '../interfaces/user.interface';
+import { User } from '../interfaces/user';
 import { ApiPath } from '../utils/api-path';
 import { Observable } from 'rxjs';
 
@@ -19,11 +19,11 @@ export class AuthService {
     private readonly http: HttpClient,
   ) { }
 
-  register(user: IUser): Observable<void> {
+  register(user: User): Observable<void> {
     return this.http.post<void>(environment.apiUrl + ApiPath.REGISTER, user);
   }
 
-  login(user: IUser): Observable<LoginResponse> {
+  login(user: User): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(environment.apiUrl + ApiPath.LOGIN, user);
   }
 
