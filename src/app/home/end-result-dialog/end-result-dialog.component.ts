@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from 'src/app/shared/interfaces/dialog-data';
+import { ResultBase } from 'src/app/shared/interfaces/result-base';
+
+type DialogData = ResultBase & { message: string, numOfCorrect: number, wordAmount: number}
 
 @Component({
   selector: 'app-end-modal',
