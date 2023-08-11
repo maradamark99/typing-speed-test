@@ -8,7 +8,7 @@ import { PaginationInfo } from '../../interfaces/pagination-info';
 })
 export class PaginatorComponent implements OnInit {
   @Input() paginationInfo?: PaginationInfo;
-  @Input() pageSizeOptions?: number[];
+  @Input() pageSizeOptions?: number[] = [5, 10, 20, 30, 50];
   @Output() pageChange: EventEmitter<number> = new EventEmitter();
   @Output() pageSizeChange: EventEmitter<number> = new EventEmitter();
   selectedPageSize?: number;
