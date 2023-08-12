@@ -7,7 +7,7 @@ import { ResultResponse } from '../interfaces/result-response';
 import { Observable, retry } from 'rxjs';
 import { Page } from '../interfaces/page';
 import { PageOptions } from '../interfaces/page-options';
-import { processPageOptionParams } from '../utils/pagination-util';
+import PaginationUtil from '../utils/pagination-util';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +16,8 @@ export class ResultService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(pageOptions: PageOptions): Observable<Page<ResultResponse>> {
-    const params = processPageOptionParams(pageOptions);
+  getAll(pageOptions: Partial<PageOptions>): Observable<Page<ResultResponse>> {
+    const params = PaginationUtil.processPageOptionParams(pageOptions);
     return this.http.get<Page<ResultResponse>>(environment.apiUrl + ApiPath.RESULTS, { params }).pipe(retry(3));
   }
 
