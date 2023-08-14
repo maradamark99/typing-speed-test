@@ -1,6 +1,6 @@
-export interface ResultBase {
+export type Result = {
     wpm: number;
     accuracy: number;
     difficulty: string;
-    date: number;
+    date: string;
 }
