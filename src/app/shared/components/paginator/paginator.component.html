@@ -10,7 +10,7 @@
             </select>
         </div>
         <div class="current-page pagination-item">
-            <span>Page {{paginationInfo ? paginationInfo.currentPage + 1 : 1}} of {{paginationInfo ? paginationInfo.totalPages : 1}}</span>
+            <span>Page {{paginationInfo ? paginationInfo.currentPage + 1 : 1}} of {{paginationInfo && paginationInfo.totalPages != 0 ? paginationInfo.totalPages : 1}}</span>
         </div>
         <div class="pagination-btns pagination-item">
             <button class="pagination-btn" 
