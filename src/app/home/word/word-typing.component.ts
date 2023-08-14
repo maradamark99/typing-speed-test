@@ -152,7 +152,7 @@ export class WordTypingComponent implements OnInit, OnDestroy {
     this.dialogRef!.afterClosed().subscribe((result) => {
         if (result === 'save') {
           this.subscriptions.push(
-            this.resultService.save({ wpm: wpm, accuracy: accuracy, difficulty: this.selectedDifficulty!.value, date: Date.now() })
+            this.resultService.save({ wpm: wpm, accuracy: accuracy, difficulty: this.selectedDifficulty!.value, date: Date.now().toString() })
               .subscribe((result) => console.log(result)));
         }
         this.wordInputRef!.nativeElement.blur();
