@@ -3,7 +3,7 @@ import { HttpParams } from "@angular/common/http";
 
 export default class PaginationUtil {
   private static DEFAULT_PAGE = 0;
-  private static DEFAULT_SIZE = 10;
+  private static DEFAULT_SIZE = 5;
 
   static processPageOptionParams(pageOptions: Partial<PageOptions>): HttpParams {
     let params = new HttpParams();
