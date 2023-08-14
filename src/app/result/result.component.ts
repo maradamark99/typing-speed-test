@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ResultService } from '../shared/services/result.service';
-import { ResultResponse } from '../shared/interfaces/result-response';
 import { Subscription } from 'rxjs';
 import { PaginationInfo } from '../shared/interfaces/pagination-info';
-import { Sort } from '../shared/interfaces/sort';
-import SortHeaderContext from '../shared/components/sort-header/sort-header-context';
 import { PageOptions } from '../shared/interfaces/page-options';
+import { TableDetails } from '../shared/types/table-details';
+import { Sort } from '../shared/interfaces/sort';
+import { ResultResponse } from '../shared/types/result-response';
 
 @Component({
   selector: 'app-result',
@@ -14,46 +14,37 @@ import { PageOptions } from '../shared/interfaces/page-options';
 })
 export class ResultComponent implements OnInit, OnDestroy {
   private subscription?: Subscription;
-  public readonly columnsToDisplay = ["user", "wpm", "accuracy", "difficulty", "date"];
-  public readonly pageSizeOptions = [5, 10, 15, 20, 30];
-  public sortColumns: Map<string, Sort> = new Map();
+  public readonly columns;
+  public tableDetails?: TableDetails;
   public results: ResultResponse[] = [];
   public paginationInfo?: PaginationInfo;
-  public readonly sortHeaderContext: SortHeaderContext;
-  private pageOptions: Partial<PageOptions> = {};
 
   constructor(public readonly resultService: ResultService) {
-    const columnsAndDirections = new Map();
-    this.columnsToDisplay.forEach((column) => columnsAndDirections.set(column, 0));
-    this.sortHeaderContext = new SortHeaderContext(columnsAndDirections);
+    this.columns = ["username", "wpm", "accuracy", "difficulty", "date"].map((c) => {
+      if (c === "username") {
+          return { header: c, value: "user" };
+      } else {
+          return { header: c, value: c };
+      }
+    });
   }
 
   ngOnInit(): void {
-    this.getResults();
+    this.getResults({});
   }
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
 
-  handleSortChange(sortBy: Sort) {
-    this.sortColumns.set(sortBy.field, sortBy);
-    this.updatePageOptions({ sort: [...this.sortColumns.values()] });
-  }
-
-  updatePageOptions(updates: Partial<PageOptions>) {
-    this.pageOptions = { ...this.pageOptions, ...updates };
-    this.getResults();
-  }
-  
-  getResults() {
+  getResults(pageOptions: Partial<PageOptions>): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
     this.subscription = this.resultService.getAll({
-      page: this.pageOptions.page,
-      size: this.pageOptions.size ?? this.pageSizeOptions[0],
-      sort: this.pageOptions.sort
+      page: pageOptions.page,
+      size: pageOptions.size,
+      sort: pageOptions.sort
     }).subscribe({
       error: (e) => console.log(e),
       next: (res) => {

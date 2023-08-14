@@ -1,36 +1,7 @@
-<div class="container">
-    <table class="results-table" *loaded="this.results">
-        <thead class="sort-headers">
-                <app-sort-header
-                    *ngFor="let column of columnsToDisplay"   
-                    class="sort-header" 
-                    [column]="column" 
-                    [context]="sortHeaderContext" 
-                    (sortChanged)="handleSortChange($event)"
-                >
-                </app-sort-header>
-        </thead>
-        <tbody>
-            <ng-container *ngIf="this.results.length > 0">
-                <tr class="result-row" *ngFor="let result of results" >
-                    <td>{{result.username}}</td>
-                    <td>{{result.wpm}}</td>
-                    <td>{{result.accuracy}} %</td>
-                    <td>{{result.difficulty}}</td>
-                    <td>{{result.date | date: 'yyyy-MM-dd HH:mm:ss'}}</td>
-                </tr>
-            </ng-container>
-        </tbody>
-    </table>
-    <div class="no-results" *ngIf="this.results.length < 1">
-            <h2>
-                No results found.
-            </h2>
-    </div>
-    <app-paginator 
-        [paginationInfo]="paginationInfo" 
-        [pageSizeOptions]="pageSizeOptions" 
-        (pageChange)="updatePageOptions({page: $event})" 
-        (pageSizeChange)="updatePageOptions({size: $event})">
-    </app-paginator>
-</div>
+<app-table 
+    [rows]="results" 
+    [columns]="columns" 
+    [tableDetails]="{ isSortable: true, noDataMessage: 'No results found.', paginationDetails: { paginationInfo: this.paginationInfo! } }"
+    (pageOptionsChange)="this.getResults($event)"
+    >
+</app-table>
