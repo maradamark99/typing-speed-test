@@ -1,8 +1,16 @@
-.sort-content {
+@import "../../../../styles.scss";
+
+.container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
+	width: 100%;
+	height: 100%;
+}
+
+.container:hover {
+	opacity: 0.5;
 }
 
 .sort-icon {
