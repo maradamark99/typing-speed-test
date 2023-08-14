@@ -2,12 +2,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiPath } from '../utils/api-path';
-import ResultRequest from '../interfaces/result-request';
-import { ResultResponse } from '../interfaces/result-response';
 import { Observable, retry } from 'rxjs';
 import { Page } from '../interfaces/page';
 import { PageOptions } from '../interfaces/page-options';
 import PaginationUtil from '../utils/pagination-util';
+import { ResultResponse } from '../types/result-response';
+import { ResultRequest } from '../types/result-request';
 
 @Injectable({
   providedIn: 'root'
