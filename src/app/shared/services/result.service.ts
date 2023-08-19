@@ -24,5 +24,9 @@ export class ResultService {
   save(result: ResultRequest) {
     return this.http.post(environment.apiUrl + ApiPath.RESULTS, result);
   }
+
+  deleteById(id: number) {
+    return this.http.delete(environment.apiUrl + ApiPath.RESULTS + "/" + encodeURIComponent(id));
+  }
   
 }
