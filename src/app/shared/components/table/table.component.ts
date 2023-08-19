@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TableDetails } from '../../types/table-details';
+import { Action, TableDetails } from '../../types/table-details';
 import SortHeaderContext from '../sort-header/sort-header-context';
 import { Sort } from '../../interfaces/sort';
 import { PageOptions } from '../../interfaces/page-options';
@@ -17,10 +17,16 @@ export class TableComponent<T extends { [key: string]: any }> implements OnInit 
   @Input() columns?: Column[];
   @Input() rows?: T[];
   @Output() pageOptionsChange: EventEmitter<Partial<PageOptions>> = new EventEmitter();
+  @Output() onDeleteClick: EventEmitter<T> = new EventEmitter();  
   private sortColumns: Map<string, Sort> = new Map();
   private pageOptions: Partial<PageOptions> = {}
 
   constructor(public readonly sortHeaderContext: SortHeaderContext) {
+    
+  }
+
+  get rowAction(): typeof Action {
+    return Action;
   }
 
   ngOnInit(): void {
@@ -31,12 +37,16 @@ export class TableComponent<T extends { [key: string]: any }> implements OnInit 
 
   handleSortChange(sort: Sort) {
     this.sortColumns.set(sort.field, sort);
-    this.updatePageOptions({ sort: [...this.sortColumns.values()] });
+    this.handlePageOptionsUpdate({ sort: [...this.sortColumns.values()] });
   }
 
-  updatePageOptions(changes: Partial<PageOptions>) {
+  handlePageOptionsUpdate(changes: Partial<PageOptions>) {
     this.pageOptions = { ...this.pageOptions, ...changes };
     this.pageOptionsChange.emit(this.pageOptions);
+  }
+
+  handleDeleteClick(row: T) {
+    this.onDeleteClick.emit(row);
   }
 
 }

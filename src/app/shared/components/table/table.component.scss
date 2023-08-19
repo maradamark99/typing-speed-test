@@ -8,9 +8,13 @@
 	justify-content: center;
 }
 
+.test {
+	display: flex;
+	flex-direction: row;
+}
+
 .table {
-	margin-top: 2rem;
-	min-width: 30rem;
+	min-width: 32rem;
 	width: 60vw;
 	table-layout: fixed;
 	border-collapse: collapse;
@@ -20,13 +24,42 @@
 		font-size: 0.9rem;
 		text-align: center;
 		height: 5rem;
+		overflow: hidden;
 	}
+}
+
+.row-actions {
+	padding-top: 4rem;
+}
+
+.row-action {
+	border-top: 1px solid transparent;
+	border-bottom: 1px solid transparent;
+	width: 2rem;
+	height: 5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 300;
+	font-size: 0.9rem;
+	text-align: center;
+}
+
+.row-action-icon {
+	color: $dark-text;
+	height: 1.5rem;
+	width: 1.5rem;
+}
+
+.row-action-icon:hover {
+	opacity: 0.5;
+	cursor: pointer;
 }
 
 .headers {
 	display: flex;
 	width: 60vw;
-	min-width: 30rem;
+	min-width: 32rem;
 }
 
 .header {
