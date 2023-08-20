@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IFormControlDetail } from 'src/app/shared/interfaces/form-control-detail';
-import { IUser } from 'src/app/shared/interfaces/user.interface';
+import { FormControlDetail } from 'src/app/shared/interfaces/form-control-detail';
 import { AuthService } from '../../shared/services/auth.service';
 import { TokenService } from '../../shared/services/token.service';
+import { User } from 'src/app/shared/interfaces/user';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private subscription?: Subscription;
 
-  public readonly formControlDetails: IFormControlDetail[] = [
+  public readonly formControlDetails: FormControlDetail[] = [
     {
       name: 'username',
       placeholder: 'Username',
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.subscription?.unsubscribe();
   }
 
-  public handleLogin(user: IUser) {
+  public handleLogin(user: User) {
     this.subscription = this.authService.login(user).subscribe({
       next: response => this.tokenService.setToken(response.token),
       error: e => console.log(e),

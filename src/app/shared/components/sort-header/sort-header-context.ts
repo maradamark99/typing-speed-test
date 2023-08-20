@@ -1,8 +1,11 @@
+import { Injectable } from "@angular/core";
+
+@Injectable()
 export default class SortHeaderContext {
     private map: Map<string, number>;
 
-    constructor(map: Map<string, number>) {
-        this.map = map;
+    constructor() {
+        this.map = new Map<string, number>();
     }
 
     get(key: string): number {

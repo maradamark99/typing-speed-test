@@ -23,16 +23,22 @@
 				<a class="nav-link" routerLink="/" routerLinkActive="router-link-active">
 					Home
 				</a>
-				<a class="nav-link" routerLink="/login" routerLinkActive="router-link-active">
-					Login
-				</a>
-				<a class="nav-link" routerLink="/register" routerLinkActive="router-link-active">
-					Register
-				</a>
+				<ng-container *ngIf="!authService.isAuthenticated()">
+					<a class="nav-link" routerLink="/login" routerLinkActive="router-link-active">
+						Login
+					</a>
+				</ng-container>
+				<ng-container *ngIf="!authService.isAuthenticated()">
+					<a class="nav-link" routerLink="/register" routerLinkActive="router-link-active">
+						Register
+					</a>
+				</ng-container>
 				<a class="nav-link" routerLink="/results" routerLinkActive="router-link-active">
 					Results
 				</a>
-				<a class="nav-link" (click)="tokenService.removeToken()">Logout </a>
+				<ng-container *ngIf="authService.isAuthenticated()">
+					<a class="nav-link" (click)="authService.logout()">Logout </a>
+				</ng-container>
 			</div>
 		</mat-sidenav>
 		<mat-sidenav-content class="main-content">

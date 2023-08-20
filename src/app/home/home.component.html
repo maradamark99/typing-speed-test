@@ -2,15 +2,15 @@
 	<div class="settings" [class.disable-settings]="isSettingsDisabled">
 		<div class="setting">
 			<label for="difficulty">difficulty: </label>
-			<select name="difficulty" (change)="setSelectedDifficulty($event)" [disabled]="isSettingsDisabled" required>
+			<select id="difficulty" (change)="setSelectedDifficulty($event)" [disabled]="isSettingsDisabled" required>
 				<option *ngFor="let difficulty of difficulties" value="{{difficulty.value}}">
 					{{difficulty.value}}
 				</option>
 			</select>
 		</div>
 		<div class="setting">
-			<label for="difficulty">type: </label>
-			<select name="difficulty">
+			<label for="type">type: </label>
+			<select id="type">
 				<option value="DEFAULT">
 					DEFAULT
 				</option>

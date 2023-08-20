@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUser } from 'src/app/shared/interfaces/user.interface';
 import { AuthService } from '../../shared/services/auth.service';
+import { FormControlDetail } from '../../shared/interfaces/form-control-detail';
+import { User } from 'src/app/shared/interfaces/user';
 import { CustomValidator } from 'src/app/shared/utils/custom-validator';
-import { IFormControlDetail } from '../../shared/interfaces/form-control-detail';
 
 @Component({
   selector: 'app-registration',
@@ -16,7 +16,7 @@ export class RegistrationComponent implements OnInit {
 
   private subscription?: Subscription;
 
-  public readonly formControlDetails: IFormControlDetail[] = [
+  public readonly formControlDetails: FormControlDetail[] = [
     {
       name: 'email',
       placeholder: 'Email',
@@ -45,7 +45,7 @@ export class RegistrationComponent implements OnInit {
       saveValue: false
     },
   ];
-  public readonly formValidators: CustomValidator[] =
+  public readonly formValidators: ValidatorFn[] =
     [CustomValidator.matchingControlValuesValidator('password', 'passwordConfirmation')];
 
   ngOnInit() {
@@ -59,7 +59,7 @@ export class RegistrationComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {
   }
 
-  handleRegistration(user: IUser): void {
+  handleRegistration(user: User): void {
     this.subscription = this.authService.register(user).subscribe({
       error: (e) => console.error(e),
       complete: () => this.router.navigate(['/login'])

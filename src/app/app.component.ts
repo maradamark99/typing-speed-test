@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TokenService } from './shared/services/token.service';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,7 @@ import { TokenService } from './shared/services/token.service';
 export class AppComponent {
   title = 'typing-speed-test';
 
-  constructor(public readonly tokenService: TokenService) {
+  constructor(public readonly authService: AuthService) {
     
   }
 }
