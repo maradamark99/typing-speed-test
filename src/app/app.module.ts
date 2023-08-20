@@ -27,6 +27,7 @@ import { LoadedDirective } from './shared/directives/loaded-directive';
 import { SortHeaderComponent } from './shared/components/sort-header/sort-header.component';
 import { PaginatorComponent } from './shared/components/paginator/paginator.component';
 import { TableComponent } from './shared/components/table/table.component';
+import { IsAdminDirective } from './shared/directives/is-admin-directive';
  
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { TableComponent } from './shared/components/table/table.component';
     SortHeaderComponent,
     PaginatorComponent,
     TableComponent,
+    IsAdminDirective,
   ],
   imports: [
     BrowserModule,
