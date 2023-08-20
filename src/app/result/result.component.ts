@@ -3,7 +3,7 @@ import { ResultService } from '../shared/services/result.service';
 import { Subscription } from 'rxjs';
 import { PaginationInfo } from '../shared/interfaces/pagination-info';
 import { PageOptions } from '../shared/interfaces/page-options';
-import { TableDetails } from '../shared/types/table-details';
+import { Action, TableDetails } from '../shared/types/table-details';
 import { Sort } from '../shared/interfaces/sort';
 import { ResultResponse } from '../shared/types/result-response';
 
@@ -37,6 +37,13 @@ export class ResultComponent implements OnInit, OnDestroy {
     this.subscription?.unsubscribe();
   }
 
+  // TODO: change this
+  handleRowActionClick(e: { row: ResultResponse; action: Action; }) {
+    if (e.action === Action.DELETE) {
+      this.deleteResultById(e.row.id);
+    }
+  }
+
   getResults(pageOptions: Partial<PageOptions>): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
@@ -54,6 +61,13 @@ export class ResultComponent implements OnInit, OnDestroy {
         };
         this.results = content
       },
+    });
+  }
+
+  deleteResultById(id: number): void {
+    this.resultService.deleteById(id).subscribe({
+      error: (e) => console.log(e),
+      next: () => this.getResults({})
     });
   }
 
