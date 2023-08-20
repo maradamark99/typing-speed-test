@@ -36,7 +36,6 @@
 				<a class="nav-link" routerLink="/results" routerLinkActive="router-link-active">
 					Results
 				</a>
-				<a class="nav-link" (click)="tokenService.removeToken()">Logout </a>
 				<ng-container *ngIf="authService.isAuthenticated()">
 					<a class="nav-link" (click)="authService.logout()">Logout </a>
 				</ng-container>
