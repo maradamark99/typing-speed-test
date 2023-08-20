@@ -27,7 +27,7 @@ export class WordService {
   }
 
   public getWords(difficulty: string): Observable<string[]> {
-    return this.http.get<string[]>(environment.apiUrl + ApiPath.WORDS + `/${difficulty}`);
+    return this.http.get<string[]>(environment.apiUrl + ApiPath.WORDS + "/" + encodeURIComponent(difficulty));
   }
 
   public resetState(): void {
