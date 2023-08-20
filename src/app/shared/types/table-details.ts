@@ -1,13 +1,13 @@
 import { PaginationDetails } from "./pagination-details"
 
 export type TableDetails = {
-    rowActions?: RowAction[],
+    rowActions?: Set<Action>,
     isSortable: boolean,
     paginationDetails?: PaginationDetails
     noDataMessage?: string
 }
 
-export enum RowAction {
+export enum Action {
     EDIT,
     DELETE
 }
