@@ -10,7 +10,6 @@ import SortHeaderContext from './sort-header-context';
 export class SortHeaderComponent implements OnInit {
   @Input() column?: string;
   @Input() sortField?: string;
-  @Input() context?: SortHeaderContext;
   @Output() sortChange: EventEmitter<Sort> = new EventEmitter();
   private sortOrder = [SortDirection.DEFAULT, SortDirection.ASC, SortDirection.DESC]
 
@@ -22,7 +21,7 @@ export class SortHeaderComponent implements OnInit {
     return SortDirection;
   }
 
-  constructor() {
+  constructor(private readonly context: SortHeaderContext) {
 
   }
 
