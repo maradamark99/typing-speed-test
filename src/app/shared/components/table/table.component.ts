@@ -15,8 +15,9 @@ export class TableComponent<T extends { [key: string]: (string | number | boolea
   @Input() tableDetails?: TableDetails;
   @Input() columns?: Column[];
   @Input() rows?: T[];
-  @Output() pageOptionsChange: EventEmitter<Partial<PageOptions>> = new EventEmitter();
-  @Output() onDeleteClick: EventEmitter<T> = new EventEmitter();  
+  @Output() onPageOptionsChange: EventEmitter<Partial<PageOptions>> = new EventEmitter();
+  @Output() onRowActionClick: EventEmitter<{ row: T, action: Action }> = new EventEmitter();
+  // TODO: remove this
   private sortColumns: Map<string, Sort> = new Map();
   private pageOptions: Partial<PageOptions> = {}
 
@@ -41,11 +42,11 @@ export class TableComponent<T extends { [key: string]: (string | number | boolea
 
   handlePageOptionsUpdate(changes: Partial<PageOptions>) {
     this.pageOptions = { ...this.pageOptions, ...changes };
-    this.pageOptionsChange.emit(this.pageOptions);
+    this.onPageOptionsChange.emit(this.pageOptions);
   }
 
-  handleDeleteClick(row: T) {
-    this.onDeleteClick.emit(row);
+  handleRowActionClick(row: T, action: Action) {
+    this.onRowActionClick.emit({ row, action });
   }
 
 }
