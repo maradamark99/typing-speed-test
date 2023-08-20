@@ -11,8 +11,7 @@ import { Column } from '../../types/column';
   styleUrls: ['./table.component.scss'],
   providers: [SortHeaderContext]
 })
-  
-export class TableComponent<T extends { [key: string]: any }> implements OnInit {
+export class TableComponent<T extends { [key: string]: (string | number | boolean) }> implements OnInit {
   @Input() tableDetails?: TableDetails;
   @Input() columns?: Column[];
   @Input() rows?: T[];
