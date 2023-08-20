@@ -4,8 +4,8 @@ import { Subscription } from 'rxjs';
 import { PaginationInfo } from '../shared/interfaces/pagination-info';
 import { PageOptions } from '../shared/interfaces/page-options';
 import { Action, TableDetails } from '../shared/types/table-details';
-import { Sort } from '../shared/interfaces/sort';
 import { ResultResponse } from '../shared/types/result-response';
+import { Column } from '../shared/types/column';
 
 @Component({
   selector: 'app-result',
@@ -14,7 +14,7 @@ import { ResultResponse } from '../shared/types/result-response';
 })
 export class ResultComponent implements OnInit, OnDestroy {
   private subscription?: Subscription;
-  public readonly columns;
+  public readonly columns: Column[];
   public tableDetails?: TableDetails;
   public results: ResultResponse[] = [];
   public paginationInfo?: PaginationInfo;
@@ -27,6 +27,12 @@ export class ResultComponent implements OnInit, OnDestroy {
           return { header: c, value: c };
       }
     });
+    this.tableDetails = {
+      isSortable: true,
+      noDataMessage: 'No results found.',
+      paginationDetails: { paginationInfo: this.paginationInfo! },
+      rowActions: new Set([Action.DELETE])
+    };
   }
 
   ngOnInit(): void {

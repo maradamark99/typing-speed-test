@@ -1,7 +1,8 @@
 <app-table 
     [rows]="results" 
     [columns]="columns" 
-    [tableDetails]="{ isSortable: true, noDataMessage: 'No results found.', paginationDetails: { paginationInfo: this.paginationInfo! } }"
-    (pageOptionsChange)="this.getResults($event)"
+    [tableDetails]="tableDetails"
+    (onPageOptionsChange)="getResults($event)"
+    (onRowActionClick)="handleRowActionClick($event)"
     >
 </app-table>
