@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Action, TableDetails } from '../../types/table-details';
+import { Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { RowAction, TableDetails } from '../../types/table-details';
 import SortHeaderContext from '../sort-header/sort-header-context';
-import { Sort } from '../../interfaces/sort';
 import { PageOptions } from '../../interfaces/page-options';
-import { Column } from '../../types/column';
+import { ResultResponse } from '../../types/result-response';
+
 
 @Component({
   selector: 'app-table',
@@ -12,32 +12,26 @@ import { Column } from '../../types/column';
   providers: [SortHeaderContext]
 })
 export class TableComponent<T extends { [key: string]: (string | number | boolean) }> implements OnInit {
+  @ContentChild('rowTemplate') rowTemplate!: TemplateRef<ResultResponse>;
+  @ContentChild('headerTemplate') headerTemplate!: TemplateRef<any>;
   @Input() tableDetails?: TableDetails;
-  @Input() columns?: Column[];
-  @Input() rows?: T[];
+  @Input() data?: T[];
   @Output() onPageOptionsChange: EventEmitter<Partial<PageOptions>> = new EventEmitter();
-  @Output() onRowActionClick: EventEmitter<{ row: T, action: Action }> = new EventEmitter();
-  // TODO: remove this
-  private sortColumns: Map<string, Sort> = new Map();
-  private pageOptions: Partial<PageOptions> = {}
+  @Output() onActionClick: EventEmitter<{ action: RowAction, row: T }> = new EventEmitter();
+  private pageOptions: Partial<PageOptions> = {};
 
-  constructor(public readonly sortHeaderContext: SortHeaderContext) {
-    
+  constructor(private readonly sortHeaderContext: SortHeaderContext) {
   }
 
-  get rowAction(): typeof Action {
-    return Action;
+  get rowAction(): typeof RowAction {
+    return RowAction;
   }
 
   ngOnInit(): void {
-    if (this.tableDetails!.isSortable) {
-      this.columns?.forEach((c) => this.sortHeaderContext.set(c.value ?? c.header, 0));
-    }
   }
 
-  handleSortChange(sort: Sort) {
-    this.sortColumns.set(sort.field, sort);
-    this.handlePageOptionsUpdate({ sort: [...this.sortColumns.values()] });
+  handleSortChange() {
+    this.handlePageOptionsUpdate({ sort: this.sortHeaderContext.sortValues() });
   }
 
   handlePageOptionsUpdate(changes: Partial<PageOptions>) {
@@ -45,8 +39,8 @@ export class TableComponent<T extends { [key: string]: (string | number | boolea
     this.onPageOptionsChange.emit(this.pageOptions);
   }
 
-  handleRowActionClick(row: T, action: Action) {
-    this.onRowActionClick.emit({ row, action });
+  handleDeleteClick(row: T) {
+    this.onActionClick.emit({action: RowAction.DELETE, row})
   }
-
+  
 }
