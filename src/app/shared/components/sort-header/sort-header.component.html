@@ -1,6 +1,6 @@
 <div class="container" (click)="handleClick()">
     <ng-container>
-        <span class="sort-column">{{column}}</span>
+        <th class="sort-column">{{column}}</th>
     </ng-container>
     <ng-container [ngSwitch]="currentSortOrder">
         <ng-container *ngSwitchCase="sortDirection.ASC">

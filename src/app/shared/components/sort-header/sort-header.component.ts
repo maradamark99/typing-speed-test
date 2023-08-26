@@ -11,10 +11,9 @@ export class SortHeaderComponent implements OnInit {
   @Input() column?: string;
   @Input() sortField?: string;
   @Output() sortChange: EventEmitter<Sort> = new EventEmitter();
-  private sortOrder = [SortDirection.DEFAULT, SortDirection.ASC, SortDirection.DESC]
 
   get currentSortOrder(): SortDirection {
-    return this.sortOrder[this.context!.get(this.column!)!];
+    return this.context.sortOrder[this.context!.get(this.column!)!];
   }
 
   get sortDirection(): typeof SortDirection {
@@ -22,19 +21,22 @@ export class SortHeaderComponent implements OnInit {
   }
 
   constructor(private readonly context: SortHeaderContext) {
-
   }
 
   ngOnInit(): void {
+    const field = this.sortField ?? this.column!
+    if (!this.context.has(field)) {
+      this.context.set(field, 0);
+    }
   }
 
   handleClick() {
     this.context!.set(this.column!, this.context!.get(this.column!) + 1);
     const currentIndex = this.context!.get(this.column!);
-    if (this.sortOrder[currentIndex] != SortDirection.DEFAULT) {
-      this.sortChange.emit({ field: this.sortField ?? this.column!, direction: this.sortOrder[currentIndex] });
+    if (this.context.sortOrder[currentIndex] != SortDirection.DEFAULT) {
+      this.sortChange.emit({ field: this.sortField ?? this.column!, direction: this.context.sortOrder[currentIndex] });
     }
-    if (currentIndex == this.sortOrder.length) {
+    if (currentIndex == this.context.sortOrder.length) {
       this.context!.set(this.column!, 0);
     }    
   }
