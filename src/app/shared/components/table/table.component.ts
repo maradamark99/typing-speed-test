@@ -1,8 +1,9 @@
 import { Component, ContentChild, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { RowAction, TableDetails } from '../../types/table-details';
 import SortHeaderContext from '../sort-header/sort-header-context';
 import { PageOptions } from '../../interfaces/page-options';
 import { ResultResponse } from '../../types/result-response';
+import { PaginationInfo } from '../../interfaces/pagination-info';
+import { RowAction } from '../../enums/row-action';
 
 
 @Component({
@@ -14,7 +15,8 @@ import { ResultResponse } from '../../types/result-response';
 export class TableComponent<T extends { [key: string]: (string | number | boolean) }> implements OnInit {
   @ContentChild('rowTemplate') rowTemplate!: TemplateRef<ResultResponse>;
   @ContentChild('headerTemplate') headerTemplate!: TemplateRef<any>;
-  @Input() tableDetails?: TableDetails;
+  @Input() paginationInfo?: PaginationInfo;
+  @Input() rowActions?: Set<RowAction>;
   @Input() data?: T[];
   @Output() onPageOptionsChange: EventEmitter<Partial<PageOptions>> = new EventEmitter();
   @Output() onActionClick: EventEmitter<{ action: RowAction, row: T }> = new EventEmitter();
