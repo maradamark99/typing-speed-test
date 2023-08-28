@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Sort, SortDirection } from "../../interfaces/sort";
+import { Sort } from "../../interfaces/sort";
+import { SortDirection } from "../../enums/sort-direction";
 
 @Injectable()
 export default class SortHeaderContext {
