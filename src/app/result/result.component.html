@@ -1,8 +1,21 @@
 <app-table 
-    [rows]="results" 
-    [columns]="columns" 
-    [tableDetails]="tableDetails"
+    [data]="results"
+    [paginationInfo]="paginationInfo"
     (onPageOptionsChange)="getResults($event)"
-    (onRowActionClick)="handleRowActionClick($event)"
     >
+    <ng-template #headerTemplate let-handler>
+        <ng-container *ngFor="let column of columns">
+            <app-sort-header (sortChange)="handler()" class="header" [column]="column"></app-sort-header>
+        </ng-container>
+    </ng-template>
+    <ng-template #rowTemplate let-row>
+        <td>{{row.username}}</td>
+        <td>{{row.wpm}}</td>
+        <td>{{row.accuracy}} %</td>
+        <td>{{row.difficulty}}</td>
+        <td>{{row.date}}</td>
+    </ng-template>
+    <ng-container noData>
+        No results available.
+    </ng-container>
 </app-table>
