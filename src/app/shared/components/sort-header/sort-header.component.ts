@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Sort, SortDirection } from '../../interfaces/sort';
+import { Sort } from '../../interfaces/sort';
 import SortHeaderContext from './sort-header-context';
+import { SortDirection } from '../../enums/sort-direction';
 
 @Component({
   selector: 'app-sort-header',
@@ -8,13 +9,13 @@ import SortHeaderContext from './sort-header-context';
   styleUrls: ['./sort-header.component.scss']
 })
 export class SortHeaderComponent implements OnInit {
-  @Input() column?: string;
+  @Input() column!: string;
   @Input() sortField?: string;
   @Output() sortChange: EventEmitter<Sort> = new EventEmitter();
-  private sortOrder = [SortDirection.DEFAULT, SortDirection.ASC, SortDirection.DESC]
+  private sortBy?: string;
 
   get currentSortOrder(): SortDirection {
-    return this.sortOrder[this.context!.get(this.column!)!];
+    return this.context.sortOrder[this.context!.get(this.sortBy!)!];
   }
 
   get sortDirection(): typeof SortDirection {
@@ -22,20 +23,23 @@ export class SortHeaderComponent implements OnInit {
   }
 
   constructor(private readonly context: SortHeaderContext) {
-
   }
 
   ngOnInit(): void {
+    this.sortBy = this.sortField ?? this.column
+    if (!this.context.has(this.sortBy)) {
+      this.context.set(this.sortBy, 0);
+    }
   }
 
   handleClick() {
-    this.context!.set(this.column!, this.context!.get(this.column!) + 1);
-    const currentIndex = this.context!.get(this.column!);
-    if (this.sortOrder[currentIndex] != SortDirection.DEFAULT) {
-      this.sortChange.emit({ field: this.sortField ?? this.column!, direction: this.sortOrder[currentIndex] });
+    this.context!.set(this.sortBy!, this.context.get(this.sortBy!) + 1);
+    const currentIndex = this.context!.get(this.sortBy!);
+    if (this.context.sortOrder[currentIndex] != SortDirection.DEFAULT) {
+      this.sortChange.emit({ field: this.sortBy!, direction: this.context.sortOrder[currentIndex] });
     }
-    if (currentIndex == this.sortOrder.length) {
-      this.context!.set(this.column!, 0);
+    if (currentIndex == this.context.sortOrder.length) {
+      this.context!.set(this.sortBy!, 0);
     }    
   }
 

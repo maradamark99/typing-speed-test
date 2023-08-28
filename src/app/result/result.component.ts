@@ -3,9 +3,8 @@ import { ResultService } from '../shared/services/result.service';
 import { Subscription } from 'rxjs';
 import { PaginationInfo } from '../shared/interfaces/pagination-info';
 import { PageOptions } from '../shared/interfaces/page-options';
-import { Action, TableDetails } from '../shared/types/table-details';
 import { ResultResponse } from '../shared/types/result-response';
-import { Column } from '../shared/types/column';
+import { RowAction } from '../shared/enums/row-action';
 
 @Component({
   selector: 'app-result',
@@ -14,25 +13,12 @@ import { Column } from '../shared/types/column';
 })
 export class ResultComponent implements OnInit, OnDestroy {
   private subscription?: Subscription;
-  public readonly columns: Column[];
-  public tableDetails?: TableDetails;
   public results: ResultResponse[] = [];
   public paginationInfo?: PaginationInfo;
+  public readonly rowActions = new Set([RowAction.DELETE, RowAction.UPDATE]);
+  public readonly columns = ['user', 'wpm', 'accuracy', 'difficulty', 'date'];
 
   constructor(public readonly resultService: ResultService) {
-    this.columns = ["username", "wpm", "accuracy", "difficulty", "date"].map((c) => {
-      if (c === "username") {
-          return { header: c, value: "user" };
-      } else {
-          return { header: c, value: c };
-      }
-    });
-    this.tableDetails = {
-      isSortable: true,
-      noDataMessage: 'No results found.',
-      paginationDetails: { paginationInfo: this.paginationInfo! },
-      rowActions: new Set([Action.DELETE])
-    };
   }
 
   ngOnInit(): void {
@@ -41,13 +27,6 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
-  }
-
-  // TODO: change this
-  handleRowActionClick(e: { row: ResultResponse; action: Action; }) {
-    if (e.action === Action.DELETE) {
-      this.deleteResultById(e.row.id);
-    }
   }
 
   getResults(pageOptions: Partial<PageOptions>): void {
@@ -70,8 +49,8 @@ export class ResultComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteResultById(id: number): void {
-    this.resultService.deleteById(id).subscribe({
+  deleteResultById(result: ResultResponse): void {
+    this.resultService.deleteById(result.id).subscribe({
       error: (e) => console.log(e),
       next: () => this.getResults({})
     });
