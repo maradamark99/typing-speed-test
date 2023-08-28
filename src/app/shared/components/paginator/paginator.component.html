@@ -1,49 +1,49 @@
 <div class="paginator">
-        <div class="page-size pagination-item">
-            <label for="page-size-select">
-                Results per page: 
-            </label>
-            <select name="page-size-select" [(ngModel)]="selectedPageSize" (ngModelChange)="handlePageSizeChange()">
-                <option *ngFor="let pageSizeOption of pageSizeOptions">
-                    {{ pageSizeOption }}
-                </option>
-            </select>
-        </div>
-        <div class="current-page pagination-item">
-            <span>Page {{paginationInfo ? paginationInfo.currentPage + 1 : 1}} of {{paginationInfo && paginationInfo.totalPages != 0 ? paginationInfo.totalPages : 1}}</span>
-        </div>
-        <div class="pagination-btns pagination-item">
-            <button class="pagination-btn" 
-                (click)="handlePageChange(0)" 
-                [disabled]="!paginationInfo || paginationInfo.isFirstPage" 
-                [ngClass]="{'disabled-btn': !paginationInfo || paginationInfo.isFirstPage}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
-                </svg>
-            </button>
-            <button class="pagination-btn" 
-                (click)="handlePageChange(paginationInfo!.currentPage - 1)" 
-                [disabled]="!paginationInfo || paginationInfo.isFirstPage" 
-                [ngClass]="{'disabled-btn': !paginationInfo || paginationInfo.isFirstPage}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                </svg>
-            </button>
-            <button class="pagination-btn" 
-                (click)="handlePageChange(paginationInfo!.currentPage + 1)" 
-                [disabled]="!paginationInfo || paginationInfo.isLastPage" 
-                [ngClass]="{'disabled-btn': !paginationInfo || paginationInfo.isLastPage}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-            </button>
-            <button class="pagination-btn" 
-                (click)="handlePageChange(paginationInfo!.totalPages - 1)" 
-                [disabled]="!paginationInfo || paginationInfo.isLastPage" 
-                [ngClass]="{'disabled-btn': !paginationInfo || paginationInfo.isLastPage}">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
-                </svg>
-            </button>
-        </div>
+    <div class="page-size pagination-item">
+        <label for="page-size-select">
+            Results per page: 
+        </label>
+        <select name="page-size-select" [(ngModel)]="selectedPageSize" (ngModelChange)="handlePageSizeChange()">
+            <option *ngFor="let pageSizeOption of pageSizeOptions">
+                {{ pageSizeOption }}
+            </option>
+        </select>
     </div>
+    <div class="current-page pagination-item">
+        <span>Page {{paginationInfo ? paginationInfo.currentPage + 1 : 1}} of {{paginationInfo && paginationInfo.totalPages != 0 ? paginationInfo.totalPages : 1}}</span>
+    </div>
+    <div class="pagination-btns pagination-item">
+        <button class="pagination-btn" 
+            (click)="handlePageChange(0)" 
+            [disabled]="!paginationInfo || paginationInfo.isFirstPage" 
+            [ngClass]="{'disabled-btn': !paginationInfo || paginationInfo.isFirstPage}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+            </svg>
+        </button>
+        <button class="pagination-btn" 
+            (click)="handlePageChange(paginationInfo!.currentPage - 1)" 
+            [disabled]="!paginationInfo || paginationInfo.isFirstPage" 
+            [ngClass]="{'disabled-btn': !paginationInfo || paginationInfo.isFirstPage}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+        <button class="pagination-btn" 
+            (click)="handlePageChange(paginationInfo!.currentPage + 1)" 
+            [disabled]="!paginationInfo || paginationInfo.isLastPage" 
+            [ngClass]="{'disabled-btn': !paginationInfo || paginationInfo.isLastPage}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+        <button class="pagination-btn" 
+            (click)="handlePageChange(paginationInfo!.totalPages - 1)" 
+            [disabled]="!paginationInfo || paginationInfo.isLastPage" 
+            [ngClass]="{'disabled-btn': !paginationInfo || paginationInfo.isLastPage}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+    </div>
+</div>
